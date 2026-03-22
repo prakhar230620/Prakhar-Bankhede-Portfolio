@@ -1,0 +1,11 @@
+{
+  "name": "prakhar-bankhede-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio",
+  "scripts": {
+    "start": "serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

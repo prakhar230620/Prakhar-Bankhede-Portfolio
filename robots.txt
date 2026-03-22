@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prakharbankhede.vercel.app/sitemap.xml
