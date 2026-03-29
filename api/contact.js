@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
   });
 
   const mailOptions = {
-    from: `"${name}" <${process.env.SMTP_EMAIL}>`, // Use your own email to avoid spoofing filters
+    from: `"Portfolio Alerts" <${process.env.SMTP_EMAIL}>`, // Static sender bypassing spoof filters
     to: 'prakharbankhede15@gmail.com',
     replyTo: email,
     subject: `Portfolio Contact: ${name}`,

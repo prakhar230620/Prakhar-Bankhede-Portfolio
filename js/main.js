@@ -775,14 +775,19 @@ if (form) {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const r = await fetch('/api/contact', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      });
+      // Run the network request and an artificial UI delay concurrently, so "Sending..." 
+      // remains highly visible for at least 1.5 seconds, satisfying user perception of work.
+      const [r] = await Promise.all([
+        fetch('/api/contact', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }),
+        new Promise(resolve => setTimeout(resolve, 1500))
+      ]);
 
       const result = await r.json().catch(() => ({}));
 
