@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prakhar Bankhede</title>
-  <meta name="description" content="Prakhar Bankhede — B.Tech AIML student, developer, and author from Indore." />
+  <meta name="description"
+    content="Prakhar Bankhede — B.Tech Artificial Intelligence & Machine Learning student, developer, and author from Indore." />
   <meta property="og:title" content="Prakhar Bankhede" />
   <meta property="og:description" content="Developer. Author. Builder." />
   <meta property="og:type" content="website" />
   <link rel="canonical" href="https://prakharbankhede.vercel.app" />
 
+  <!-- Space Grotesk for headings, Inter for body, JetBrains Mono for accents -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
 
   <!-- Three.js -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
@@ -23,6 +28,7 @@
   {"@context":"https://schema.org","@type":"Person","name":"Prakhar Bankhede","jobTitle":"Developer & Author","url":"https://prakharbankhede.vercel.app","address":{"@type":"PostalAddress","addressLocality":"Indore","addressCountry":"India"}}
   </script>
 </head>
+
 <body>
 
   <!-- 3D Canvas — full page background -->
@@ -36,32 +42,32 @@
     <div class="nav__inner">
       <a href="#hero" class="nav__brand" aria-label="Home">PB</a>
       <ul class="nav__links" id="navLinks">
-        <li><a href="#about"          class="nav__link" data-section="about">About</a></li>
-        <li><a href="#projects"       class="nav__link" data-section="projects">Work</a></li>
-        <li><a href="#github-work"    class="nav__link" data-section="github-work">GitHub</a></li>
-        <li><a href="#skills"         class="nav__link" data-section="skills">Stack</a></li>
+        <li><a href="#about" class="nav__link" data-section="about">About</a></li>
+        <li><a href="#projects" class="nav__link" data-section="projects">Work</a></li>
+        <li><a href="#github-work" class="nav__link" data-section="github-work">GitHub</a></li>
+        <li><a href="#skills" class="nav__link" data-section="skills">Stack</a></li>
         <li><a href="#certifications" class="nav__link" data-section="certifications">Certs</a></li>
-        <li><a href="#books"          class="nav__link" data-section="books">Books</a></li>
-        <li><a href="#timeline"       class="nav__link" data-section="timeline">Journey</a></li>
-        <li><a href="#contact"        class="nav__link" data-section="contact">Contact</a></li>
+        <li><a href="#books" class="nav__link" data-section="books">Books</a></li>
+        <li><a href="#timeline" class="nav__link" data-section="timeline">Journey</a></li>
+        <li><a href="#contact" class="nav__link" data-section="contact">Contact</a></li>
       </ul>
       <button class="nav__burger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span>
       </button>
     </div>
-    <div class="nav__drawer" id="navDrawer" aria-hidden="true">
-      <ul class="nav__drawer-links">
-        <li><a href="#about"          class="nav__drawer-link">About</a></li>
-        <li><a href="#projects"       class="nav__drawer-link">Work</a></li>
-        <li><a href="#github-work"    class="nav__drawer-link">GitHub</a></li>
-        <li><a href="#skills"         class="nav__drawer-link">Stack</a></li>
-        <li><a href="#certifications" class="nav__drawer-link">Certs</a></li>
-        <li><a href="#books"          class="nav__drawer-link">Books</a></li>
-        <li><a href="#timeline"       class="nav__drawer-link">Journey</a></li>
-        <li><a href="#contact"        class="nav__drawer-link">Contact</a></li>
-      </ul>
-    </div>
   </nav>
+  <div class="nav__drawer" id="navDrawer" aria-hidden="true">
+    <ul class="nav__drawer-links">
+      <li><a href="#about" class="nav__drawer-link">About</a></li>
+      <li><a href="#projects" class="nav__drawer-link">Work</a></li>
+      <li><a href="#github-work" class="nav__drawer-link">GitHub</a></li>
+      <li><a href="#skills" class="nav__drawer-link">Stack</a></li>
+      <li><a href="#certifications" class="nav__drawer-link">Certs</a></li>
+      <li><a href="#books" class="nav__drawer-link">Books</a></li>
+      <li><a href="#timeline" class="nav__drawer-link">Journey</a></li>
+      <li><a href="#contact" class="nav__drawer-link">Contact</a></li>
+    </ul>
+  </div>
 
   <main>
 
@@ -69,14 +75,14 @@
     <section class="hero" id="hero" aria-label="Introduction">
       <div class="hero__content">
         <p class="hero__pre fade-in" style="--d:.1s">Indore, India</p>
-        <h1 class="hero__name fade-in" style="--d:.25s">Prakhar<br/><em>Bankhede</em></h1>
+        <h1 class="hero__name fade-in" style="--d:.25s">Prakhar<br /><em>Bankhede</em></h1>
         <div class="hero__role fade-in" style="--d:.45s">
           <span id="typewriter"></span><span class="tw-cursor" aria-hidden="true">_</span>
         </div>
         <p class="hero__sub fade-in" style="--d:.6s">B.Tech AI/ML · IPS Academy · Developer · Author</p>
         <div class="hero__actions fade-in" style="--d:.75s">
           <a href="#projects" class="btn btn--solid">View Work</a>
-          <a href="#contact"  class="btn btn--ghost">Get in Touch</a>
+          <a href="#contact" class="btn btn--ghost">Get in Touch</a>
         </div>
       </div>
       <div class="hero__scroll" aria-label="Scroll down">
@@ -89,28 +95,39 @@
       <div class="container">
         <div class="section__tag reveal">About</div>
         <div class="about__grid">
-          <div class="about__text reveal">
-            <h2 class="section__h2">Building things is<br/>how I think.</h2>
-            <p>I'm a third-year AI/ML student who writes code, deploys software, and occasionally writes books. My approach is straightforward — find a problem, understand it deeply, build something that works.</p>
-            <p>I'm not a specialist. I move across web dev, machine learning, and writing because the interesting ideas usually live at the borders.</p>
-            <div class="about__pills">
-              <span class="pill">IPS Academy, Indore</span>
-              <span class="pill">AI/ML — 3rd Year</span>
-              <span class="pill">Deployed on Vercel</span>
-              <span class="pill">Anthropic Certified</span>
+          <div class="about__image-col reveal" data-tilt>
+            <div class="about__image-frame">
+              <img src="assets/images/About.jpeg" alt="Prakhar Bankhede" class="about__img">
+              <div class="about__img-overlay"></div>
+            </div>
+          </div>
+          <div class="about__content-col">
+            <div class="about__text reveal">
+              <h2 class="section__h2">Building things is<br />how I think.</h2>
+              <p>I'm a third-year AI/ML student who writes code, deploys software, and occasionally writes books. My
+                approach is straightforward — find a problem, understand it deeply, build something that works.</p>
+              <p>I'm not a specialist. I move across web dev, machine learning, and writing because the interesting
+                ideas
+                usually live at the borders.</p>
+              <div class="about__pills">
+                <span class="pill">IPS Academy, Indore</span>
+                <span class="pill">AI/ML — 3rd Year</span>
+                <span class="pill">Deployed on Vercel</span>
+                <span class="pill">Anthropic Certified</span>
+              </div>
             </div>
           </div>
           <div class="about__stats reveal">
             <div class="stat-box">
-              <span class="stat-box__num counter" data-target="5">0</span>
+              <span class="stat-box__num counter" data-target="10">0</span>
               <span class="stat-box__label">Projects Deployed</span>
             </div>
             <div class="stat-box">
-              <span class="stat-box__num counter" data-target="2">0</span>
+              <span class="stat-box__num counter" data-target="1">0</span>
               <span class="stat-box__label">Books Written</span>
             </div>
             <div class="stat-box">
-              <span class="stat-box__num counter" data-target="3">0</span>
+              <span class="stat-box__num counter" data-target="14">0</span>
               <span class="stat-box__label">Certifications</span>
             </div>
             <div class="stat-box">
@@ -129,67 +146,150 @@
         <h2 class="section__h2 reveal">Selected Projects</h2>
         <div class="work__grid">
 
+          <!-- 01: Renasis -->
           <article class="work-card reveal" data-tilt tabindex="0">
             <div class="work-card__num">01</div>
             <div class="work-card__body">
               <div class="work-card__top">
                 <span class="badge badge--live">Live</span>
-                <span class="work-card__cat">ML · Full-Stack</span>
+                <span class="work-card__cat">AI · Next.js 15</span>
               </div>
-              <h3 class="work-card__title">Box Office Prediction Platform</h3>
-              <p class="work-card__desc">ML web app predicting movie revenue using ensemble models. Node.js + Python backend deployed on Vercel.</p>
+              <h3 class="work-card__title">Renasis</h3>
+              <p class="work-card__desc">AI-powered customer review analysis tool supporting Google Gemini and Groq.
+                Built for sentiment analysis and actionable insights.</p>
               <div class="work-card__stack">
-                <span>Python</span><span>Node.js</span><span>MongoDB</span><span>Scikit-learn</span>
+                <span>Next.js 15</span><span>TypeScript</span><span>Gemini API</span><span>Groq</span>
               </div>
               <div class="work-card__links">
-                <a href="#" target="_blank" rel="noopener" aria-label="Live demo">↗ Live</a>
-                <a href="#" target="_blank" rel="noopener" aria-label="GitHub">↗ GitHub</a>
+                <a href="https://renasis.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/Renasis" target="_blank" rel="noopener">↗ GitHub</a>
               </div>
             </div>
           </article>
 
+          <!-- 02: Key Code X -->
           <article class="work-card reveal" data-tilt tabindex="0">
             <div class="work-card__num">02</div>
             <div class="work-card__body">
               <div class="work-card__top">
-                <span class="badge badge--live">Live</span>
-                <span class="work-card__cat">AI · Tooling</span>
+                <span class="badge badge--wip">Production Ready</span>
+                <span class="work-card__cat">Frontend · Tooling</span>
               </div>
-              <h3 class="work-card__title">AI Tools Suite</h3>
-              <p class="work-card__desc">Collection of AI-powered utilities built on Claude API and custom ML pipelines.</p>
+              <h3 class="work-card__title">Key Code X</h3>
+              <p class="work-card__desc">Visual CSS development studio. Features interactive editors for shadows,
+                filters, and animations with AI-powered code explanations.</p>
               <div class="work-card__stack">
-                <span>Claude API</span><span>Python</span><span>FastAPI</span>
+                <span>React</span><span>CSS3</span><span>AI Explainer</span>
               </div>
               <div class="work-card__links">
-                <a href="#" target="_blank" rel="noopener">↗ Live</a>
-                <a href="#" target="_blank" rel="noopener">↗ GitHub</a>
+                <a href="https://touch-css.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/TouchCSS" target="_blank" rel="noopener">↗ GitHub</a>
               </div>
             </div>
           </article>
 
+          <!-- 03: CivicPlus -->
           <article class="work-card reveal" data-tilt tabindex="0">
             <div class="work-card__num">03</div>
             <div class="work-card__body">
               <div class="work-card__top">
-                <span class="badge badge--wip">In Progress</span>
-                <span class="work-card__cat"><!-- [PLACEHOLDER: category] --></span>
+                <span class="badge badge--live">Live</span>
+                <span class="work-card__cat">Social · AI</span>
               </div>
-              <h3 class="work-card__title"><!-- [PLACEHOLDER: Project Name] --></h3>
-              <p class="work-card__desc"><!-- [PLACEHOLDER: Short description] --></p>
-              <div class="work-card__stack"><span><!-- [PLACEHOLDER] --></span></div>
+              <h3 class="work-card__title">CivicPlus</h3>
+              <p class="work-card__desc">Advanced civic engagement platform utilizing AI to streamline community
+                interactions and local government transparency.</p>
+              <div class="work-card__stack">
+                <span>Next.js</span><span>Prisma</span><span>Tailwind</span><span>AI API</span>
+              </div>
+              <div class="work-card__links">
+                <a href="https://civicplus.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/CivicSnap" target="_blank" rel="noopener">↗ GitHub</a>
+              </div>
             </div>
           </article>
 
+          <!-- 04: ToolMines AI AWS -->
           <article class="work-card reveal" data-tilt tabindex="0">
             <div class="work-card__num">04</div>
             <div class="work-card__body">
               <div class="work-card__top">
-                <span class="badge badge--live">Live</span>
-                <span class="work-card__cat"><!-- [PLACEHOLDER: category] --></span>
+                <span class="badge badge--wip">Production Ready</span>
+                <span class="work-card__cat">Cloud · Backend</span>
               </div>
-              <h3 class="work-card__title"><!-- [PLACEHOLDER: Project Name] --></h3>
-              <p class="work-card__desc"><!-- [PLACEHOLDER: Short description] --></p>
-              <div class="work-card__stack"><span><!-- [PLACEHOLDER] --></span></div>
+              <h3 class="work-card__title">ToolMines AI</h3>
+              <p class="work-card__desc">Backend AI orchestration suite built on AWS. Features secure environment
+                management and server-side logic for high-scale AI applications.</p>
+              <div class="work-card__stack">
+                <span>Python</span><span>Groq SDK</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+              </div>
+              <div class="work-card__links">
+                <a href="https://github.com/prakhar230620/ToolMines_AI--AWS" target="_blank" rel="noopener">↗ GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 05: RecipeReady Mobile -->
+          <article class="work-card reveal" data-tilt tabindex="0">
+            <div class="work-card__num">05</div>
+            <div class="work-card__body">
+              <div class="work-card__top">
+                <span class="badge badge--live">Live</span>
+                <span class="work-card__cat">Mobile · AI</span>
+              </div>
+              <h3 class="work-card__title">RecipeReady</h3>
+              <p class="work-card__desc">Smart recipe generator that creates custom meals from available ingredients.
+                Built with Next.js, featuring PWA support and dual-AI integration.</p>
+              <div class="work-card__stack">
+                <span>Next.js</span><span>PWA</span><span>Gemini</span><span>Groq</span>
+              </div>
+              <div class="work-card__links">
+                <a href="https://recipe-ready-one.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/RecipeReady_Mobile" target="_blank" rel="noopener">↗
+                  GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 06: Resonance -->
+          <article class="work-card reveal" data-tilt tabindex="0">
+            <div class="work-card__num">06</div>
+            <div class="work-card__body">
+              <div class="work-card__top">
+                <span class="badge badge--live">Live</span>
+                <span class="work-card__cat">Audio · AI</span>
+              </div>
+              <h3 class="work-card__title">Resonance</h3>
+              <p class="work-card__desc">AI-driven audio processing platform for advanced sound manipulation, featuring
+                intelligent signal analysis and resonance control.</p>
+              <div class="work-card__stack">
+                <span>Web Audio API</span><span>AI Models</span><span>TypeScript</span>
+              </div>
+              <div class="work-card__links">
+                <a href="https://resonance-eight.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/Resonance" target="_blank" rel="noopener">↗ GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 07: PDFusion -->
+          <article class="work-card reveal" data-tilt tabindex="0">
+            <div class="work-card__num">07</div>
+            <div class="work-card__body">
+              <div class="work-card__top">
+                <span class="badge badge--live">Live</span>
+                <span class="work-card__cat">PDF · Utilities</span>
+              </div>
+              <h3 class="work-card__title">PDFusion</h3>
+              <p class="work-card__desc">Comprehensive PDF management tool for merging, splitting, and optimizing PDF
+                documents. Built as a high-performance web application.</p>
+              <div class="work-card__stack">
+                <span>Next.js</span><span>PDF lib</span><span>TypeScript</span>
+              </div>
+              <div class="work-card__links">
+                <a href="https://pdfusion-three.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/pdfusion" target="_blank" rel="noopener">↗ GitHub</a>
+              </div>
             </div>
           </article>
 
@@ -202,13 +302,21 @@
       <div class="container">
         <div class="section__tag reveal">Open Source</div>
         <h2 class="section__h2 reveal">GitHub Activity</h2>
+        <p class="reveal" style="margin-bottom:2rem; color:var(--text-2); max-width:600px;">
+          Built <strong>50+ repositories</strong> between 2024 and 2026, comprising a wide range of working projects
+          from AI/ML experiments to full-stack applications.
+        </p>
         <div class="repos__grid" id="githubRepos" aria-live="polite">
-          <div class="repo-skel"></div><div class="repo-skel"></div>
-          <div class="repo-skel"></div><div class="repo-skel"></div>
-          <div class="repo-skel"></div><div class="repo-skel"></div>
+          <div class="repo-skel"></div>
+          <div class="repo-skel"></div>
+          <div class="repo-skel"></div>
+          <div class="repo-skel"></div>
+          <div class="repo-skel"></div>
+          <div class="repo-skel"></div>
         </div>
         <div class="text-center reveal" style="margin-top:2rem;">
-          <a id="githubProfileLink" href="https://github.com/PRAKHAR_GITHUB_USERNAME" target="_blank" rel="noopener" class="btn btn--ghost">View all on GitHub</a>
+          <a id="githubProfileLink" href="https://github.com/prakhar230620" target="_blank" rel="noopener"
+            class="btn btn--ghost">View all on GitHub</a>
         </div>
       </div>
     </section>
@@ -224,6 +332,7 @@
             <div class="skill-group__tags">
               <span>Python</span><span>TensorFlow</span><span>Scikit-learn</span>
               <span>NLP</span><span>Computer Vision</span><span>Claude API</span><span>Prompt Engineering</span>
+              <span>Groq SDK</span><span>vibe Coding Tools</span>
             </div>
           </div>
           <div class="skill-group reveal">
@@ -231,18 +340,23 @@
             <div class="skill-group__tags">
               <span>HTML/CSS</span><span>JavaScript</span><span>Node.js</span>
               <span>Express</span><span>REST APIs</span><span>MongoDB</span><span>React</span>
+              <span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Framer Motion</span>
+              <span>Three.js</span><span>GSAP</span>
             </div>
           </div>
           <div class="skill-group reveal">
             <h3>Tools</h3>
             <div class="skill-group__tags">
               <span>Git</span><span>Vercel</span><span>VS Code</span><span>Postman</span><span>Linux</span>
+              <span>GitHub</span><span>Figma</span><span>Antigravity</span><span>Google Colab</span>
+              <span>Automation-Tools</span>
             </div>
           </div>
           <div class="skill-group reveal">
             <h3>Other</h3>
             <div class="skill-group__tags">
               <span>Technical Writing</span><span>Research</span><span>System Design</span><span>AI-assisted Dev</span>
+              <span>Electronics</span><span>Robotics</span>
             </div>
           </div>
         </div>
@@ -258,7 +372,7 @@
         <div class="edu-row reveal">
           <div class="edu-cell">
             <div class="edu-cell__label">Degree</div>
-            <div class="edu-cell__value">B.Tech — AI & Machine Learning</div>
+            <div class="edu-cell__value">B.Tech — Artificial Intelligence & Machine Learning</div>
           </div>
           <div class="edu-cell">
             <div class="edu-cell__label">Institution</div>
@@ -266,35 +380,144 @@
           </div>
           <div class="edu-cell">
             <div class="edu-cell__label">Status</div>
-            <div class="edu-cell__value">Pursuing · 2023–2027</div>
+            <div class="edu-cell__value">Pursuing · 2024–2026</div>
+            <div class="edu-cell__value">3rd Year</div>
           </div>
         </div>
 
         <div class="certs__list">
-          <div class="cert-row reveal cert-row--featured">
+          <a href="https://verify.skilljar.com/c/f4fuijzr4wd4" class="cert-row reveal cert-row--featured"
+            target="_blank" rel="noopener">
             <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
             <div class="cert-row__issuer">Anthropic</div>
-            <div class="cert-row__name">AI Certification</div>
-            <div class="cert-row__date"><!-- [PLACEHOLDER: Year] --></div>
-          </div>
-          <div class="cert-row reveal">
+            <div class="cert-row__name">Claude with the Anthropic API</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://verify.skilljar.com/c/rzjqvoaom5gg" class="cert-row reveal" target="_blank" rel="noopener">
             <div class="cert-row__dot"></div>
-            <div class="cert-row__issuer"><!-- [PLACEHOLDER: Issuer] --></div>
-            <div class="cert-row__name"><!-- [PLACEHOLDER: Cert Name] --></div>
-            <div class="cert-row__date"><!-- [PLACEHOLDER: Date] --></div>
-          </div>
-          <div class="cert-row reveal">
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Claude with Google Vertex AI</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://verify.skilljar.com/c/6eqm8vwnvn2m" class="cert-row reveal" target="_blank" rel="noopener">
             <div class="cert-row__dot"></div>
-            <div class="cert-row__issuer"><!-- [PLACEHOLDER: Issuer] --></div>
-            <div class="cert-row__name"><!-- [PLACEHOLDER: Cert Name] --></div>
-            <div class="cert-row__date"><!-- [PLACEHOLDER: Date] --></div>
-          </div>
-          <div class="cert-row reveal">
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Claude Code in Action</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="http://verify.skilljar.com/c/8vmfzh48bmvg" class="cert-row reveal" target="_blank" rel="noopener">
             <div class="cert-row__dot"></div>
-            <div class="cert-row__issuer"><!-- [PLACEHOLDER: Issuer] --></div>
-            <div class="cert-row__name"><!-- [PLACEHOLDER: Cert Name] --></div>
-            <div class="cert-row__date"><!-- [PLACEHOLDER: Date] --></div>
-          </div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">AI Fluency: Framework & Foundations</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://verify.skilljar.com/c/8xdyt7btokzs" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Introduction to Model Context Protocol</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://verify.skilljar.com/c/5rw4gfsde9ws" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Model Context Protocol: Advanced Topics</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="http://verify.skilljar.com/c/6jt75ksmfp8u" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">AI Fluency for Educators</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="http://verify.skilljar.com/c/pqdiwmb7zj8f" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">AI Fluency for Nonprofits</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+
+          <a href="https://verify.skilljar.com/c/chonuqe6dwfr" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Al Fluency for students</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://verify.skilljar.com/c/ib3ybopte8hs" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Claude 101</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://verify.skilljar.com/c/a95nq8ni6m3p" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Teaching the Al Fluency Framework</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://verify.skilljar.com/c/kebxe69f4kxa" class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Anthropic</div>
+            <div class="cert-row__name">Claude with Amazon Bedrock</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://www.theforage.com/completion-certificates/Sj7temL583QAYpHXD/E6McHJDKsQYh79moz_Sj7temL583QAYpHXD_69abb9b24402fe031d1325a3_1772869130494_completion_certificate.pdf"
+            class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/JPMorgan_Chase___Co-/JPMorgan_Chase___Co-_Logo_0.svg" alt="JPMorgan Chase"
+                loading="lazy">
+            </div>
+            <div class="cert-row__issuer">JPMorganChase</div>
+            <div class="cert-row__name">Software Engineering Virtual Experience</div>
+            <div class="cert-row__date">2026</div>
+          </a>
+          <a href="https://www.theforage.com/completion-certificates/2sNmYuurxgpFYawco/xv8eSGu7nksKNiCQj_2sNmYuurxgpFYawco_69abb9b24402fe031d1325a3_1772872318548_completion_certificate.pdf"
+            class="cert-row reveal" target="_blank" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Commonwealth_Bank_of_Australia/Commonwealth_Bank_of_Australia_idow7DUGyL_0.svg"
+                alt="Commonwealth Bank" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Commbank</div>
+            <div class="cert-row__name">Software Engineering Virtual Experience</div>
+            <div class="cert-row__date">2026</div>
+          </a>
         </div>
       </div>
     </section>
@@ -306,49 +529,33 @@
         <h2 class="section__h2 reveal">Books</h2>
         <div class="books__row">
 
-          <div class="book reveal">
-            <div class="book__3d" aria-label="Published book">
-              <div class="book__face book__face--front">
-                <div class="book__face-title"><!-- [PLACEHOLDER: Book Title] --></div>
-                <div class="book__face-author">Prakhar Bankhede</div>
+          <div class="book book--omnix reveal">
+            <div class="book__3d" aria-label="The Dark Innovation: Omnix">
+              <div class="book__face book__face--front"
+                style="background-image: url('assets/Books/book_cover_omnix.png');">
+                <!-- Cover Image handled by .book--omnix CSS and inline fallback -->
               </div>
-              <div class="book__face book__face--spine"><span><!-- [PLACEHOLDER: Title] --></span></div>
+              <div class="book__face book__face--spine"><span>The Dark Innovation</span></div>
               <div class="book__face book__face--back"></div>
               <div class="book__face book__face--top"></div>
               <div class="book__face book__face--bottom"></div>
             </div>
             <div class="book__info">
-              <span class="badge badge--live">Published</span>
-              <h3><!-- [PLACEHOLDER: Book Title] --></h3>
-              <p><!-- [PLACEHOLDER: 2–3 sentences about the book] --></p>
-              <a href="#" class="btn btn--ghost" target="_blank" rel="noopener">Get the Book</a>
+              <span class="badge badge--live">Personal Work</span>
+              <h3 class="book__face-title" style="margin: 0 0 0.5rem 0;">The Dark Innovation: Omnix</h3>
+              <p>A personal creative work written for reading and sharing stories and thoughts. This is a journey
+                through an imaginative world, shared purely to connect with readers through the power of narrative.</p>
+
+              <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                <button id="openReaderBtn" class="btn btn--solid"
+                  style="padding: 0.6rem 1.4rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer;"
+                  aria-label="Read The Dark Innovation: Omnix Chapter 1">
+                  📖 Read Chapter 1
+                </button>
+              </div>
             </div>
           </div>
 
-          <div class="book reveal">
-            <div class="book__3d book__3d--dim" aria-label="Book in progress">
-              <div class="book__face book__face--front">
-                <div class="book__face-soon">Coming Soon</div>
-                <div class="book__face-title">In Progress...</div>
-                <div class="book__face-author">Prakhar Bankhede</div>
-              </div>
-              <div class="book__face book__face--spine"><span>TBD</span></div>
-              <div class="book__face book__face--back"></div>
-              <div class="book__face book__face--top"></div>
-              <div class="book__face book__face--bottom"></div>
-            </div>
-            <div class="book__info">
-              <span class="badge badge--wip">In Progress</span>
-              <h3><!-- [PLACEHOLDER: Title or "Untitled"] --></h3>
-              <p>The next one is being written.</p>
-              <div class="progress-bar">
-                <div class="progress-bar__label">
-                  <span>Progress</span><span><!-- [PLACEHOLDER: e.g. 40%] --></span>
-                </div>
-                <div class="progress-bar__track"><div class="progress-bar__fill" style="--p:40%" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div></div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -360,50 +567,61 @@
         <h2 class="section__h2 reveal">Timeline</h2>
         <ol class="tl" role="list">
           <li class="tl__item reveal">
-            <div class="tl__year">Now</div>
+            <div class="tl__year">2020</div>
             <div class="tl__body">
-              <div class="tl__title">B.Tech AI/ML — IPS Academy, Indore</div>
-              <p class="tl__desc">Building projects alongside coursework. Deploying to Vercel. Active on GitHub.</p>
+              <div class="tl__title">Passed 10th Grade</div>
+              <p class="tl__desc">Completed Secondary Education from MP Board.</p>
+              <span class="tl__tag">Academic</span>
+            </div>
+          </li>
+          <li class="tl__item reveal">
+            <div class="tl__year">2022</div>
+            <div class="tl__body">
+              <div class="tl__title">Passed 12th Grade</div>
+              <p class="tl__desc">Completed Higher Secondary Education from MP Board with a focus on science.</p>
               <span class="tl__tag">Academic</span>
             </div>
           </li>
           <li class="tl__item reveal">
             <div class="tl__year">2024</div>
             <div class="tl__body">
+              <div class="tl__title">Started Engineering Career</div>
+              <p class="tl__desc">Joined IPS Academy for B.Tech in Artificial Intelligence & Machine Learning.</p>
+              <span class="tl__tag">Academic</span>
+            </div>
+          </li>
+          <li class="tl__item reveal">
+            <div class="tl__year">2025</div>
+            <div class="tl__body">
+              <div class="tl__title">Comic Book</div>
+              <p class="tl__desc">Successfully authored my first comic book; currently in the pre-publication phase.</p>
+              <span class="tl__tag">Writing</span>
+            </div>
+          </li>
+          <li class="tl__item reveal">
+            <div class="tl__year">2026</div>
+            <div class="tl__body">
               <div class="tl__title">Anthropic AI Certification</div>
-              <p class="tl__desc">Completed Anthropic's certification program on responsible AI and Claude API usage.</p>
+              <p class="tl__desc">Completed Anthropic's certification program on responsible AI and Claude API usage.
+              </p>
               <span class="tl__tag">Certification</span>
             </div>
           </li>
           <li class="tl__item reveal">
-            <div class="tl__year">2024</div>
+            <div class="tl__year">2026–Now</div>
             <div class="tl__body">
-              <div class="tl__title">Box Office Prediction Platform — Deployed</div>
-              <p class="tl__desc">Full-stack ML project, live on Vercel. First major deployed production app.</p>
+              <div class="tl__title">Building & Deploying</div>
+              <p class="tl__desc">Built multiple full-stack and ML projects, live on Vercel and documented on GitHub.
+              </p>
               <span class="tl__tag">Project</span>
             </div>
           </li>
           <li class="tl__item reveal">
-            <div class="tl__year">2024</div>
+            <div class="tl__year">Now</div>
             <div class="tl__body">
-              <div class="tl__title">Published First Book</div>
-              <p class="tl__desc"><!-- [PLACEHOLDER: Publisher / Platform / brief note] --></p>
-              <span class="tl__tag">Publication</span>
-            </div>
-          </li>
-          <li class="tl__item reveal">
-            <div class="tl__year"><!-- [PLACEHOLDER: Year] --></div>
-            <div class="tl__body">
-              <div class="tl__title"><!-- [PLACEHOLDER: Internship / Role] --></div>
-              <p class="tl__desc"><!-- [PLACEHOLDER: Description] --></p>
-              <span class="tl__tag">Internship</span>
-            </div>
-          </li>
-          <li class="tl__item reveal">
-            <div class="tl__year">2023</div>
-            <div class="tl__body">
-              <div class="tl__title">Started Engineering & GitHub</div>
-              <p class="tl__desc">Enrolled in B.Tech and began building publicly on GitHub.</p>
+              <div class="tl__title">B.Tech AIML — 3rd Year</div>
+              <p class="tl__desc">Currently pursuing B.Tech in Artificial Intelligence & Machine Learning at IPS
+                Academy, Indore.</p>
               <span class="tl__tag">Academic</span>
             </div>
           </li>
@@ -419,39 +637,73 @@
         <div class="contact__grid">
 
           <div class="contact__links reveal">
-            <a href="https://github.com/PRAKHAR_GITHUB_USERNAME" id="socialGithub" class="c-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <a href="https://github.com/prakhar230620" class="c-link" target="_blank" rel="noopener"
+              aria-label="GitHub">
               <span class="c-link__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  aria-hidden="true">
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                </svg>
               </span>
-              <span>GitHub<br/><small><!-- [PLACEHOLDER: @username] --></small></span>
+              <span>GitHub<br /><small>@prakhar230620</small></span>
               <span class="c-link__arrow">↗</span>
             </a>
-            <a href="https://linkedin.com/in/PLACEHOLDER" class="c-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/prakhar-bankhede-5556033b6/" class="c-link" target="_blank"
+              rel="noopener" aria-label="LinkedIn">
               <span class="c-link__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
               </span>
-              <span>LinkedIn<br/><small><!-- [PLACEHOLDER: /in/yourname] --></small></span>
+              <span>LinkedIn<br /><small>Prakhar-Bankhede</small></span>
               <span class="c-link__arrow">↗</span>
             </a>
-            <a href="mailto:placeholder@email.com" class="c-link" aria-label="Email">
+            <a href="https://www.instagram.com/prakhar.61_?igsh=NDY1d2l5ZXpkNzlj" class="c-link" target="_blank"
+              rel="noopener" aria-label="Instagram">
               <span class="c-link__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
               </span>
-              <span>Email<br/><small><!-- [PLACEHOLDER: your@email.com] --></small></span>
+              <span>Instagram<br /><small>@prakhar.61_</small></span>
+              <span class="c-link__arrow">↗</span>
+            </a>
+            <a href="mailto:prakharbankhede15@gmail.com" class="c-link" aria-label="Email">
+              <span class="c-link__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </span>
+              <span>Email<br /><small>prakharbankhede15@gmail.com</small></span>
               <span class="c-link__arrow">↗</span>
             </a>
           </div>
 
-          <form class="contact__form reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" novalidate>
-            <!-- [PLACEHOLDER: Replace YOUR_FORMSPREE_ID at formspree.io] -->
-            <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" /></div>
-            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email" /></div>
-            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="What's on your mind?" rows="5" required></textarea></div>
+          <form class="contact__form reveal" id="contactForm" novalidate>
+            <div class="field"><label for="name">Name</label><input type="text" id="name" name="name"
+                placeholder="Your name" required autocomplete="name" /></div>
+            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email"
+                placeholder="your@email.com" required autocomplete="email" /></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message"
+                placeholder="What's on your mind?" rows="5" required></textarea></div>
             <button type="submit" class="btn btn--solid" id="formSubmit">
               <span id="formBtnText">Send</span>
             </button>
             <div class="form__ok" id="formSuccess" hidden aria-live="polite">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path class="check-path" d="M8 12l3 3 5-5"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path class="check-path" d="M8 12l3 3 5-5" />
+              </svg>
               Message sent. I'll get back to you.
             </div>
           </form>
@@ -464,15 +716,87 @@
 
   <footer class="footer" role="contentinfo">
     <div class="container">
-      <span>Prakhar Bankhede · 2025</span>
+      <span>Prakhar Bankhede · 2026</span>
+      <span>@All rights reserved.</span>
       <span>HTML · CSS · Three.js</span>
     </div>
   </footer>
 
   <button class="btt" id="backToTop" aria-label="Back to top" hidden>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      aria-hidden="true">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
   </button>
 
+  <!-- Desktop View Suggestion Toast -->
+  <div id="desktop-toast" class="toast" aria-live="polite" hidden>
+    <div class="toast__content">
+      <div class="toast__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      </div>
+      <div class="toast__text">
+        <p>Switch to <strong>Desktop View</strong> for the full 3D interactive experience and better performance.</p>
+      </div>
+      <button class="toast__close" id="closeToast" aria-label="Dismiss">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Vercel Web Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- PDF.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    // Set worker source for PDF.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  </script>
+
   <script src="js/main.js"></script>
+
+
+  <!-- In-Portfolio Book Reader Overlay -->
+  <div id="book-reader" class="reader" hidden>
+    <div class="reader__overlay"></div>
+    
+    <button id="closeReader" class="reader__back" aria-label="Exit Reader">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12" />
+        <polyline points="12 19 5 12 12 5" />
+      </svg>
+      <span>Back to Portfolio</span>
+    </button>
+
+    <div class="reader__container">
+      <div id="read-book" class="reader__book">
+        <!-- Pages will be injected dynamically by JS -->
+      </div>
+    </div>
+
+    <div class="reader__controls">
+      <button id="prevPage" class="reader__btn" aria-label="Previous Page">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <div class="reader__page-num">
+        Page <span id="currentPageNum">1</span> / <span id="totalPagesNum">--</span>
+      </div>
+      <button id="nextPage" class="reader__btn" aria-label="Next Page">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </div>
+  </div>
 </body>
+
 </html>

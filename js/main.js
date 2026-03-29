@@ -5,7 +5,7 @@
    Three.js 3D scene + physically-accurate particle simulations
 ═══════════════════════════════════════════════════════════════ */
 
-const GITHUB_USERNAME = 'PRAKHAR_GITHUB_USERNAME';
+const GITHUB_USERNAME = 'prakhar230620';
 
 const TYPEWRITER_LINES = [
   'Developer.',
@@ -338,13 +338,13 @@ const LANG_COLORS = {
     let idxNum = 0;
 
     for (let i = 0; i < nBulge; i++, idxNum++) {
-      const idx = offsetIdx + idxNum;
-      const r = BULGE_R * Math.pow(Math.random(), 2); 
+      const idx = offsetIdx + i;
+      const r = BULGE_R * Math.pow(Math.random(), 2);
       const theta = PI2 * Math.random(), phi = Math.acos(2 * Math.random() - 1);
       let x = r * Math.sin(phi) * Math.cos(theta);
       let y = r * Math.cos(phi) * 0.7;
       let z = r * Math.sin(phi) * Math.sin(theta);
-      colW[idx] = 1.0; 
+      colW[idx] = 1.0;
       const cosI = Math.cos(INCL), sinI = Math.sin(INCL);
       spawnPos[idx * 3] = x; spawnPos[idx * 3 + 1] = y * cosI - z * sinI + offsetY; spawnPos[idx * 3 + 2] = y * sinI + z * cosI;
     }
@@ -365,8 +365,6 @@ const LANG_COLORS = {
       spawnPos[idx * 3] = x; spawnPos[idx * 3 + 1] = y * cosI - z * sinI + offsetY; spawnPos[idx * 3 + 2] = y * sinI + z * cosI;
     }
   };
-
-  // DIAMOND and LIGHTNING — REMOVED
 
   /* ── Shape list (7 shapes) ── */
   const shapes = [
@@ -679,28 +677,85 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
 async function loadGitHub() {
   const grid = document.getElementById('githubRepos');
   if (!grid) return;
+
+  // Specific projects to feature (order matters for display)
+  const targetNames = [
+    'Renasis', 'ToolMines_AI--AWS', 'RecipeReady_Mobile', 'pdfusion', 'Resonance',
+    'CENTRAL-AI-16', 'vocalforge', 'ytgenius', 'int-proj', 'TouchCSS'
+  ];
+
+  const projectDescriptions = {
+    'Renasis': 'AI-powered customer review analysis tool supporting Google Gemini and Groq. Built with Next.js 15 and TypeScript for sentiment analysis and actionable insights.',
+    'ToolMines_AI--AWS': 'Backend integration for the ToolMines AI suite using AWS services. Features secure environment management and server-side logic for AI applications.',
+    'RecipeReady_Mobile': 'Smart recipe generator that creates custom meals from available ingredients. Built with Next.js, featuring PWA support and dual-AI integration.',
+    'pdfusion': 'Comprehensive PDF management tool for merging, splitting, and optimizing PDF documents. Built as a high-performance Next.js web application.',
+    'Resonance': 'AI-driven audio processing and signal analysis platform for advanced sound manipulation and intelligent resonance control.',
+    'CENTRAL-AI-16': 'Core module of the Central AI ecosystem, focusing on Python-based backend services and high-scale AI model orchestration.',
+    'vocalforge': 'Advanced AI voice interaction platform. Features offline PWA capabilities and voice-to-text/text-to-voice using the Gemini API.',
+    'ytgenius': 'Intelligent YouTube content analyzer that provides summaries and key insights from video transcripts using AI.',
+    'int-proj': 'Advanced integration framework for connecting multiple AI services and streamlining data workflows for modern AI pipelines.',
+    'TouchCSS': 'Key Code X — A Visual CSS development studio. Features interactive editors for shadows, filters, and animations with real-time AI-powered code explanations.'
+  };
+
   try {
-    const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=public`);
+    // Fetch 100 repos to ensure we catch all featured ones from the 50+ total
+    const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100&type=public`);
     if (!res.ok) throw new Error();
-    const repos = await res.json();
+
+    const allRepos = await res.json();
+
+    // Filter by the target list (case-insensitive)
+    let repos = allRepos.filter(r =>
+      targetNames.some(name => r.name.toLowerCase() === name.toLowerCase())
+    );
+
+    // Sort to match the targetNames order
+    repos.sort((a, b) => {
+      const idxA = targetNames.findIndex(n => n.toLowerCase() === a.name.toLowerCase());
+      const idxB = targetNames.findIndex(n => n.toLowerCase() === b.name.toLowerCase());
+      return idxA - idxB;
+    });
+
     const pl = document.getElementById('githubProfileLink'), sg = document.getElementById('socialGithub');
     const url = `https://github.com/${GITHUB_USERNAME}`;
     if (pl) pl.href = url; if (sg) sg.href = url;
+
     grid.innerHTML = '';
-    repos.filter(r => !r.fork).forEach(repo => {
+
+    repos.forEach((repo, index) => {
       const color = LANG_COLORS[repo.language] || LANG_COLORS.default;
       const topics = (repo.topics || []).slice(0, 3).map(t => `<span class="repo-card__topic">${esc(t)}</span>`).join('');
       const card = document.createElement('a');
-      card.className = 'repo-card reveal'; card.href = repo.html_url; card.target = '_blank'; card.rel = 'noopener noreferrer';
+      card.className = 'repo-card reveal';
+      card.href = repo.html_url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
       card.setAttribute('aria-label', `${repo.name} on GitHub`);
       card.style.setProperty('--lang-color', color);
-      card.innerHTML = `<div class="repo-card__name">${esc(repo.name)}</div><div class="repo-card__desc">${esc(repo.description || 'No description.')}</div><div class="repo-card__meta">${repo.language ? `<span class="repo-card__lang" style="--lang-color:${color}">${esc(repo.language)}</span>` : ''}<span>★ ${repo.stargazers_count}</span></div>${topics ? `<div class="repo-card__topics">${topics}</div>` : ''}`;
+
+      // Find project description case-insensitively
+      const customDesc = Object.entries(projectDescriptions).find(([k]) => k.toLowerCase() === repo.name.toLowerCase())?.[1];
+      const description = customDesc || repo.description || 'No description available.';
+      
+      const displayName = repo.name.toLowerCase() === 'touchcss' ? 'Key Code X' : repo.name;
+      
+      card.innerHTML = `
+        <div class="repo-card__name">${esc(displayName)}</div>
+        <div class="repo-card__desc">${esc(description)}</div>
+        <div class="repo-card__meta">
+          ${repo.language ? `<span class="repo-card__lang" style="--lang-color:${color}">${esc(repo.language)}</span>` : ''}
+          <span>★ ${repo.stargazers_count}</span>
+        </div>
+        ${topics ? `<div class="repo-card__topics">${topics}</div>` : ''}
+      `;
+
       grid.appendChild(card);
-      setTimeout(() => card.classList.add('revealed'), 80);
+      // Staggered reveal
+      setTimeout(() => card.classList.add('revealed'), 80 * (index + 1));
     });
-  } catch {
-    const g = document.getElementById('githubRepos');
-    if (g) g.innerHTML = `<div style="grid-column:1/-1;padding:2rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text-3)">Couldn't load repos. <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener" style="color:var(--gold)">View on GitHub ↗</a></div>`;
+  } catch (err) {
+    console.error('GitHub Fetch Error:', err);
+    if (grid) grid.innerHTML = `<div style="grid-column:1/-1;padding:2rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text-3)">Couldn't load repos. <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener" style="color:var(--gold)">View on GitHub ↗</a></div>`;
   }
 }
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -715,11 +770,37 @@ if (form) {
     e.preventDefault();
     const btn = document.getElementById('formSubmit'), txt = document.getElementById('formBtnText');
     txt.textContent = 'Sending…'; btn.disabled = true;
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
     try {
-      const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-      if (r.ok) { form.querySelectorAll('.field,#formSubmit').forEach(el => el.style.display = 'none'); document.getElementById('formSuccess').hidden = false; }
-      else { txt.textContent = 'Error — Try Again'; btn.disabled = false; }
-    } catch { txt.textContent = 'Error — Try Again'; btn.disabled = false; }
+      const r = await fetch('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+
+      const result = await r.json().catch(() => ({}));
+
+      if (r.ok && result.success) {
+        form.querySelectorAll('.field,#formSubmit').forEach(el => el.style.display = 'none');
+        document.getElementById('formSuccess').hidden = false;
+      }
+      else {
+        const errMsg = result.error || 'Error — Try Again';
+        txt.textContent = errMsg;
+        btn.disabled = false;
+        console.error('Contact Form Error:', result);
+      }
+    } catch (err) {
+      txt.textContent = 'Network Error — Try Again';
+      btn.disabled = false;
+      console.error('Fetch error:', err);
+    }
   });
 }
 
@@ -753,3 +834,221 @@ document.querySelectorAll('.book__3d').forEach(bookEl => {
   }, { threshold: 0.5 });
   document.querySelectorAll('.progress-bar__fill').forEach(f => { f.style.animationPlayState = 'paused'; obs.observe(f); });
 })();
+
+/* ═══════════════════════════════════════════════════════════════
+   DESKTOP MODE TOAST
+   Suggests desktop view to mobile/tablet users for better performance
+═══════════════════════════════════════════════════════════════ */
+(function initDesktopModeToast() {
+  const toast = document.getElementById('desktop-toast');
+  const closeBtn = document.getElementById('closeToast');
+  if (!toast || !closeBtn) return;
+
+  // Detection: Width < 1024px (Tablets & Phones)
+  const isMobileOrTablet = window.innerWidth < 1024;
+  const isDismissed = sessionStorage.getItem('desktop-toast-dismissed');
+
+  if (isMobileOrTablet && !isDismissed) {
+    // Show after a short delay for better UX
+    setTimeout(() => {
+      toast.hidden = false;
+      // Trigger CSS transition
+      requestAnimationFrame(() => {
+        toast.classList.add('toast--show');
+      });
+    }, 2000);
+  }
+
+  closeBtn.addEventListener('click', () => {
+    toast.classList.remove('toast--show');
+    sessionStorage.setItem('desktop-toast-dismissed', 'true');
+    // Hide completely after transition
+    setTimeout(() => {
+      toast.hidden = true;
+    }, 600);
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   BOOK READER LOGIC
+   Uses PDF.js to render pages with 3D CSS flip animations
+═══════════════════════════════════════════════════════════════ */
+const BookReader = (() => {
+  let pdf = null;
+  let currentPage = 1;
+  let totalPages = 0;
+  let isFlipping = false;
+  const SCALE = () => Math.min(window.devicePixelRatio, 2) * (window.innerWidth < 900 ? 0.8 : 1.0);
+
+  // Core DOM refs
+  const getEl = (id) => document.getElementById(id);
+
+  function showReader() {
+    const reader = getEl('book-reader');
+    reader.removeAttribute('hidden');
+    // Force reflow so transition triggers
+    reader.offsetHeight;
+    reader.style.opacity = '1';
+    reader.style.pointerEvents = 'all';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideReader() {
+    const reader = getEl('book-reader');
+    reader.style.opacity = '0';
+    reader.style.pointerEvents = 'none';
+    setTimeout(() => {
+      reader.setAttribute('hidden', '');
+      reader.style.opacity = '';
+      reader.style.pointerEvents = '';
+    }, 500);
+    document.body.style.overflow = '';
+  }
+
+  async function loadPDF(url) {
+    if (pdf) return true;
+    try {
+      getEl('read-book').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8A8378;font-family:JetBrains Mono,monospace;font-size:0.85rem;gap:1rem"><div class="reader-loader"></div> Loading book…</div>';
+      const task = pdfjsLib.getDocument({ url, cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/', cMapPacked: true });
+      pdf = await task.promise;
+      totalPages = pdf.numPages;
+      getEl('totalPagesNum').textContent = totalPages;
+      return true;
+    } catch (err) {
+      console.error('PDF Load Error:', err);
+      getEl('read-book').innerHTML = '<div style="color:#C9A96E;padding:2rem;text-align:center">⚠️ Could not load book. Please check the file path.</div>';
+      return false;
+    }
+  }
+
+  async function renderPage(num) {
+    const page = await pdf.getPage(num);
+    const container = getEl('book-reader').getBoundingClientRect();
+    const availH = container.height * 0.72;
+    const availW = (container.width * 0.85) / (window.innerWidth < 900 ? 1 : 2);
+
+    const vpDefault = page.getViewport({ scale: 1 });
+    const scale = Math.min(availW / vpDefault.width, availH / vpDefault.height, 2.5) * (window.devicePixelRatio > 1 ? 1.5 : 1);
+    const viewport = page.getViewport({ scale });
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.display = 'block';
+    canvas.style.objectFit = 'contain';
+
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    return canvas;
+  }
+
+  async function renderSpread(direction) {
+    if (isFlipping) return;
+    isFlipping = true;
+
+    const book = getEl('read-book');
+    const isMobile = window.innerWidth < 900;
+
+    // Determine page numbers to show
+    const pages = [];
+    if (isMobile) {
+      pages.push(currentPage);
+    } else {
+      if (currentPage === 1) {
+        pages.push(1); // cover alone on right
+      } else {
+        pages.push(currentPage);
+        if (currentPage + 1 <= totalPages) pages.push(currentPage + 1);
+      }
+    }
+
+    // Build new page wrappers offscreen
+    const newWrappers = await Promise.all(pages.map(async (num, i) => {
+      const canvas = await renderPage(num);
+      const wrapper = document.createElement('div');
+      wrapper.className = 'reader__page' + (isMobile ? ' reader__page--solo' : (i === 0 ? ' reader__page--left' : ' reader__page--right'));
+      wrapper.appendChild(canvas);
+
+      // Page turn entrance animation
+      if (direction === 'next') {
+        wrapper.style.transform = 'rotateY(-90deg)';
+        wrapper.style.transition = 'none';
+      } else if (direction === 'prev') {
+        wrapper.style.transform = 'rotateY(90deg)';
+        wrapper.style.transition = 'none';
+      }
+      return wrapper;
+    }));
+
+    // Flip out old pages
+    const oldPages = Array.from(book.children);
+    if (oldPages.length && direction) {
+      oldPages.forEach(p => {
+        p.style.transition = 'transform 0.4s cubic-bezier(0.645,0.045,0.355,1), opacity 0.4s';
+        p.style.transform = direction === 'next' ? 'rotateY(90deg)' : 'rotateY(-90deg)';
+        p.style.opacity = '0';
+      });
+      await new Promise(r => setTimeout(r, 420));
+    }
+
+    // Swap in new pages
+    book.innerHTML = '';
+    newWrappers.forEach(w => book.appendChild(w));
+
+    // Animate in
+    if (direction) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          newWrappers.forEach(w => {
+            w.style.transition = 'transform 0.45s cubic-bezier(0.645,0.045,0.355,1)';
+            w.style.transform = 'rotateY(0deg)';
+          });
+        });
+      });
+      await new Promise(r => setTimeout(r, 460));
+    }
+
+    // Update UI controls
+    getEl('currentPageNum').textContent = currentPage;
+    getEl('prevPage').disabled = currentPage <= 1;
+    getEl('nextPage').disabled = currentPage >= totalPages;
+
+    isFlipping = false;
+  }
+
+  return {
+    async open(url) {
+      showReader();
+      const ok = await loadPDF(url);
+      if (!ok) return;
+      currentPage = 1;
+      await renderSpread(null);
+    },
+
+    close: hideReader,
+
+    async next() {
+      if (currentPage >= totalPages || isFlipping) return;
+      const step = window.innerWidth < 900 ? 1 : (currentPage === 1 ? 1 : 2);
+      currentPage = Math.min(totalPages, currentPage + step);
+      await renderSpread('next');
+    },
+
+    async prev() {
+      if (currentPage <= 1 || isFlipping) return;
+      const step = window.innerWidth < 900 ? 1 : 2;
+      currentPage = Math.max(1, currentPage - step);
+      await renderSpread('prev');
+    }
+  };
+})();
+
+// ── Wire up all Reader buttons ────────────────────────────────
+document.getElementById('openReaderBtn')?.addEventListener('click', () => {
+  BookReader.open('assets/Books/The Dark Innovation Omnix Chapter-1.pdf');
+});
+document.getElementById('closeReader')?.addEventListener('click', () => BookReader.close());
+document.getElementById('nextPage')?.addEventListener('click', () => BookReader.next());
+document.getElementById('prevPage')?.addEventListener('click', () => BookReader.prev());
