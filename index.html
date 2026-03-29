@@ -518,6 +518,24 @@
             <div class="cert-row__name">Software Engineering Virtual Experience</div>
             <div class="cert-row__date">2026</div>
           </a>
+          <a href="assets/images/MERN Stack Internship Certificate.jpeg" class="cert-row reveal" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Yipsilon_Logo.png" alt="Yipsilon" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Yipsilon IT Solutions</div>
+            <div class="cert-row__name">MERN Stack Internship</div>
+            <div class="cert-row__date">2025</div>
+          </a>
+          <a href="assets/images/Navodaya's talent search contest result.jpeg" class="cert-row reveal" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/Navodaya_Logo.png" alt="Navodaya" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Navodaya Vidyalaya</div>
+            <div class="cert-row__name">Talent Search Contest</div>
+            <div class="cert-row__date">2019</div>
+          </a>
         </div>
       </div>
     </section>
@@ -567,6 +585,15 @@
         <h2 class="section__h2 reveal">Timeline</h2>
         <ol class="tl" role="list">
           <li class="tl__item reveal">
+            <div class="tl__year">2019</div>
+            <div class="tl__body">
+              <div class="tl__title">Talent Search Contest</div>
+              <p class="tl__desc">Participated and succeeded in the Navodaya Talent Search Contest,
+                securing 441 rank on national level.</p>
+              <span class="tl__tag">Achievement</span>
+            </div>
+          </li>
+          <li class="tl__item reveal">
             <div class="tl__year">2020</div>
             <div class="tl__body">
               <div class="tl__title">Passed 10th Grade</div>
@@ -605,6 +632,15 @@
               <p class="tl__desc">Completed Anthropic's certification program on responsible AI and Claude API usage.
               </p>
               <span class="tl__tag">Certification</span>
+            </div>
+          </li>
+          <li class="tl__item reveal">
+            <div class="tl__year">2026</div>
+            <div class="tl__body">
+              <div class="tl__title">MERN Stack Internship</div>
+              <p class="tl__desc">Successfully completed an intensive internship at Yipsilon IT Solutions, specializing
+                in building full-stack applications with MongoDB, Express, React, and Node.js.</p>
+              <span class="tl__tag">Internship</span>
             </div>
           </li>
           <li class="tl__item reveal">
@@ -748,6 +784,23 @@
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
+    </div>
+  </div>
+
+  <!-- In-Portfolio Image Certificate Viewer Overlay -->
+  <div id="cert-viewer" class="reader" hidden>
+    <div class="reader__overlay"></div>
+    <button id="closeCertViewer" class="reader__back" aria-label="Close Viewer">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+      <span>Close</span>
+    </button>
+    <div class="cert-viewer__content"
+      style="position:relative; z-index:1010; width:90%; height:85vh; display:flex; align-items:center; justify-content:center; margin: 0 auto; margin-top:2rem">
+      <img id="certViewerImage" src="" alt="Certificate View" loading="lazy"
+        style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.6);">
     </div>
   </div>
 

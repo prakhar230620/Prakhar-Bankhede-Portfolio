@@ -1078,3 +1078,53 @@ document.getElementById('openReaderBtn')?.addEventListener('click', () => {
 document.getElementById('closeReader')?.addEventListener('click', () => BookReader.close());
 document.getElementById('nextPage')?.addEventListener('click', () => BookReader.next());
 document.getElementById('prevPage')?.addEventListener('click', () => BookReader.prev());
+
+/* ═══════════════════════════════════════════════════════════════
+   CERTIFICATE IMAGE LIGHTBOX VIEWER
+═══════════════════════════════════════════════════════════════ */
+(() => {
+  const viewer = document.getElementById('cert-viewer');
+  const viewerImg = document.getElementById('certViewerImage');
+  const closeBtn = document.getElementById('closeCertViewer');
+
+  if (!viewer || !viewerImg || !closeBtn) return;
+
+  // Intercept certificate clicks
+  document.querySelectorAll('.cert-row').forEach(cert => {
+    cert.addEventListener('click', e => {
+      const url = cert.getAttribute('href');
+      // If it's a direct image file rather than an external page like Skilljar/Forage
+      if (url && url.match(/\.(jpeg|jpg|png|svg)(|\?.*)$/i)) {
+        e.preventDefault();
+        viewerImg.src = url;
+        
+        viewer.hidden = false;
+        viewer.offsetHeight; // trigger reflow
+        viewer.style.opacity = '1';
+        viewer.style.pointerEvents = 'auto';
+        document.body.style.overflow = 'hidden'; // lock scrolling
+      }
+    });
+  });
+
+  const hideViewer = () => {
+    viewer.style.opacity = '0';
+    viewer.style.pointerEvents = 'none';
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      viewer.hidden = true;
+      viewerImg.src = '';
+    }, 400); // match standard modal fadeout transition time
+  };
+
+  closeBtn.addEventListener('click', hideViewer);
+  viewer.querySelector('.reader__overlay').addEventListener('click', hideViewer);
+  
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !viewer.hidden) {
+      hideViewer();
+    }
+  });
+
+})();
