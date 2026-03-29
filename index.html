@@ -751,18 +751,6 @@
     </div>
   </div>
 
-  <!-- Vercel Web Analytics -->
-  <script defer src="/_vercel/insights/script.js"></script>
-  <!-- PDF.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    // Set worker source for PDF.js
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-  </script>
-
-  <script src="js/main.js"></script>
-
-
   <!-- In-Portfolio Book Reader Overlay -->
   <div id="book-reader" class="reader" hidden>
     <div class="reader__overlay"></div>
@@ -797,6 +785,17 @@
       </button>
     </div>
   </div>
+
+  <!-- Vercel Web Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- PDF.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    // Set worker source for PDF.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  </script>
+
+  <script src="js/main.js"></script>
 </body>
 
 </html>

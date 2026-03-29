@@ -949,7 +949,8 @@ const BookReader = (() => {
     if (isFlipping) return;
     isFlipping = true;
 
-    const book = getEl('read-book');
+    try {
+      const book = getEl('read-book');
     const isMobile = window.innerWidth < 900;
 
     // Determine page numbers to show
@@ -1011,12 +1012,13 @@ const BookReader = (() => {
       await new Promise(r => setTimeout(r, 460));
     }
 
-    // Update UI controls
-    getEl('currentPageNum').textContent = currentPage;
-    getEl('prevPage').disabled = currentPage <= 1;
-    getEl('nextPage').disabled = currentPage >= totalPages;
-
-    isFlipping = false;
+      // Update UI controls
+      getEl('currentPageNum').textContent = currentPage;
+      getEl('prevPage').disabled = currentPage <= 1;
+      getEl('nextPage').disabled = currentPage >= totalPages;
+    } finally {
+      isFlipping = false;
+    }
   }
 
   return {
