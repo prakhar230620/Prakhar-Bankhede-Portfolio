@@ -1027,10 +1027,18 @@ const BookReader = (() => {
         pageNode.dataset.loaded = 'true'; 
         
         const page = await pdf.getPage(pageNum);
-        const vp = page.getViewport({ scale: Math.min(window.devicePixelRatio, 2.5) * 1.5 }); 
+        // Use a massive dense resolution multiplier ensuring 4K clarity on zoom
+        const hdScale = Math.max(3.5, window.devicePixelRatio * 2);
+        const vp = page.getViewport({ scale: hdScale }); 
+        
         pageNode.width = vp.width;
         pageNode.height = vp.height;
         const ctx = pageNode.getContext('2d');
+        
+        // Ensure browser applies high-quality text anti-aliasing
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        
         await page.render({ canvasContext: ctx, viewport: vp }).promise;
     };
 
