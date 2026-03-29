@@ -948,11 +948,9 @@ const BookReader = (() => {
     pageFlip = new St.PageFlip(bookEl, {
       width: Math.floor(renderW),       // Base page width
       height: Math.floor(renderH),      // Base page height
-      size: "stretch",                  // Allows resizing
-      minWidth: isMobile ? 250 : 350,
-      maxWidth: 1000,
-      minHeight: isMobile ? 350 : 450,
-      maxHeight: 1400,
+      size: "fixed",                    // FIXED prevents asymmetric shattering/floating layouts
+      autoCenter: true,                 // Ensures the book anchors solidly and stops drifting
+      drawShadow: true,                 // Ensures standard book shadows render over pages
       maxShadowOpacity: 0.5,            // Realistic book shadow
       showCover: true,
       mobileScrollSupport: false,
