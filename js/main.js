@@ -929,6 +929,7 @@ const BookReader = (() => {
     // Determine canvas dimensions based on screen limits
     const isMobile = window.innerWidth < 900;
     const availH = window.innerHeight * (isMobile ? 0.65 : 0.72);
+    // Since we always render a 2-page spread, availW is half the container width
     const availW = (window.innerWidth * 0.9) / (isMobile ? 1 : 2);
     
     let renderH = availH;
@@ -948,24 +949,33 @@ const BookReader = (() => {
     pageFlip = new St.PageFlip(bookEl, {
       width: Math.floor(renderW),       // Base page width
       height: Math.floor(renderH),      // Base page height
-      size: "fixed",                    // FIXED prevents asymmetric shattering/floating layouts
-      autoCenter: true,                 // Ensures the book anchors solidly and stops drifting
-      drawShadow: true,                 // Ensures standard book shadows render over pages
-      maxShadowOpacity: 0.5,            // Realistic book shadow
-      showCover: true,
+      size: "fixed",                    // FIXED prevents asymmetric shattering
+      autoCenter: false,                // FALSE prevents erratic location shifting
+      drawShadow: true,                 // Realistic curling shadow on flip
+      maxShadowOpacity: 0.5,            
+      showCover: false,                 // FALSE = softly curles the cover like normal pages
       mobileScrollSupport: false,
-      usePortrait: isMobile             // Single page mode on mobile
+      usePortrait: isMobile             
     });
 
-    // Create empty wrappers for all pages
     const pageNodes = [];
+    
+    // To keep the book perfectly centered and simulate a soft cover opening,
+    // we prefix an empty invisible page on the left.
+    // [Empty Left] + [Cover Right]
+    if (!isMobile) {
+      const emptyFront = document.createElement('div');
+      emptyFront.className = 'page page-wrapper empty-page';
+      emptyFront.style.background = 'transparent'; // No ugly black void
+      emptyFront.style.boxShadow = 'none';
+      pageNodes.push(emptyFront);
+    }
+
     for(let i = 1; i <= totalPages; i++) {
         const div = document.createElement('div');
         div.className = 'page page-wrapper';
         div.dataset.page = i;
-        div.style.backgroundColor = '#fff';
         
-        // Add a canvas inside that will lazily load
         const canvas = document.createElement('canvas');
         canvas.style.width = '100%';
         canvas.style.height = '100%';
@@ -975,39 +985,48 @@ const BookReader = (() => {
         pageNodes.push(div);
     }
     
+    // Must end on an even pair, pad if necessary
+    if (!isMobile && pageNodes.length % 2 !== 0) {
+      const emptyBack = document.createElement('div');
+      emptyBack.className = 'page page-wrapper empty-page';
+      emptyBack.style.background = 'transparent';
+      emptyBack.style.boxShadow = 'none';
+      pageNodes.push(emptyBack);
+    }
+    
     pageNodes.forEach(node => bookEl.appendChild(node));
     
     // Load pages into PageFlip engine
-    pageFlip.loadFromHTML(document.querySelectorAll('.page-wrapper'));
+    pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
     // Bind page flip event to update UI & trigger lazy render
     pageFlip.on('flip', (e) => {
-        let current = e.data + 1; // e.data is 0-indexed page number
-        getEl('currentPageNum').textContent = current;
-        getEl('prevPage').disabled = current <= 1;
-        getEl('nextPage').disabled = current >= totalPages;
+        // Since we injected an empty left page, e.data is the array index.
+        // Index 0 = Empty Left, Index 1 = Page 1 (Right)
+        // Index 2 = Page 2 (Left), Index 3 = Page 3 (Right)
+        let primaryPage = isMobile ? (e.data + 1) : (e.data === 0 ? 1 : e.data);
         
-        // Lazy load the current page and adjacent pages to ensure high quality rendering
-        renderLazy(current - 1);
-        renderLazy(current);
-        renderLazy(current + 1);
-        renderLazy(current + 2);
-        if(!isMobile) {
-            renderLazy(current + 3);
-            renderLazy(current + 4);
-        }
+        getEl('currentPageNum').textContent = primaryPage;
+        getEl('prevPage').disabled = e.data === 0;
+        // Check if we hit the end
+        getEl('nextPage').disabled = e.data >= pageNodes.length - 2;
+        
+        // Lazy load the current pages and adjacent pages
+        renderLazy(primaryPage - 1);
+        renderLazy(primaryPage);
+        renderLazy(primaryPage + 1);
+        renderLazy(primaryPage + 2);
     });
 
     // Helper to render pages on demand
     const renderLazy = async (pageNum) => {
-        if (pageNum < 1 || pageNum > totalPages) return; // out of bounds
+        if (pageNum < 1 || pageNum > totalPages) return; 
         const pageNode = document.querySelector(`.page-wrapper[data-page="${pageNum}"] canvas`);
         if (!pageNode || pageNode.dataset.loaded === 'true') return;
         
-        pageNode.dataset.loaded = 'true'; // mark rendering to avoid dupes
+        pageNode.dataset.loaded = 'true'; 
         
         const page = await pdf.getPage(pageNum);
-        // We render at 2x scale for sharp high-DPI
         const vp = page.getViewport({ scale: Math.min(window.devicePixelRatio, 2.5) * 1.5 }); 
         pageNode.width = vp.width;
         pageNode.height = vp.height;
