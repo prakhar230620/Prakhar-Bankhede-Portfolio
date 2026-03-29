@@ -889,7 +889,7 @@ const BookReader = (() => {
     // Force reflow so transition triggers
     reader.offsetHeight;
     reader.style.opacity = '1';
-    reader.style.pointerEvents = 'all';
+    reader.style.pointerEvents = 'auto'; // 'auto' is correct for HTML (unlike 'all' for SVG)
     document.body.style.overflow = 'hidden';
   }
 
@@ -923,9 +923,11 @@ const BookReader = (() => {
 
   async function renderPage(num) {
     const page = await pdf.getPage(num);
-    const container = getEl('book-reader').getBoundingClientRect();
-    const availH = container.height * 0.72;
-    const availW = (container.width * 0.85) / (window.innerWidth < 900 ? 1 : 2);
+    const isMobile = window.innerWidth < 900;
+    
+    // Calculate reliable available space using window instead of DOM
+    const availH = window.innerHeight * (isMobile ? 0.65 : 0.72);
+    const availW = (window.innerWidth * 0.9) / (isMobile ? 1 : 2);
 
     const vpDefault = page.getViewport({ scale: 1 });
     const scale = Math.min(availW / vpDefault.width, availH / vpDefault.height, 2.5) * (window.devicePixelRatio > 1 ? 1.5 : 1);
@@ -936,9 +938,8 @@ const BookReader = (() => {
     canvas.width = viewport.width;
     canvas.height = viewport.height;
     canvas.style.width = '100%';
-    canvas.style.height = '100%';
+    canvas.style.height = 'auto'; // allow canvas to define aspect ratio properly
     canvas.style.display = 'block';
-    canvas.style.objectFit = 'contain';
 
     await page.render({ canvasContext: ctx, viewport }).promise;
     return canvas;
