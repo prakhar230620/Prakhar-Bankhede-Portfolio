@@ -12,6 +12,20 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  // Strict structural validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email address format' });
+  }
+
+  if (name.trim().length < 2) {
+    return res.status(400).json({ error: 'Name is too short' });
+  }
+
+  if (message.trim().length < 5) {
+    return res.status(400).json({ error: 'Message is too short' });
+  }
+
   // Create a transporter using your SMTP credentials (from environment variables)
   const transporter = nodemailer.createTransport({
     service: 'gmail',
