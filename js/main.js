@@ -871,25 +871,21 @@ document.querySelectorAll('.book__3d').forEach(bookEl => {
 
 /* ═══════════════════════════════════════════════════════════════
    BOOK READER LOGIC
-   Uses PDF.js to render pages with 3D CSS flip animations
+   Uses PDF.js to render pages + PageFlip for realistic 3D curves
 ═══════════════════════════════════════════════════════════════ */
 const BookReader = (() => {
   let pdf = null;
-  let currentPage = 1;
+  let pageFlip = null;
   let totalPages = 0;
-  let isFlipping = false;
-  const SCALE = () => Math.min(window.devicePixelRatio, 2) * (window.innerWidth < 900 ? 0.8 : 1.0);
-
-  // Core DOM refs
+  
   const getEl = (id) => document.getElementById(id);
 
   function showReader() {
     const reader = getEl('book-reader');
     reader.removeAttribute('hidden');
-    // Force reflow so transition triggers
     reader.offsetHeight;
     reader.style.opacity = '1';
-    reader.style.pointerEvents = 'auto'; // 'auto' is correct for HTML (unlike 'all' for SVG)
+    reader.style.pointerEvents = 'auto'; // 'auto' is correct for HTML
     document.body.style.overflow = 'hidden';
   }
 
@@ -921,104 +917,115 @@ const BookReader = (() => {
     }
   }
 
-  async function renderPage(num) {
-    const page = await pdf.getPage(num);
-    const isMobile = window.innerWidth < 900;
+  async function renderAllPagesToBook() {
+    const bookEl = getEl('read-book');
+    bookEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#c9a96e;"><div class="reader-loader" style="margin-right:10px"></div> Setting up pages...</div>';
     
-    // Calculate reliable available space using window instead of DOM
+    // We get the first page to determine native page aspect ratio
+    const samplePage = await pdf.getPage(1);
+    const viewport = samplePage.getViewport({ scale: 1 });
+    const ratio = viewport.width / viewport.height;
+    
+    // Determine canvas dimensions based on screen limits
+    const isMobile = window.innerWidth < 900;
     const availH = window.innerHeight * (isMobile ? 0.65 : 0.72);
     const availW = (window.innerWidth * 0.9) / (isMobile ? 1 : 2);
-
-    const vpDefault = page.getViewport({ scale: 1 });
-    const scale = Math.min(availW / vpDefault.width, availH / vpDefault.height, 2.5) * (window.devicePixelRatio > 1 ? 1.5 : 1);
-    const viewport = page.getViewport({ scale });
-
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-    canvas.style.width = '100%';
-    canvas.style.height = 'auto'; // allow canvas to define aspect ratio properly
-    canvas.style.display = 'block';
-
-    await page.render({ canvasContext: ctx, viewport }).promise;
-    return canvas;
-  }
-
-  async function renderSpread(direction) {
-    if (isFlipping) return;
-    isFlipping = true;
-
-    try {
-      const book = getEl('read-book');
-    const isMobile = window.innerWidth < 900;
-
-    // Determine page numbers to show
-    const pages = [];
-    if (isMobile) {
-      pages.push(currentPage);
-    } else {
-      if (currentPage === 1) {
-        pages.push(1); // cover alone on right
-      } else {
-        pages.push(currentPage);
-        if (currentPage + 1 <= totalPages) pages.push(currentPage + 1);
-      }
+    
+    let renderH = availH;
+    let renderW = renderH * ratio;
+    if (renderW > availW) {
+      renderW = availW;
+      renderH = renderW / ratio;
     }
-
-    // Build new page wrappers offscreen
-    const newWrappers = await Promise.all(pages.map(async (num, i) => {
-      const canvas = await renderPage(num);
-      const wrapper = document.createElement('div');
-      wrapper.className = 'reader__page' + (isMobile ? ' reader__page--solo' : (i === 0 ? ' reader__page--left' : ' reader__page--right'));
-      wrapper.appendChild(canvas);
-
-      // Page turn entrance animation
-      if (direction === 'next') {
-        wrapper.style.transform = 'rotateY(-90deg)';
-        wrapper.style.transition = 'none';
-      } else if (direction === 'prev') {
-        wrapper.style.transform = 'rotateY(90deg)';
-        wrapper.style.transition = 'none';
-      }
-      return wrapper;
-    }));
-
-    // Flip out old pages
-    const oldPages = Array.from(book.children);
-    if (oldPages.length && direction) {
-      oldPages.forEach(p => {
-        p.style.transition = 'transform 0.4s cubic-bezier(0.645,0.045,0.355,1), opacity 0.4s';
-        p.style.transform = direction === 'next' ? 'rotateY(90deg)' : 'rotateY(-90deg)';
-        p.style.opacity = '0';
-      });
-      await new Promise(r => setTimeout(r, 420));
+    
+    // Create the page flip instance
+    if (pageFlip) {
+      pageFlip.destroy();
     }
+    
+    bookEl.innerHTML = ''; // clear loading text explicitly before initializing
 
-    // Swap in new pages
-    book.innerHTML = '';
-    newWrappers.forEach(w => book.appendChild(w));
+    pageFlip = new St.PageFlip(bookEl, {
+      width: Math.floor(renderW),       // Base page width
+      height: Math.floor(renderH),      // Base page height
+      size: "stretch",                  // Allows resizing
+      minWidth: isMobile ? 250 : 350,
+      maxWidth: 1000,
+      minHeight: isMobile ? 350 : 450,
+      maxHeight: 1400,
+      maxShadowOpacity: 0.5,            // Realistic book shadow
+      showCover: true,
+      mobileScrollSupport: false,
+      usePortrait: isMobile             // Single page mode on mobile
+    });
 
-    // Animate in
-    if (direction) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          newWrappers.forEach(w => {
-            w.style.transition = 'transform 0.45s cubic-bezier(0.645,0.045,0.355,1)';
-            w.style.transform = 'rotateY(0deg)';
-          });
-        });
-      });
-      await new Promise(r => setTimeout(r, 460));
+    // Create empty wrappers for all pages
+    const pageNodes = [];
+    for(let i = 1; i <= totalPages; i++) {
+        const div = document.createElement('div');
+        div.className = 'page page-wrapper';
+        div.dataset.page = i;
+        div.style.backgroundColor = '#fff';
+        
+        // Add a canvas inside that will lazily load
+        const canvas = document.createElement('canvas');
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.dataset.loaded = 'false';
+        
+        div.appendChild(canvas);
+        pageNodes.push(div);
     }
+    
+    pageNodes.forEach(node => bookEl.appendChild(node));
+    
+    // Load pages into PageFlip engine
+    pageFlip.loadFromHTML(document.querySelectorAll('.page-wrapper'));
 
-      // Update UI controls
-      getEl('currentPageNum').textContent = currentPage;
-      getEl('prevPage').disabled = currentPage <= 1;
-      getEl('nextPage').disabled = currentPage >= totalPages;
-    } finally {
-      isFlipping = false;
-    }
+    // Bind page flip event to update UI & trigger lazy render
+    pageFlip.on('flip', (e) => {
+        let current = e.data + 1; // e.data is 0-indexed page number
+        getEl('currentPageNum').textContent = current;
+        getEl('prevPage').disabled = current <= 1;
+        getEl('nextPage').disabled = current >= totalPages;
+        
+        // Lazy load the current page and adjacent pages to ensure high quality rendering
+        renderLazy(current - 1);
+        renderLazy(current);
+        renderLazy(current + 1);
+        renderLazy(current + 2);
+        if(!isMobile) {
+            renderLazy(current + 3);
+            renderLazy(current + 4);
+        }
+    });
+
+    // Helper to render pages on demand
+    const renderLazy = async (pageNum) => {
+        if (pageNum < 1 || pageNum > totalPages) return; // out of bounds
+        const pageNode = document.querySelector(`.page-wrapper[data-page="${pageNum}"] canvas`);
+        if (!pageNode || pageNode.dataset.loaded === 'true') return;
+        
+        pageNode.dataset.loaded = 'true'; // mark rendering to avoid dupes
+        
+        const page = await pdf.getPage(pageNum);
+        // We render at 2x scale for sharp high-DPI
+        const vp = page.getViewport({ scale: Math.min(window.devicePixelRatio, 2.5) * 1.5 }); 
+        pageNode.width = vp.width;
+        pageNode.height = vp.height;
+        const ctx = pageNode.getContext('2d');
+        await page.render({ canvasContext: ctx, viewport: vp }).promise;
+    };
+
+    // Trigger initial renders (cover, page 2, page 3)
+    renderLazy(1);
+    renderLazy(2);
+    renderLazy(3);
+    
+    // Setup initial UI
+    getEl('currentPageNum').textContent = 1;
+    getEl('prevPage').disabled = true;
+    getEl('nextPage').disabled = totalPages <= 1;
   }
 
   return {
@@ -1026,25 +1033,11 @@ const BookReader = (() => {
       showReader();
       const ok = await loadPDF(url);
       if (!ok) return;
-      currentPage = 1;
-      await renderSpread(null);
+      await renderAllPagesToBook();
     },
-
     close: hideReader,
-
-    async next() {
-      if (currentPage >= totalPages || isFlipping) return;
-      const step = window.innerWidth < 900 ? 1 : (currentPage === 1 ? 1 : 2);
-      currentPage = Math.min(totalPages, currentPage + step);
-      await renderSpread('next');
-    },
-
-    async prev() {
-      if (currentPage <= 1 || isFlipping) return;
-      const step = window.innerWidth < 900 ? 1 : 2;
-      currentPage = Math.max(1, currentPage - step);
-      await renderSpread('prev');
-    }
+    next() { if(pageFlip) pageFlip.flipNext(); },
+    prev() { if(pageFlip) pageFlip.flipPrev(); }
   };
 })();
 

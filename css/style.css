@@ -1774,44 +1774,22 @@ h3 {
   position: relative;
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
 }
 
-/* Each rendered page wrapper */
-.reader__page {
-  position: relative;
+/* St.PageFlip Page Wrapper */
+.page-wrapper {
   background: #fff;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   overflow: hidden;
-  flex-shrink: 0;
 }
 
-.reader__page canvas {
+.page-wrapper canvas {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-}
-
-.reader__page--left {
-  width: 48%;
-  border-radius: 4px 0 0 4px;
-  transform-origin: right center;
-}
-
-.reader__page--right {
-  width: 48%;
-  border-radius: 0 4px 4px 0;
-  transform-origin: left center;
-}
-
-.reader__page--solo {
-  width: min(560px, 90%);
-  border-radius: 4px;
-  transform-origin: left center;
+  object-fit: fill;
 }
 
 .reader__controls {
@@ -1869,10 +1847,5 @@ h3 {
 @media (max-width: 900px) {
   .reader__container {
     height: 65vh;
-  }
-  .reader__page--left,
-  .reader__page--right {
-    width: 90%;
-    border-radius: 4px;
   }
 }
