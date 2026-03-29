@@ -11,7 +11,7 @@
   --border: rgba(255, 255, 255, 0.09);
   --text: #EDE9E0;
   --text-2: #8A8378;
-  --text-3: #4A4640;
+  --text-3: #615E58;
   --gold: #C9A96E;
   --gold-dim: rgba(201, 169, 110, 0.15);
   --white: #F5F2EC;
@@ -471,7 +471,7 @@ h3 {
 
 .hero__sub {
   font-size: .9rem;
-  color: var(--text-3);
+  color: var(--text-2);
   margin-bottom: 2.5rem;
   letter-spacing: .5px;
 }
