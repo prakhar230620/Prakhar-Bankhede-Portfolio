@@ -564,11 +564,45 @@
               <p>A personal creative work written for reading and sharing stories and thoughts. This is a journey
                 through an imaginative world, shared purely to connect with readers through the power of narrative.</p>
 
-              <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+              <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                <select id="omnixChapterSelect" class="btn" style="padding: 0.6rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer; background: rgba(255,255,255,0.1); color: var(--text-1); border: 1px solid var(--border); outline: none;">
+                  <option value="chapter1" style="color: black;">Chapter 1</option>
+                </select>
                 <button id="openReaderBtn" class="btn btn--solid"
                   style="padding: 0.6rem 1.4rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer;"
-                  aria-label="Read The Dark Innovation: Omnix Chapter 1">
-                  📖 Read Chapter 1
+                  aria-label="Read The Dark Innovation: Omnix">
+                  📖 Read Book
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="book book--soch reveal">
+            <div class="book__3d" aria-label="Soch: Pinjra or Aazadi">
+              <div class="book__face book__face--front"
+                style="background-image: url('assets/Books/Soch-%20Pinjra%20or%20aajadi%20book%20cover.png'); background-size: cover; background-position: center;">
+              </div>
+              <div class="book__face book__face--spine"><span>Soch: Pinjra or Aazadi</span></div>
+              <div class="book__face book__face--back"></div>
+              <div class="book__face book__face--top"></div>
+              <div class="book__face book__face--bottom"></div>
+            </div>
+            <div class="book__info">
+              <span class="badge badge--live">Personal Work</span>
+              <h3 class="book__face-title" style="margin: 0 0 0.5rem 0;">Soch: Pinjra or Aazadi</h3>
+              <p>A profound exploration of thoughts, constraints, and the true essence of freedom. Step into a world of
+                self-reflection and liberation through chapters that challenge boundaries.</p>
+
+              <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                <select id="sochChapterSelect" class="btn"
+                  style="padding: 0.6rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer; background: rgba(255,255,255,0.1); color: var(--text-1); border: 1px solid var(--border); outline: none;">
+                  <option value="chapter1" style="color: black;">Chapter 1</option>
+                  <option value="chapter2" style="color: black;">Chapter 2</option>
+                </select>
+                <button id="openSochReaderBtn" class="btn btn--solid"
+                  style="padding: 0.6rem 1.4rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer;"
+                  aria-label="Read Soch: Pinjra or Aazadi">
+                  📖 Read Book
                 </button>
               </div>
             </div>
@@ -834,6 +868,8 @@
   <!-- Realistic 3D PageFlip -->
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
+  <!-- Base64 Encoded PDFs to bypass local file CORS -->
+  <script src="js/pdfData.js"></script>
   <script src="js/main.js"></script>
 </body>
 

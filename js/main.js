@@ -882,6 +882,7 @@ const BookReader = (() => {
   let pdf = null;
   let pageFlip = null;
   let totalPages = 0;
+  let currentLoadedUrl = null;
   
   const getEl = (id) => document.getElementById(id);
 
@@ -906,18 +907,41 @@ const BookReader = (() => {
     document.body.style.overflow = '';
   }
 
-  async function loadPDF(url) {
-    if (pdf) return true;
+  // Helper to convert base64 to Uint8Array
+  function base64ToUint8Array(base64) {
+    const raw = window.atob(base64);
+    const uint8Array = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) {
+      uint8Array[i] = raw.charCodeAt(i);
+    }
+    return uint8Array;
+  }
+
+  async function loadPDF(bookKey) {
+    if (pdf && currentLoadedUrl === bookKey) return true;
     try {
       getEl('read-book').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8A8378;font-family:JetBrains Mono,monospace;font-size:0.85rem;gap:1rem"><div class="reader-loader"></div> Loading book…</div>';
-      const task = pdfjsLib.getDocument({ url, cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/', cMapPacked: true });
+      
+      const pdfBase64 = window.PDF_DATA ? window.PDF_DATA[bookKey] : null;
+      if (!pdfBase64) throw new Error("PDF data not found in bundle.");
+      
+      const pdfDataArray = base64ToUint8Array(pdfBase64);
+      
+      const task = pdfjsLib.getDocument({ 
+        data: pdfDataArray, 
+        cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/', 
+        cMapPacked: true 
+      });
       pdf = await task.promise;
       totalPages = pdf.numPages;
+      currentLoadedUrl = bookKey;
       getEl('totalPagesNum').textContent = totalPages;
       return true;
     } catch (err) {
       console.error('PDF Load Error:', err);
-      getEl('read-book').innerHTML = '<div style="color:#C9A96E;padding:2rem;text-align:center">⚠️ Could not load book. Please check the file path.</div>';
+      getEl('read-book').innerHTML = '<div style="color:#C9A96E;padding:2rem;text-align:center;max-width:80%;margin:0 auto">⚠️ Could not load book data. Ensure the pdfData.js bundle is built.</div>';
+      pdf = null;
+      currentLoadedUrl = null;
       return false;
     }
   }
@@ -1059,9 +1083,9 @@ const BookReader = (() => {
   }
 
   return {
-    async open(url) {
+    async open(bookKey) {
       showReader();
-      const ok = await loadPDF(url);
+      const ok = await loadPDF(bookKey);
       if (!ok) return;
       await renderAllPagesToBook();
     },
@@ -1073,8 +1097,21 @@ const BookReader = (() => {
 
 // ── Wire up all Reader buttons ────────────────────────────────
 document.getElementById('openReaderBtn')?.addEventListener('click', () => {
-  BookReader.open('assets/Books/The Dark Innovation Omnix Chapter-1.pdf');
+  const chapter = document.getElementById('omnixChapterSelect').value;
+  if(chapter === 'chapter1') {
+    BookReader.open('omnix1');
+  }
 });
+
+document.getElementById('openSochReaderBtn')?.addEventListener('click', () => {
+  const chapter = document.getElementById('sochChapterSelect').value;
+  if(chapter === 'chapter1') {
+    BookReader.open('soch1');
+  } else {
+    BookReader.open('soch2');
+  }
+});
+
 document.getElementById('closeReader')?.addEventListener('click', () => BookReader.close());
 document.getElementById('nextPage')?.addEventListener('click', () => BookReader.next());
 document.getElementById('prevPage')?.addEventListener('click', () => BookReader.prev());
