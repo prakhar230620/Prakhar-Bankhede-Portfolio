@@ -874,224 +874,433 @@ document.querySelectorAll('.book__3d').forEach(bookEl => {
   });
 })();
 
-/* ═══════════════════════════════════════════════════════════════
-   BOOK READER LOGIC
-   Uses PDF.js to render pages + PageFlip for realistic 3D curves
-═══════════════════════════════════════════════════════════════ */
-const BookReader = (() => {
-  let pdf = null;
-  let pageFlip = null;
-  let totalPages = 0;
-  let currentLoadedUrl = null;
-  
-  const getEl = (id) => document.getElementById(id);
+/* =================================================================
+   BOOK READER — Image-based (PNG pages) + PageFlip animation
+   No PDF.js needed. Pages are pre-exported PNGs stored under
+   assets/Books/**. PageFlip handles the 3-D curl animation on
+   desktop; mobile gets a smooth single-page view with pinch-zoom.
+================================================================= */
 
-  function showReader() {
-    const reader = getEl('book-reader');
-    reader.removeAttribute('hidden');
-    reader.offsetHeight;
-    reader.style.opacity = '1';
-    reader.style.pointerEvents = 'auto'; // 'auto' is correct for HTML
+/* ── Book page catalogues ────────────────────────────────────── */
+const BOOK_PAGES = {
+  "omnix1": [
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-1.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-2.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-3.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-4.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-5.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-6.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-7.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-8.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-9.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-10.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-11.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-12.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-13.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-14.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-15.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-16.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-17.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-18.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-19.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-20.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-21.png",
+    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-22.png"
+  ],
+  "soch1": [
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_1/Soch_Pinjra_Aazadi_Chapter1-1.png",
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_1/Soch_Pinjra_Aazadi_Chapter1-2.png",
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_1/Soch_Pinjra_Aazadi_Chapter1-3.png",
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_1/Soch_Pinjra_Aazadi_Chapter1-4.png"
+  ],
+  "soch2": [
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-1.png",
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-2.png",
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-3.png",
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-4.png",
+    "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-5.png"
+  ]
+};
+
+const BookReader = (() => {
+  let pages        = [];   // array of image URLs for current book
+  let totalPages   = 0;
+  let curPage      = 1;
+  let busy         = false;
+  let pageFlipInst = null;  // St.PageFlip instance (desktop only)
+
+  // Zoom state (mobile)
+  let zoomLevel    = 1.0;
+  const ZOOM_MIN   = 1.0;
+  const ZOOM_MAX   = 4.0;
+  const ZOOM_STEP  = 0.5;
+
+  const $el = id => document.getElementById(id);
+
+  /* ── loading indicator ───────────────────────────────────── */
+  function setLoading(txt) {
+    $el('read-book').innerHTML =
+      '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;' +
+      'height:100%;gap:14px;color:#C9A96E;font-family:JetBrains Mono,monospace;font-size:.85rem">' +
+      '<div class="reader-loader"></div><span>' + txt + '</span></div>';
+  }
+
+  /* ── state reset ─────────────────────────────────────────── */
+  function resetState() {
+    if (pageFlipInst) {
+      try { pageFlipInst.destroy(); } catch(e) {}
+      pageFlipInst = null;
+    }
+    const el = $el('read-book');
+    if (el) el.innerHTML = '';
+    pages = [];
+    totalPages = 0;
+    curPage    = 1;
+    zoomLevel  = 1.0;
+    busy       = false;
+  }
+
+  /* ── overlay show/hide ───────────────────────────────────── */
+  function showOverlay() {
+    const r = $el('book-reader');
+    r.removeAttribute('hidden');
+    r.offsetHeight;
+    r.style.opacity       = '1';
+    r.style.pointerEvents = 'auto';
     document.body.style.overflow = 'hidden';
   }
 
-  function hideReader() {
-    const reader = getEl('book-reader');
-    reader.style.opacity = '0';
-    reader.style.pointerEvents = 'none';
-    setTimeout(() => {
-      reader.setAttribute('hidden', '');
-      reader.style.opacity = '';
-      reader.style.pointerEvents = '';
-    }, 500);
+  function hideOverlay() {
+    const r = $el('book-reader');
+    r.style.opacity       = '0';
+    r.style.pointerEvents = 'none';
     document.body.style.overflow = '';
+    resetState();
+    setTimeout(() => {
+      r.setAttribute('hidden', '');
+      r.style.opacity       = '';
+      r.style.pointerEvents = '';
+    }, 400);
   }
 
-  // Helper to convert base64 to Uint8Array
-  function base64ToUint8Array(base64) {
-    const raw = window.atob(base64);
-    const uint8Array = new Uint8Array(raw.length);
-    for (let i = 0; i < raw.length; i++) {
-      uint8Array[i] = raw.charCodeAt(i);
-    }
-    return uint8Array;
+  /* ── Preload images (parallel) ───────────────────────────── */
+  function preloadImages(urls) {
+    return Promise.all(urls.map(url => new Promise(resolve => {
+      const img = new Image();
+      img.onload = img.onerror = resolve;
+      img.src = url;
+    })));
   }
 
-  async function loadPDF(bookKey) {
-    if (pdf && currentLoadedUrl === bookKey) return true;
-    try {
-      getEl('read-book').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8A8378;font-family:JetBrains Mono,monospace;font-size:0.85rem;gap:1rem"><div class="reader-loader"></div> Loading book…</div>';
-      
-      const pdfBase64 = window.PDF_DATA ? window.PDF_DATA[bookKey] : null;
-      if (!pdfBase64) throw new Error("PDF data not found in bundle.");
-      
-      const pdfDataArray = base64ToUint8Array(pdfBase64);
-      
-      const task = pdfjsLib.getDocument({ 
-        data: pdfDataArray, 
-        cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/', 
-        cMapPacked: true 
-      });
-      pdf = await task.promise;
-      totalPages = pdf.numPages;
-      currentLoadedUrl = bookKey;
-      getEl('totalPagesNum').textContent = totalPages;
-      return true;
-    } catch (err) {
-      console.error('PDF Load Error:', err);
-      getEl('read-book').innerHTML = '<div style="color:#C9A96E;padding:2rem;text-align:center;max-width:80%;margin:0 auto">⚠️ Could not load book data. Ensure the pdfData.js bundle is built.</div>';
-      pdf = null;
-      currentLoadedUrl = null;
-      return false;
-    }
-  }
+  /* ── DESKTOP renderer — PageFlip + loadFromHTML() ────────
+     We use PageFlip's loadFromHTML() feature to bypass the
+     native canvas rendering, keeping images completely sharp.
+  ─────────────────────────────────────────────────────────── */
+  async function initDesktopReader() {
+    setLoading('Loading book pages…');
+    // Preload first few pages eagerly, rest lazily
+    await preloadImages(pages.slice(0, Math.min(3, pages.length)));
 
-  async function renderAllPagesToBook() {
-    const bookEl = getEl('read-book');
-    bookEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#c9a96e;"><div class="reader-loader" style="margin-right:10px"></div> Setting up pages...</div>';
-    
-    // We get the first page to determine native page aspect ratio
-    const samplePage = await pdf.getPage(1);
-    const viewport = samplePage.getViewport({ scale: 1 });
-    const ratio = viewport.width / viewport.height;
-    
-    // Determine canvas dimensions based on screen limits
-    const isMobile = window.innerWidth < 900;
-    const availH = window.innerHeight * (isMobile ? 0.65 : 0.72);
-    // Since we always render a 2-page spread, availW is half the container width
-    const availW = (window.innerWidth * 0.9) / (isMobile ? 1 : 2);
-    
-    let renderH = availH;
-    let renderW = renderH * ratio;
-    if (renderW > availW) {
-      renderW = availW;
-      renderH = renderW / ratio;
-    }
-    
-    // Create the page flip instance
-    if (pageFlip) {
-      pageFlip.destroy();
-    }
-    
-    bookEl.innerHTML = ''; // clear loading text explicitly before initializing
+    const img0 = await new Promise(res => {
+      const i = new Image();
+      i.onload = () => res(i);
+      i.onerror = () => res({ naturalWidth: 800, naturalHeight: 1100 }); 
+      i.src = pages[0];
+    });
+    const ratio = img0.naturalWidth / img0.naturalHeight;
 
-    pageFlip = new St.PageFlip(bookEl, {
-      width: Math.floor(renderW),       // Base page width
-      height: Math.floor(renderH),      // Base page height
-      size: "fixed",                    // FIXED prevents asymmetric shattering
-      autoCenter: false,                // FALSE prevents erratic location shifting
-      drawShadow: true,                 // Realistic curling shadow on flip
-      maxShadowOpacity: 0.5,            
-      showCover: false,                 // FALSE = softly curles the cover like normal pages
-      mobileScrollSupport: false,
-      usePortrait: isMobile             
+    const availH = window.innerHeight * 0.84;
+    const availW = (window.innerWidth * 0.92) / 2;
+    let pageH = availH, pageW = pageH * ratio;
+    if (pageW > availW) { pageW = availW; pageH = pageW / ratio; }
+
+    pageW = Math.min(pageW, img0.naturalWidth);
+    pageH = Math.min(pageH, img0.naturalHeight);
+
+    const pW = Math.floor(pageW);
+    const pH = Math.floor(pageH);
+
+    // Destroy turn.js if exists
+    if (pageFlipInst) { try { pageFlipInst.turn("destroy"); } catch(e) {} pageFlipInst = null; }
+
+    const bookEl = $el('read-book');
+    bookEl.innerHTML = '';
+    const flipHost = document.createElement('div');
+    flipHost.id = 'rb-spread';
+    flipHost.className = 'flipbook';
+    flipHost.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.4)';
+    
+    // Create HTML pages for Turn.js
+    pages.forEach((src, idx) => {
+      const pageDiv = document.createElement('div');
+      
+      // Page 1, 2 (Front cover outward & inward) AND
+      // Last 2 pages (Back cover inward & outward) must be rigid 'hard' covers 
+      // Otherwise, turn.js mathematically glitches creating the 'white square' anomaly.
+      if (idx === 0 || idx === 1 || idx === pages.length - 1 || idx === pages.length - 2) {
+        pageDiv.className = 'page hard';
+      } else {
+        pageDiv.className = 'page';
+      }
+      
+      pageDiv.style.cssText = 'background: white; border: none; user-select: none; -webkit-user-select: none;';
+      
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Page ' + (idx + 1);
+      img.draggable = false;
+      img.style.cssText = 'width: 100%; height: 100%; object-fit: contain; pointer-events: none;';
+      
+      pageDiv.appendChild(img);
+      flipHost.appendChild(pageDiv);
     });
 
-    const pageNodes = [];
-    
-    // To keep the book perfectly centered and simulate a soft cover opening,
-    // we prefix an empty invisible page on the left.
-    // [Empty Left] + [Cover Right]
-    if (!isMobile) {
-      const emptyFront = document.createElement('div');
-      emptyFront.className = 'page page-wrapper empty-page';
-      emptyFront.style.background = 'transparent'; // No ugly black void
-      emptyFront.style.boxShadow = 'none';
-      pageNodes.push(emptyFront);
-    }
+    bookEl.appendChild(flipHost);
 
-    for(let i = 1; i <= totalPages; i++) {
-        const div = document.createElement('div');
-        div.className = 'page page-wrapper';
-        div.dataset.page = i;
-        
-        const canvas = document.createElement('canvas');
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        canvas.dataset.loaded = 'false';
-        
-        div.appendChild(canvas);
-        pageNodes.push(div);
-    }
-    
-    // Must end on an even pair, pad if necessary
-    if (!isMobile && pageNodes.length % 2 !== 0) {
-      const emptyBack = document.createElement('div');
-      emptyBack.className = 'page page-wrapper empty-page';
-      emptyBack.style.background = 'transparent';
-      emptyBack.style.boxShadow = 'none';
-      pageNodes.push(emptyBack);
-    }
-    
-    pageNodes.forEach(node => bookEl.appendChild(node));
-    
-    // Load pages into PageFlip engine
-    pageFlip.loadFromHTML(document.querySelectorAll('.page'));
-
-    // Bind page flip event to update UI & trigger lazy render
-    pageFlip.on('flip', (e) => {
-        // Since we injected an empty left page, e.data is the array index.
-        // Index 0 = Empty Left, Index 1 = Page 1 (Right)
-        // Index 2 = Page 2 (Left), Index 3 = Page 3 (Right)
-        let primaryPage = isMobile ? (e.data + 1) : (e.data === 0 ? 1 : e.data);
-        
-        getEl('currentPageNum').textContent = primaryPage;
-        getEl('prevPage').disabled = e.data === 0;
-        // Check if we hit the end
-        getEl('nextPage').disabled = e.data >= pageNodes.length - 2;
-        
-        // Lazy load the current pages and adjacent pages
-        renderLazy(primaryPage - 1);
-        renderLazy(primaryPage);
-        renderLazy(primaryPage + 1);
-        renderLazy(primaryPage + 2);
+    // Initialize Turn.js
+    pageFlipInst = $(flipHost).turn({
+      width: pW * 2,
+      height: pH,
+      autoCenter: true,
+      display: 'double',
+      acceleration: false,
+      elevation: 0,
+      gradients: true,
+      page: 1,          // Start on page 1 (cover) not blank spread
+      when: {
+        turned: function(e, page) {
+          curPage = page;
+          $el('currentPageNum').textContent = curPage;
+          $el('prevPage').disabled = (curPage === 1);
+          $el('nextPage').disabled = (curPage === totalPages || curPage === totalPages + 1);
+        }
+      }
     });
 
-    // Helper to render pages on demand
-    const renderLazy = async (pageNum) => {
-        if (pageNum < 1 || pageNum > totalPages) return; 
-        const pageNode = document.querySelector(`.page-wrapper[data-page="${pageNum}"] canvas`);
-        if (!pageNode || pageNode.dataset.loaded === 'true') return;
-        
-        pageNode.dataset.loaded = 'true'; 
-        
-        const page = await pdf.getPage(pageNum);
-        // Use a massive dense resolution multiplier ensuring 4K clarity on zoom
-        const hdScale = Math.max(3.5, window.devicePixelRatio * 2);
-        const vp = page.getViewport({ scale: hdScale }); 
-        
-        pageNode.width = vp.width;
-        pageNode.height = vp.height;
-        const ctx = pageNode.getContext('2d');
-        
-        // Ensure browser applies high-quality text anti-aliasing
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        
-        await page.render({ canvasContext: ctx, viewport: vp }).promise;
-    };
+    // Disable double-click text selection on book
+    flipHost.addEventListener('dblclick', function(e) { e.preventDefault(); });
+    flipHost.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    flipHost.style.userSelect = 'none';
 
-    // Trigger initial renders (cover, page 2, page 3)
-    renderLazy(1);
-    renderLazy(2);
-    renderLazy(3);
-    
-    // Setup initial UI
-    getEl('currentPageNum').textContent = 1;
-    getEl('prevPage').disabled = true;
-    getEl('nextPage').disabled = totalPages <= 1;
+    // Definitively disable hover peel on every individual page's flip data.
+    // turn.js stores hover per-page in .data().f.hover — calling .turn('hover',false)
+    // only sets it on the book container, NOT on each page sheet.
+    // We must iterate all .page children and kill it per-sheet.
+    $(flipHost).find('.page').each(function() {
+      var flipData = $(this).data('f');
+      if (flipData) flipData.hover = false;
+    });
+    // Also override at book level    
+    pageFlipInst.turn('hover', false);
+
+    curPage = 1;
+    $el('currentPageNum').textContent = 1;
+    $el('prevPage').disabled = true;
+    $el('nextPage').disabled = totalPages <= 1;
   }
 
+  /* ── MOBILE renderer — single page + pinch/tap zoom ────────
+     Shows one page at a time. User can zoom in/out with the
+     zoom buttons or pinch gesture to read small text clearly.
+  ─────────────────────────────────────────────────────────── */
+  function renderMobilePage(pageNum, preserveZoom) {
+    if (!pages.length) return;
+    if (!preserveZoom) zoomLevel = 1.0;
+
+    const bookEl  = $el('read-book');
+    const availW  = window.innerWidth  * 0.96;
+    const availH  = window.innerHeight * 0.78;
+
+    bookEl.innerHTML = '';
+
+    // Outer scroll container (scrollable when zoomed)
+    const scroll = document.createElement('div');
+    scroll.id    = 'rb-scroll';
+    scroll.style.cssText =
+      'width:100%;height:100%;overflow:auto;display:flex;' +
+      'align-items:center;justify-content:center;-webkit-overflow-scrolling:touch;';
+    bookEl.appendChild(scroll);
+
+    const inner = document.createElement('div');
+    inner.id    = 'rb-inner';
+    inner.style.cssText = 'display:flex;align-items:center;justify-content:center;flex-shrink:0;';
+    scroll.appendChild(inner);
+
+    const img = document.createElement('img');
+    img.src   = pages[pageNum - 1];
+    img.alt   = 'Page ' + pageNum;
+    img.style.cssText =
+      'display:block;max-width:' + availW + 'px;max-height:' + availH + 'px;' +
+      'width:auto;height:auto;' +
+      'box-shadow:0 8px 36px rgba(0,0,0,.65);border-radius:4px;' +
+      'transform-origin:center center;' +
+      'transform:scale(' + zoomLevel + ');' +
+      'transition:transform .2s ease;user-select:none;' +
+      'image-rendering:-webkit-optimize-contrast;image-rendering:high-quality;';
+    inner.appendChild(img);
+
+    // Zoom controls bar (floating above image)
+    const zBar = document.createElement('div');
+    zBar.id    = 'rb-zoombar';
+    zBar.style.cssText =
+      'position:absolute;bottom:5rem;right:1rem;' +
+      'display:flex;flex-direction:column;gap:8px;z-index:20;';
+    const btnStyle =
+      'width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.15);' +
+      'background:rgba(18,16,14,.85);color:#C9A96E;font-size:1.3rem;' +
+      'display:flex;align-items:center;justify-content:center;cursor:pointer;' +
+      'backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);touch-action:manipulation;';
+
+    const zIn  = document.createElement('button');
+    zIn.innerHTML  = '+';
+    zIn.title      = 'Zoom in';
+    zIn.style.cssText = btnStyle;
+    zIn.onclick = () => { zoomLevel = Math.min(ZOOM_MAX, zoomLevel + ZOOM_STEP); applyZoom(); };
+
+    const zOut = document.createElement('button');
+    zOut.innerHTML = '−';
+    zOut.title     = 'Zoom out';
+    zOut.style.cssText = btnStyle;
+    zOut.onclick = () => { zoomLevel = Math.max(ZOOM_MIN, zoomLevel - ZOOM_STEP); applyZoom(); };
+
+    const zReset = document.createElement('button');
+    zReset.innerHTML = '⤢';
+    zReset.title     = 'Reset zoom';
+    zReset.style.cssText = btnStyle;
+    zReset.onclick = () => { zoomLevel = 1.0; applyZoom(); };
+
+    zBar.appendChild(zIn);
+    zBar.appendChild(zOut);
+    zBar.appendChild(zReset);
+    bookEl.style.position = 'relative';
+    bookEl.appendChild(zBar);
+
+    function applyZoom() {
+      img.style.transform = 'scale(' + zoomLevel + ')';
+    }
+
+    // Native pinch-to-zoom (touch events)
+    let lastDist = 0;
+    scroll.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) {
+        lastDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+      }
+    }, { passive: true });
+    scroll.addEventListener('touchmove', e => {
+      if (e.touches.length === 2) {
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const delta = dist - lastDist;
+        if (Math.abs(delta) > 2) {
+          zoomLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomLevel + delta * 0.01));
+          applyZoom();
+          lastDist = dist;
+        }
+      }
+    }, { passive: true });
+
+    curPage = pageNum;
+    $el('currentPageNum').textContent  = pageNum;
+    $el('prevPage').disabled = pageNum <= 1;
+    $el('nextPage').disabled = pageNum >= totalPages;
+  }
+
+  /* ── public API ───────────────────────────────────────────── */
   return {
-    async open(bookKey) {
-      showReader();
-      const ok = await loadPDF(bookKey);
-      if (!ok) return;
-      await renderAllPagesToBook();
+    async open(key) {
+      if (busy) return;
+      const catalogue = window.BOOK_PAGES || BOOK_PAGES;
+      const pagePaths = catalogue[key];
+      if (!pagePaths || !pagePaths.length) {
+        console.error('BookReader: no pages found for key:', key);
+        return;
+      }
+      busy = true;
+      showOverlay();
+      setLoading('Opening book…');
+
+      pages      = pagePaths;
+      totalPages = pages.length;
+      $el('totalPagesNum').textContent = totalPages;
+      curPage    = 1;
+
+      const isMobile = window.innerWidth < 900;
+      if (isMobile) {
+        renderMobilePage(1);
+        busy = false;
+      } else {
+        await initDesktopReader();
+        busy = false;
+      }
     },
-    close: hideReader,
-    next() { if(pageFlip) pageFlip.flipNext(); },
-    prev() { if(pageFlip) pageFlip.flipPrev(); }
+
+    close: hideOverlay,
+
+    next() {
+      const isMobile = window.innerWidth < 900;
+      if (isMobile) {
+        if (!busy && curPage < totalPages) renderMobilePage(curPage + 1, true);
+      } else {
+        if (pageFlipInst) pageFlipInst.turn('next');
+      }
+    },
+
+    prev() {
+      const isMobile = window.innerWidth < 900;
+      if (isMobile) {
+        if (!busy && curPage > 1) renderMobilePage(curPage - 1, true);
+      } else {
+        if (pageFlipInst) pageFlipInst.turn('previous');
+      }
+    },
+
+    zoomIn() {
+      const isMobile = window.innerWidth < 900;
+      if (isMobile) {
+        zoomLevel = Math.min(ZOOM_MAX, zoomLevel + ZOOM_STEP);
+        const img = document.querySelector('#rb-inner img');
+        if (img) img.style.transform = 'scale(' + zoomLevel + ')';
+      } else {
+        // Desktop: scale the entire turn.js book spread
+        zoomLevel = Math.min(ZOOM_MAX, zoomLevel + ZOOM_STEP);
+        const spread = document.querySelector('#rb-spread');
+        if (spread) {
+          spread.style.transformOrigin = 'center top';
+          spread.style.transform = 'scale(' + zoomLevel + ')';
+        }
+      }
+    },
+    zoomOut() {
+      const isMobile = window.innerWidth < 900;
+      if (isMobile) {
+        zoomLevel = Math.max(ZOOM_MIN, zoomLevel - ZOOM_STEP);
+        const img = document.querySelector('#rb-inner img');
+        if (img) img.style.transform = 'scale(' + zoomLevel + ')';
+      } else {
+        zoomLevel = Math.max(ZOOM_MIN, zoomLevel - ZOOM_STEP);
+        const spread = document.querySelector('#rb-spread');
+        if (spread) {
+          spread.style.transformOrigin = 'center top';
+          spread.style.transform = 'scale(' + zoomLevel + ')';
+        }
+      }
+    },
+    resetZoom() {
+      zoomLevel = 1.0;
+      const isMobile = window.innerWidth < 900;
+      if (isMobile) {
+        const img = document.querySelector('#rb-inner img');
+        if (img) img.style.transform = 'scale(1)';
+      } else {
+        const spread = document.querySelector('#rb-spread');
+        if (spread) spread.style.transform = 'scale(1)';
+      }
+    },
   };
 })();
 

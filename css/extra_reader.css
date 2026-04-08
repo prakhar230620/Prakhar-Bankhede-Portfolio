@@ -1,17 +1,38 @@
+/* Global: all images inside the reader render at maximum quality */
+.reader img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+}
+
+/* Prevent text selection everywhere in the reader — stops golden
+   highlight on double-click + move */
+.reader, .reader * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* PageFlip internal canvas — never let CSS scale it (causes blur) */
+#read-book canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  /* Do NOT set width/height here — PageFlip controls canvas size */
+}
 
 /* ─── BOOK READER OVERLAY ────────────────────────────────── */
 .reader {
   position: fixed;
   inset: 0;
   z-index: 3000;
-  background: var(--bg);
+  background: var(--bg, #0f0e0c);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .5s var(--ease);
+  transition: opacity .5s ease;
 }
 
 .reader:not([hidden]) {
@@ -34,94 +55,98 @@
   display: flex;
   align-items: center;
   gap: .75rem;
-  color: var(--text-2);
+  color: var(--text-2, #8A8378);
   font-size: .85rem;
   padding: .6rem 1rem;
   border-radius: 99px;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
   transition: all .3s;
+  cursor: pointer;
 }
 
 .reader__back:hover {
-  color: var(--white);
+  color: var(--white, #fff);
   background: rgba(255, 255, 255, 0.06);
   transform: translateX(-4px);
 }
 
 .reader__container {
-  width: 90%;
-  max-width: 1200px;
-  height: 75vh;
+  width: 92%;
+  max-width: 1400px;
+  height: 82vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 2000px;
+  position: relative;
 }
 
+/* Turn.js book container - overflow auto to allow scrolling when zoomed */
 .reader__book {
   position: relative;
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
   display: flex;
   justify-content: center;
+  align-items: center;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.reader__page {
-  position: absolute;
-  width: 45%;
-  height: 100%;
-  background: #fff;
-  transform-origin: left center;
-  transition: transform .8s cubic-bezier(0.645, 0.045, 0.355, 1);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  overflow: hidden;
-  display: flex;
-  backface-visibility: hidden;
+/* Fade-in animation used by #rb-spread when page changes */
+@keyframes rbFadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-.reader__page--left {
-  left: 5%;
-  border-radius: 4px 0 0 4px;
-  transform: rotateY(0);
-  z-index: 1;
+
+/* ─── LOADING SPINNER ───────────────────────────────────── */
+.reader-loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(201, 169, 110, 0.3);
+  border-top-color: #C9A96E;
+  border-radius: 50%;
+  animation: readerSpin 0.8s linear infinite;
+  flex-shrink: 0;
+  display: inline-block;
 }
 
-.reader__page--right {
-  right: 5%;
-  border-radius: 0 4px 4px 0;
-  transform: rotateY(0);
-  z-index: 1;
+@keyframes readerSpin {
+  to { transform: rotate(360deg); }
 }
 
-.reader__page-content {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
+/* ─── READER CONTROLS BAR ───────────────────────────────── */
 .reader__controls {
   position: absolute;
-  bottom: 3rem;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 2rem;
-  background: rgba(18, 16, 14, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(18, 16, 14, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: .8rem 2rem;
   border-radius: 99px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
   z-index: 10;
 }
 
 .reader__btn {
-  color: var(--text-2);
+  color: var(--text-2, #8A8378);
   transition: color .2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .reader__btn:hover:not(:disabled) {
-  color: var(--gold);
+  color: var(--gold, #C9A96E);
 }
 
 .reader__btn:disabled {
@@ -132,31 +157,33 @@
 .reader__page-num {
   font-family: 'JetBrains Mono', monospace;
   font-size: .85rem;
-  color: var(--text-3);
+  color: var(--text-3, #6A6460);
+  white-space: nowrap;
 }
 
-/* Transition for flipping */
-.reader__page.flipping {
-  transform: rotateY(-180deg);
-  z-index: 5;
+/* ─── CERTIFICATE VIEWER (reuses .reader base) ───────────── */
+.cert-viewer__content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
+/* ─── MOBILE RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 900px) {
   .reader__container {
-    height: 60vh;
+    height: 65vh;
   }
-  .reader__page {
-    width: 90%;
-    left: 5%;
-    right: 5%;
+  .reader__controls {
+    bottom: 1.5rem;
+    gap: 1.25rem;
+    padding: .65rem 1.5rem;
   }
-  .reader__page--left, .reader__page--right {
-    display: none;
-  }
-  .reader__page--active {
-    display: flex;
-    left: 5% !important;
-    right: 5% !important;
-    width: 90% !important;
+  .reader__back {
+    top: 1rem;
+    left: 1rem;
+    font-size: .75rem;
+    padding: .5rem .8rem;
   }
 }

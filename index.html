@@ -23,6 +23,7 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
 
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/extra_reader.css" />
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Person","name":"Prakhar Bankhede","jobTitle":"Developer & Author","url":"https://prakharbankhede.vercel.app","address":{"@type":"PostalAddress","addressLocality":"Indore","addressCountry":"India"}}
@@ -550,7 +551,7 @@
           <div class="book book--omnix reveal">
             <div class="book__3d" aria-label="The Dark Innovation: Omnix">
               <div class="book__face book__face--front"
-                style="background-image: url('assets/Books/book_cover_omnix.png');">
+                style="background-image: url('assets/Books/The_Dark_innovation_Omnix/book_cover_omnix.png'); background-size: cover; background-position: center;">
                 <!-- Cover Image handled by .book--omnix CSS and inline fallback -->
               </div>
               <div class="book__face book__face--spine"><span>The Dark Innovation</span></div>
@@ -581,7 +582,7 @@
           <div class="book book--soch reveal">
             <div class="book__3d" aria-label="Soch: Pinjra or Aazadi">
               <div class="book__face book__face--front"
-                style="background-image: url('assets/Books/Soch-%20Pinjra%20or%20aajadi%20book%20cover.png'); background-size: cover; background-position: center;">
+                style="background-image: url('assets/Books/Soch_Pinjra_Or_Azadi/Soch-%20Pinjra%20or%20aajadi%20book%20cover.png'); background-size: cover; background-position: center;">
               </div>
               <div class="book__face book__face--spine"><span>Soch: Pinjra or Aazadi</span></div>
               <div class="book__face book__face--back"></div>
@@ -860,17 +861,9 @@
 
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
-  <!-- PDF.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    // Set worker source for PDF.js
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-  </script>
-  <!-- Realistic 3D PageFlip -->
-  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
-
-  <!-- Base64 Encoded PDFs to bypass local file CORS -->
-  <script src="js/pdfData.js"></script>
+  <!-- JS Libraries for Book Flip (Turn.js) -->
+  <script src="js/jquery.js"></script>
+  <script src="js/turn.js"></script>
   <script src="js/main.js"></script>
 </body>
 
