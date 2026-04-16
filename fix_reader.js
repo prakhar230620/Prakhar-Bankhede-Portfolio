@@ -50,10 +50,21 @@ if (fs.existsSync(soch2Dir)) {
   files.forEach(f => soch2Pages.push(`assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/${f}`));
 }
 
+const ant1Dir = path.join(__dirname, 'assets', 'Books', 'Ant Ki Mahek', 'Ant ki Mahek Chapter 1');
+const ant1Pages = [];
+if (fs.existsSync(ant1Dir)) {
+  const files = fs.readdirSync(ant1Dir).filter(f => /\.(png|jpg|jpeg)$/i.test(f)).sort((a,b)=>{
+    const na = parseInt(a.match(/\d+/)?.[0]||0), nb = parseInt(b.match(/\d+/)?.[0]||0);
+    return na - nb;
+  });
+  files.forEach(f => ant1Pages.push(`assets/Books/Ant Ki Mahek/Ant ki Mahek Chapter 1/${f}`));
+}
+
 const catalogue = {
   omnix1: omnix1Pages,
   soch1: soch1Pages,
   soch2: soch2Pages.length ? soch2Pages : soch1Pages, // fallback to ch1 if ch2 not ready
+  ant1: ant1Pages,
 };
 
 // Serialise as a JS object literal embedded inside the new BookReader code

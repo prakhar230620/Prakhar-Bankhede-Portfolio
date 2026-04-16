@@ -919,6 +919,13 @@ const BOOK_PAGES = {
     "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-3.png",
     "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-4.png",
     "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_2/Soch_Pinjra_Aazadi_Chapter2-5.png"
+  ],
+  "ant1": [
+    "assets/Books/Ant Ki Mahek/Ant ki Mahek Chapter 1/Ant Ki Mahek Chapter 1-1.png",
+    "assets/Books/Ant Ki Mahek/Ant ki Mahek Chapter 1/Ant Ki Mahek Chapter 1-2.png",
+    "assets/Books/Ant Ki Mahek/Ant ki Mahek Chapter 1/Ant Ki Mahek Chapter 1-3.png",
+    "assets/Books/Ant Ki Mahek/Ant ki Mahek Chapter 1/Ant Ki Mahek Chapter 1-4.png",
+    "assets/Books/Ant Ki Mahek/Ant ki Mahek Chapter 1/Ant Ki Mahek Chapter 1-5.png"
   ]
 };
 
@@ -1309,6 +1316,13 @@ document.getElementById('openReaderBtn')?.addEventListener('click', () => {
   const chapter = document.getElementById('omnixChapterSelect').value;
   if(chapter === 'chapter1') {
     BookReader.open('omnix1');
+  }
+});
+
+document.getElementById('openAntReaderBtn')?.addEventListener('click', () => {
+  const chapter = document.getElementById('antChapterSelect').value;
+  if(chapter === 'chapter1') {
+    BookReader.open('ant1');
   }
 });
 
