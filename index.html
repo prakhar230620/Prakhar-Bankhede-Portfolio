@@ -4,13 +4,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prakhar Bankhede</title>
+  <title>Prakhar Bankhede | AI/ML Student, Developer & Author</title>
   <meta name="description"
     content="Prakhar Bankhede — B.Tech Artificial Intelligence & Machine Learning student, developer, and author from Indore." />
-  <meta property="og:title" content="Prakhar Bankhede" />
-  <meta property="og:description" content="Developer. Author. Builder." />
+  <meta name="keywords" content="Prakhar Bankhede, AI/ML Student, Developer, Author, IPS Academy, Web Development, Machine Learning, Indore" />
+  <meta name="author" content="Prakhar Bankhede" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <link rel="canonical" href="https://prakharbankhede.vercel.app" />
+  <meta property="og:url" content="https://prakharbankhede.vercel.app/" />
+  <meta property="og:title" content="Prakhar Bankhede | AI/ML Student, Developer & Author" />
+  <meta property="og:description" content="Developer. Author. Builder." />
+  <meta property="og:image" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://prakharbankhede.vercel.app/" />
+  <meta property="twitter:title" content="Prakhar Bankhede | AI/ML Student, Developer & Author" />
+  <meta property="twitter:description" content="Developer. Author. Builder." />
+  <meta property="twitter:image" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <meta name="twitter:creator" content="@prakhar230620" />
+
+  <link rel="canonical" href="https://prakharbankhede.vercel.app/" />
 
   <!-- Space Grotesk for headings, Inter for body, JetBrains Mono for accents -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,8 +42,63 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/extra_reader.css" />
 
+  <!-- Icons & Mobile -->
+  <link rel="apple-touch-icon" href="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <meta name="format-detection" content="telephone=no" />
+
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Prakhar Bankhede","jobTitle":"Developer & Author","url":"https://prakharbankhede.vercel.app","address":{"@type":"PostalAddress","addressLocality":"Indore","addressCountry":"India"}}
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://prakharbankhede.vercel.app/#person",
+        "name": "Prakhar Bankhede",
+        "jobTitle": "AI/ML Student, Developer & Author",
+        "url": "https://prakharbankhede.vercel.app/",
+        "image": "https://prakharbankhede.vercel.app/assets/images/About.jpeg",
+        "sameAs": [
+          "https://github.com/prakhar230620",
+          "https://www.linkedin.com/in/prakhar-bankhede-5556033b6/",
+          "https://www.instagram.com/prakhar.61_"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Indore",
+          "addressCountry": "India"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://prakharbankhede.vercel.app/#website",
+        "url": "https://prakharbankhede.vercel.app/",
+        "name": "Prakhar Bankhede | Portfolio",
+        "publisher": {"@id": "https://prakharbankhede.vercel.app/#person"}
+      },
+      {
+        "@type": "ItemList",
+        "name": "Selected Projects",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Renasis", "url": "https://renasis.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Key Code X", "url": "https://touch-css.vercel.app/" },
+          { "@type": "ListItem", "position": 3, "name": "CivicPlus", "url": "https://civicplus.vercel.app/" },
+          { "@type": "ListItem", "position": 4, "name": "ToolMines AI", "url": "https://github.com/prakhar230620/ToolMines_AI--AWS" },
+          { "@type": "ListItem", "position": 5, "name": "RecipeReady", "url": "https://recipe-ready-one.vercel.app/" },
+          { "@type": "ListItem", "position": 6, "name": "Resonance", "url": "https://resonance-eight.vercel.app/" },
+          { "@type": "ListItem", "position": 7, "name": "PDFusion", "url": "https://pdfusion-three.vercel.app/" }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "Authored Books",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "The Dark Innovation: Omnix" },
+          { "@type": "ListItem", "position": 2, "name": "Soch: Pinjra or Aazadi" },
+          { "@type": "ListItem", "position": 3, "name": "Ant Ki Mahek" }
+        ]
+      }
+    ]
+  }
   </script>
 </head>
 
@@ -98,18 +170,15 @@
         <div class="about__grid">
           <div class="about__image-col reveal" data-tilt>
             <div class="about__image-frame">
-              <img src="assets/images/About.jpeg" alt="Prakhar Bankhede" class="about__img">
+              <img src="assets/images/About.jpeg" alt="Prakhar Bankhede - AI/ML Student, Developer, and Author from IPS Academy Indore" class="about__img">
               <div class="about__img-overlay"></div>
             </div>
           </div>
           <div class="about__content-col">
             <div class="about__text reveal">
               <h2 class="section__h2">Building things is<br />how I think.</h2>
-              <p>I'm a third-year AI/ML student who writes code, deploys software, and occasionally writes books. My
-                approach is straightforward — find a problem, understand it deeply, build something that works.</p>
-              <p>I'm not a specialist. I move across web dev, machine learning, and writing because the interesting
-                ideas
-                usually live at the borders.</p>
+              <p>As a third-year Artificial Intelligence and Machine Learning student, I am passionate about developing scalable software and crafting compelling narratives. My approach is structured and analytical: identify core challenges, understand them deeply, and engineer robust, real-world solutions.</p>
+              <p>Operating at the intersection of full-stack web development, machine learning, and creative writing, I leverage a multidisciplinary perspective to build innovative products. I thrive on translating complex concepts into accessible, high-performance applications.</p>
               <div class="about__pills">
                 <span class="pill">IPS Academy, Indore</span>
                 <span class="pill">AI/ML — 3rd Year</span>
@@ -162,8 +231,8 @@
                 <span>Next.js 15</span><span>TypeScript</span><span>Gemini API</span><span>Groq</span>
               </div>
               <div class="work-card__links">
-                <a href="https://renasis.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/Renasis" target="_blank" rel="noopener">↗ GitHub</a>
+                <a href="https://renasis.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/Renasis" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
               </div>
             </div>
           </article>
@@ -183,8 +252,8 @@
                 <span>React</span><span>CSS3</span><span>AI Explainer</span>
               </div>
               <div class="work-card__links">
-                <a href="https://touch-css.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/TouchCSS" target="_blank" rel="noopener">↗ GitHub</a>
+                <a href="https://touch-css.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/TouchCSS" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
               </div>
             </div>
           </article>
@@ -204,8 +273,8 @@
                 <span>Next.js</span><span>Prisma</span><span>Tailwind</span><span>AI API</span>
               </div>
               <div class="work-card__links">
-                <a href="https://civicplus.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/CivicSnap" target="_blank" rel="noopener">↗ GitHub</a>
+                <a href="https://civicplus.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/CivicSnap" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
               </div>
             </div>
           </article>
@@ -225,7 +294,7 @@
                 <span>Python</span><span>Groq SDK</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
               </div>
               <div class="work-card__links">
-                <a href="https://github.com/prakhar230620/ToolMines_AI--AWS" target="_blank" rel="noopener">↗ GitHub</a>
+                <a href="https://github.com/prakhar230620/ToolMines_AI--AWS" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
               </div>
             </div>
           </article>
@@ -245,8 +314,8 @@
                 <span>Next.js</span><span>PWA</span><span>Gemini</span><span>Groq</span>
               </div>
               <div class="work-card__links">
-                <a href="https://recipe-ready-one.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/RecipeReady_Mobile" target="_blank" rel="noopener">↗
+                <a href="https://recipe-ready-one.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/RecipeReady_Mobile" target="_blank" rel="noopener noreferrer">↗
                   GitHub</a>
               </div>
             </div>
@@ -267,8 +336,8 @@
                 <span>Web Audio API</span><span>AI Models</span><span>TypeScript</span>
               </div>
               <div class="work-card__links">
-                <a href="https://resonance-eight.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/Resonance" target="_blank" rel="noopener">↗ GitHub</a>
+                <a href="https://resonance-eight.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/Resonance" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
               </div>
             </div>
           </article>
@@ -288,8 +357,8 @@
                 <span>Next.js</span><span>PDF lib</span><span>TypeScript</span>
               </div>
               <div class="work-card__links">
-                <a href="https://pdfusion-three.vercel.app/" target="_blank" rel="noopener">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/pdfusion" target="_blank" rel="noopener">↗ GitHub</a>
+                <a href="https://pdfusion-three.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
+                <a href="https://github.com/prakhar230620/pdfusion" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
               </div>
             </div>
           </article>
@@ -316,7 +385,7 @@
           <div class="repo-skel"></div>
         </div>
         <div class="text-center reveal" style="margin-top:2rem;">
-          <a id="githubProfileLink" href="https://github.com/prakhar230620" target="_blank" rel="noopener"
+          <a id="githubProfileLink" href="https://github.com/prakhar230620" target="_blank" rel="noopener noreferrer"
             class="btn btn--ghost">View all on GitHub</a>
         </div>
       </div>
@@ -388,120 +457,120 @@
 
         <div class="certs__list">
           <a href="https://verify.skilljar.com/c/f4fuijzr4wd4" class="cert-row reveal cert-row--featured"
-            target="_blank" rel="noopener">
+            target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude with the Anthropic API</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/rzjqvoaom5gg" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/rzjqvoaom5gg" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude with Google Vertex AI</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/6eqm8vwnvn2m" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/6eqm8vwnvn2m" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude Code in Action</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="http://verify.skilljar.com/c/8vmfzh48bmvg" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="http://verify.skilljar.com/c/8vmfzh48bmvg" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">AI Fluency: Framework & Foundations</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/8xdyt7btokzs" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/8xdyt7btokzs" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Introduction to Model Context Protocol</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/5rw4gfsde9ws" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/5rw4gfsde9ws" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Model Context Protocol: Advanced Topics</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="http://verify.skilljar.com/c/6jt75ksmfp8u" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="http://verify.skilljar.com/c/6jt75ksmfp8u" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">AI Fluency for Educators</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="http://verify.skilljar.com/c/pqdiwmb7zj8f" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="http://verify.skilljar.com/c/pqdiwmb7zj8f" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">AI Fluency for Nonprofits</div>
             <div class="cert-row__date">2026</div>
           </a>
 
-          <a href="https://verify.skilljar.com/c/chonuqe6dwfr" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/chonuqe6dwfr" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Al Fluency for students</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/ib3ybopte8hs" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/ib3ybopte8hs" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude 101</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/a95nq8ni6m3p" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/a95nq8ni6m3p" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Teaching the Al Fluency Framework</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/kebxe69f4kxa" class="cert-row reveal" target="_blank" rel="noopener">
+          <a href="https://verify.skilljar.com/c/kebxe69f4kxa" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude with Amazon Bedrock</div>
             <div class="cert-row__date">2026</div>
           </a>
           <a href="https://www.theforage.com/completion-certificates/Sj7temL583QAYpHXD/E6McHJDKsQYh79moz_Sj7temL583QAYpHXD_69abb9b24402fe031d1325a3_1772869130494_completion_certificate.pdf"
-            class="cert-row reveal" target="_blank" rel="noopener">
+            class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/JPMorgan_Chase___Co-/JPMorgan_Chase___Co-_Logo_0.svg" alt="JPMorgan Chase"
+              <img src="assets/icons/JPMorgan_Chase___Co-/JPMorgan_Chase___Co-_Logo_0.svg" alt="JPMorgan Chase Software Engineering Certification - Prakhar Bankhede"
                 loading="lazy">
             </div>
             <div class="cert-row__issuer">JPMorganChase</div>
@@ -509,21 +578,21 @@
             <div class="cert-row__date">2026</div>
           </a>
           <a href="https://www.theforage.com/completion-certificates/2sNmYuurxgpFYawco/xv8eSGu7nksKNiCQj_2sNmYuurxgpFYawco_69abb9b24402fe031d1325a3_1772872318548_completion_certificate.pdf"
-            class="cert-row reveal" target="_blank" rel="noopener">
+            class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
               <img src="assets/icons/Commonwealth_Bank_of_Australia/Commonwealth_Bank_of_Australia_idow7DUGyL_0.svg"
-                alt="Commonwealth Bank" loading="lazy">
+                alt="Commonwealth Bank Software Engineering Certification - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Commbank</div>
             <div class="cert-row__name">Software Engineering Job Simulation</div>
             <div class="cert-row__date">2026</div>
           </a>
           <a href="https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_69abb9b24402fe031d1325a3_1776619886651_completion_certificate.pdf?raw=1"
-            class="cert-row reveal" target="_blank" rel="noopener">
+            class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/mastercard logo.png" alt="Mastercard" loading="lazy">
+              <img src="assets/icons/mastercard logo.png" alt="Mastercard Cybersecurity Certification - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Mastercard</div>
             <div class="cert-row__name">Cybersecurity Job Simulation</div>
@@ -532,7 +601,7 @@
           <a href="assets/images/MERN Stack Internship Certificate.jpeg" class="cert-row reveal" rel="noopener">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Yipsilon_Logo.png" alt="Yipsilon" loading="lazy">
+              <img src="assets/icons/Yipsilon_Logo.png" alt="Yipsilon IT Solutions MERN Stack Internship - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Yipsilon IT Solutions</div>
             <div class="cert-row__name">MERN Stack Internship</div>
@@ -541,7 +610,7 @@
           <a href="assets/images/Navodaya's talent search contest result.jpeg" class="cert-row reveal" rel="noopener">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Navodaya_Logo.png" alt="Navodaya" loading="lazy">
+              <img src="assets/icons/Navodaya_Logo.png" alt="Navodaya Vidyalaya Talent Search Contest - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Navodaya Vidyalaya</div>
             <div class="cert-row__name">Talent Search Contest</div>
@@ -738,7 +807,7 @@
         <div class="contact__grid">
 
           <div class="contact__links reveal">
-            <a href="https://github.com/prakhar230620" class="c-link" target="_blank" rel="noopener"
+            <a href="https://github.com/prakhar230620" class="c-link" target="_blank" rel="noopener noreferrer"
               aria-label="GitHub">
               <span class="c-link__icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -751,7 +820,7 @@
               <span class="c-link__arrow">↗</span>
             </a>
             <a href="https://www.linkedin.com/in/prakhar-bankhede-5556033b6/" class="c-link" target="_blank"
-              rel="noopener" aria-label="LinkedIn">
+              rel="noopener noreferrer" aria-label="LinkedIn" title="Connect with Prakhar Bankhede on LinkedIn">
               <span class="c-link__icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                   aria-hidden="true">
@@ -764,7 +833,7 @@
               <span class="c-link__arrow">↗</span>
             </a>
             <a href="https://www.instagram.com/prakhar.61_?igsh=NDY1d2l5ZXpkNzlj" class="c-link" target="_blank"
-              rel="noopener" aria-label="Instagram">
+              rel="noopener noreferrer" aria-label="Instagram" title="Follow Prakhar Bankhede on Instagram">
               <span class="c-link__icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                   stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
