@@ -883,30 +883,13 @@ document.querySelectorAll('.book__3d').forEach(bookEl => {
 
 /* ── Book page catalogues ────────────────────────────────────── */
 const BOOK_PAGES = {
-  "omnix1": [
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-1.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-2.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-3.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-4.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-5.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-6.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-7.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-8.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-9.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-10.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-11.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-12.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-13.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-14.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-15.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-16.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-17.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-18.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-19.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-20.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-21.png",
-    "assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-22.png"
-  ],
+  // The Dark Innovation: Omnix — 6 chapters, each from their own folder
+  "omnix1": (() => { const p = []; for (let i = 1; i <= 8;  i++) p.push(`assets/Books/The_Dark_innovation_Omnix/Chapter_1/The Dark Innovation Omnix Chapter-1-${i}.png`); return p; })(),
+  "omnix2": (() => { const p = []; for (let i = 1; i <= 11; i++) p.push(`assets/Books/The_Dark_innovation_Omnix/Chapter_2/The Dark Innovation Omnix Chapter-2-${i}.png`); return p; })(),
+  "omnix3": (() => { const p = []; for (let i = 1; i <= 11; i++) p.push(`assets/Books/The_Dark_innovation_Omnix/Chapter_3/The Dark Innovation Omnix Chapter-3-${i}.png`); return p; })(),
+  "omnix4": (() => { const p = []; for (let i = 1; i <= 12; i++) p.push(`assets/Books/The_Dark_innovation_Omnix/Chapter_4/The Dark Innovation Omnix Chapter-4-${i}.png`); return p; })(),
+  "omnix5": (() => { const p = []; for (let i = 1; i <= 11; i++) p.push(`assets/Books/The_Dark_innovation_Omnix/Chapter_5/The Dark Innovation Omnix Chapter-5-${i}.png`); return p; })(),
+  "omnix6": (() => { const p = []; for (let i = 1; i <= 13; i++) p.push(`assets/Books/The_Dark_innovation_Omnix/Chapter_6/The Dark Innovation Omnix Chapter-6-${i}.png`); return p; })(),
   "soch1": [
     "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_1/Soch_Pinjra_Aazadi_Chapter1-1.png",
     "assets/Books/Soch_Pinjra_Or_Azadi/Chapter_1/Soch_Pinjra_Aazadi_Chapter1-2.png",
@@ -1314,9 +1297,16 @@ const BookReader = (() => {
 // ── Wire up all Reader buttons ────────────────────────────────
 document.getElementById('openReaderBtn')?.addEventListener('click', () => {
   const chapter = document.getElementById('omnixChapterSelect').value;
-  if(chapter === 'chapter1') {
-    BookReader.open('omnix1');
-  }
+  const keyMap = {
+    'chapter1': 'omnix1',
+    'chapter2': 'omnix2',
+    'chapter3': 'omnix3',
+    'chapter4': 'omnix4',
+    'chapter5': 'omnix5',
+    'chapter6': 'omnix6',
+  };
+  const key = keyMap[chapter];
+  if (key) BookReader.open(key);
 });
 
 document.getElementById('openAntReaderBtn')?.addEventListener('click', () => {

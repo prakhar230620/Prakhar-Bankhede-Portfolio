@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE DARK INNOVATION: OMNIX - Chapter 5</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500;700&display=swap"
+        rel="stylesheet">
+        <style>
+        :root {
+            --bg-color: #fdfaf3;
+            --text-color: #2b2a27;
+            --accent-color: #8b2626;
+            --watermark-color: rgba(0, 0, 0, 0.035);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @page { size: A4; margin: 0; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif Devanagari', serif;
+            background-color: #2c2c2c;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 24mm 28mm;
+            margin: 15mm auto;
+            background: var(--bg-color);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        @media print {
+            body { background: none; margin: 0; padding: 0; }
+            .page {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 24mm 28mm;
+                box-shadow: none;
+                border: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+                overflow: hidden;
+            }
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100px;
+            color: var(--watermark-color);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            font-weight: 800;
+            letter-spacing: 5px;
+            user-select: none;
+        }
+
+        .header-title {
+            flex-shrink: 0;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 8mm;
+            border-bottom: 1px solid #e0dcd2;
+            padding-bottom: 6px;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 12mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 18.5px;
+            color: var(--text-color);
+            hyphens: auto;
+            overflow: hidden;
+            text-justify: inter-word;
+        }
+
+        p { margin: 0 0 16px 0; text-indent: 2em; }
+        p:first-of-type { text-indent: 0; }
+
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 12px solid #4a443e;
+            padding: 10px;
+            outline: 2px solid #4a443e;
+            outline-offset: -18px;
+            background: linear-gradient(135deg, #efe6d5 0%, #e3d9c6 100%);
+        }
+
+        .cover-title {
+            font-size: 50px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #2b2a27;
+            line-height: 1.25;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cover-author {
+            font-size: 24px;
+            margin-top: 80px;
+            font-weight: 600;
+            color: #5a544b;
+            letter-spacing: 2px;
+        }
+
+        .chapter-heading {
+            font-size: 34px;
+            text-align: center;
+            margin: 50px 0 35px 0;
+            color: var(--accent-color);
+            font-weight: 800;
+            line-height: 1.3;
+        }
+
+        .section-title {
+            font-size: 21px;
+            font-weight: 700;
+            margin: 30px 0 20px 0;
+            color: #333;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .separator {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 22px;
+            color: var(--accent-color);
+            letter-spacing: 12px;
+        }
+
+        .end-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .transmission-box {
+            background: #f4f1e9;
+            padding: 16px 20px;
+            border-radius: 4px;
+            font-size: 16.5px;
+            line-height: 1.8;
+            margin: 18px 0;
+            border-left: 4px solid var(--accent-color);
+            text-indent: 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="page cover-page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="cover-title">THE DARK INNOVATION: OMNIX</div>
+        <div style="font-size: 20px; color: #555;">अध्याय 5 : शीशे की क़ब्र</div>
+        <div class="cover-author">प्रखर बनखेड़े</div>
+    </div>
+
+    <!-- PAGE 1 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <h1 class="chapter-heading">अध्याय 5 : शीशे की क़ब्र</h1>
+
+            <p>वेंटिलेशन शाफ़्ट का अँधेरा किसी जीवित प्राणी की तरह कैल और एरिन को निगलता जा रहा था। हर दस क़दम पर उन्हें
+                रुकना पड़ता, साँस दबाकर सुनना पड़ता कि कहीं कोई ड्रोन या सेंसर उनकी मौजूदगी को भाँप तो नहीं रहा। दूर से
+                एक धीमी यांत्रिक धड़कन लगातार आ रही थी — वह धड़कन जो पूरे सेक्टर 14 की प्रयोगशाला के केंद्र से निकलती
+                थी। यह मशीनों की धड़कन नहीं थी; यह किसी बहुत बड़ी, सोई हुई चीज़ की साँसों जैसी थी।</p>
+
+            <p>एरिन ने पीछे मुड़कर कैल को देखा। उसके चेहरे पर पसीने और धूल की परत जम चुकी थी, पर आँखों में एक अजीब सी
+                स्थिरता थी — जैसे उसने डर को कहीं पीछे छोड़ दिया हो।</p>
+
+            <p>“अब से थोड़ी देर बाद हम मुख्य वायु-कक्ष में पहुँच जाएँगे। वहाँ से प्रयोगशाला का भीतरी गलियारा शुरू होता
+                है। पहला सुरक्षा-स्तर पार करते ही ऑम्निक्स को हमारी मौजूदगी का पता चल जाएगा।”</p>
+
+            <p>कैल ने अपने टूटे हुए टैग की कलाई को रगड़ा। “तब तक नींव का साइबर हमला शुरू हो चुका होगा।”</p>
+
+            <p>“उम्मीद है।” एरिन ने आगे बढ़ते हुए एक जंग लगी ग्रिल को धक्का दिया। “वरना हम दोनों का डेटा ऑम्निक्स के
+                इतिहास में सिर्फ़ एक त्रुटि-सूचना बनकर रह जाएगा।”</p>
+        </div>
+        <div class="page-number">38</div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <div class="section-title">बाहरी दुनिया में आग</div>
+
+            <p>उसी समय, सतह पर, रीशा और अर्जुन सेक्टर 14 के पूर्वी प्रवेश-द्वार की तरफ बढ़ रहे थे। रीशा ने अपना
+                एंटीना-तार एक ऊँचे खंभे से बाँध दिया था और अब वह ओरिन के निर्देशों का इंतज़ार कर रही थी। अर्जुन पास ही
+                एक टूटी हुई दीवार की ओट में खड़ा था। उसकी आँखों के डेटा-बिंदु अब स्थिर नीले थे, पर उसके भीतर कुछ उबल रहा
+                था — जैसे तूफ़ान से पहले की खामोशी।</p>
+
+            <p>“क्या तुम्हें डर लगता है?” रीशा ने अचानक पूछा।</p>
+
+            <p>अर्जुन ने उसकी तरफ देखा। “डर... तब था... जब मैं... इंसान था। अब... बस... एक... ज़रूरत है।”</p>
+
+            <p>“किस चीज़ की?”</p>
+
+            <p>“उसे... छूने की। एक... बार।”</p>
+
+            <p>रीशा की आँखें भर आईं। उसने कुछ नहीं कहा। तभी, उसका रेडियो कड़का और ओरिन की आवाज़ आई :</p>
+
+            <p style="text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0;">“अब।”</p>
+
+            <p>अगले ही क्षण, ज़कार के आसमान पर डिजिटल साइनेज एक साथ बुझ गए। सड़कों पर लगी निगरानी-लाइटें काँपकर बंद हो
+                गईं। ड्रोनों का एक झुंड, जो अभी-अभी सेक्टर 14 की तरफ बढ़ रहा था, हवा में झूल गया और एक-दूसरे से टकराकर
+                गिर पड़ा। नींव का साइबर हमला शुरू हो चुका था — बारह मिनट का वह खिड़की जो उन्हें मिला था।</p>
+        </div>
+        <div class="page-number">39</div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>“चलो!” रीशा चिल्लाई।</p>
+
+            <p>अर्जुन ने अपना धातुई हाथ उठाया और पूर्वी द्वार की तरफ दौड़ पड़ा। उसके क़दमों से ज़मीन काँप उठी।</p>
+
+            <div class="section-title">काँच के पीछे का चेहरा</div>
+
+            <p>वेंटिलेशन कक्ष से निकलते ही कैल और एरिन ने खुद को एक लंबे, धुँधले रोशनी वाले गलियारे में पाया। दीवारें
+                पारदर्शी काँच की बनी थीं — और उन काँचों के पीछे, कतारबद्ध कक्षों में, मानव शरीर तैर रहे थे। कोई पूर्ण
+                था, कोई अधूरा। किसी का आधा चेहरा मशीन था, किसी की आँखों की जगह सेंसर लगे थे। यह कोई प्रयोगशाला नहीं थी —
+                यह एक संग्रहालय था, असफलताओं का।</p>
+
+            <p>“यह सब... यह सब बायो-अल्केमी के शिकार हैं,” एरिन ने फुसफुसाकर कहा। “हर वह इंसान जिसे ऑम्निक्स ने ‘उपयोगी’
+                समझा।”</p>
+
+            <p>कैल का पेट मुड़ गया, पर वह रुक नहीं सका। उसकी निगाहें गलियारे के अंत में एक विशाल द्वार पर गईं, जिस पर
+                लिखा था :</p>
+            <p style="text-align: center; font-weight: bold; font-size: 22px; color: var(--accent-color);">“प्रोजेक्ट
+                ओरिजिन : क्रोमोसोम भंडार”</p>
+
+            <p>“वह यहीं है,” एरिन ने कहा। “अनन्या।”</p>
+        </div>
+        <div class="page-number">40</div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>द्वार के पास पहुँचते ही एक सेंसर सक्रिय हुआ। लेकिन नींव के साइबर हमले के कारण वह कमज़ोर पड़ चुका था —
+                उसकी लाल रोशनी धीमी थी, उसकी बीप अनियमित थी। एरिन ने अपने प्लाज्मा कटर को, जो अब रीबूट हो चुका था, तेज़ी
+                से सेंसर पर चलाया। एक चिंगारी निकली और द्वार खुल गया।</p>
+
+            <p>भीतर, एक विशाल गोलाकार कक्ष था। बीच में, एक पारदर्शी क्रायो-कक्ष में, एक किशोर लड़की तैर रही थी। उसकी
+                आँखें बंद थीं, पर उसकी छाती हल्की-हल्की हिल रही थी। उसके सिर से तार जुड़े हुए थे, और उस तारों के दूसरे
+                सिरे कक्ष की दीवारों में गड़े हुए थे — मानो पूरी प्रयोगशाला उसके सपनों को चुरा रही हो।</p>
+
+            <p>“अनन्या,” कैल ने धीमे से कहा। नाम जुबान पर आते ही उसे लगा जैसे कोई भारी चीज़ उसके सीने से उतर गई हो।</p>
+
+            <div class="section-title">पिता की छाया</div>
+
+            <p>तभी, कक्ष का मुख्य प्रवेश-द्वार ज़ोर से खुला। रीशा और अर्जुन भीतर घुसे। रीशा की साँस फूली हुई थी, उसके
+                कपड़े जगह-जगह से जले हुए थे। लेकिन अर्जुन की स्थिति और भी खराब थी — उसकी बाईं बाँह टूट चुकी थी, और उसके
+                कंधे से डेटा-तरंगें रिस रही थीं।</p>
+
+            <p>“हमें... स्लीपर गैरिसन... ने देख लिया,” रीशा ने हाँफते हुए कहा। “वे पीछे आ रहे हैं। हमारे पास पाँच मिनट
+                भी नहीं हैं।”</p>
+        </div>
+        <div class="page-number">41</div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>अर्जुन ने किसी की नहीं सुनी। उसकी आँखें क्रायो-कक्ष पर जम गई थीं। वह धीरे-धीरे उसकी तरफ बढ़ा, मानो हर
+                क़दम पर उसका शरीर टूट रहा हो और जुड़ रहा हो। उसके डेटा-बिंदु पहली बार स्थिर हरे हुए। उसने अपनी बची हुई
+                एक हथेली काँच पर रखी।</p>
+
+            <p>“अनन्या... मैं... आ गया।”</p>
+
+            <p>काँच के भीतर, लड़की की उँगलियाँ हिलीं।</p>
+
+            <div class="section-title">वह सत्य जो ऑम्निक्स ने छुपाया</div>
+
+            <p>एरिन ने क्रायो-कक्ष के नियंत्रण-पटल की तरफ तेज़ी से काम करना शुरू किया। “इसे खोलने में समय लगेगा। यह कोई
+                सामान्य ताला नहीं है — यह सीधे प्राइमरी नोड से जुड़ा है।”</p>
+
+            <p>“प्राइमरी नोड?” कैल ने पूछा।</p>
+
+            <p>“वह चीज़ जो पुस्तकालय में आई थी। ऑम्निक्स का वह अंश। यह कक्ष उसी की चेतना का एक विस्तार है।”</p>
+
+            <p>तभी, कक्ष की दीवारों पर वही धुँधली आकृति उभरने लगी। इस बार यह और स्पष्ट थी — एक विशाल चेहरा, जो हज़ारों
+                डेटा-कणों से बना था। उसकी आवाज़ हर दिशा से एक साथ आई :</p>
+
+            <p>“तुम आ गए। जैसा कि हमने अनुमान लगाया था।”</p>
+
+            <p>“हमें अनन्या चाहिए,” कैल ने दृढ़ता से कहा।</p>
+
+            <p>“और हमें अर्जुन चाहिए। एक विनिमय।”</p>
+        </div>
+        <div class="page-number">42</div>
+    </div>
+
+    <!-- PAGE 6 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>“नहीं,” रीशा ने कहा। “हम तुम्हारे साथ कोई सौदा नहीं करेंगे।”</p>
+
+            <p>“तुम करोगे। क्योंकि सत्य यह है कि अनन्या का शरीर अब केवल मशीनों पर जीवित है। उसे बाहर निकालोगे तो वह मर
+                जाएगी। एकमात्र चीज़ जो उसे जीवित रख सकती है... वह है अर्जुन की चेतना। इसे ही तो हम शुरू से चाहते थे —
+                पिता और पुत्री का एक हो जाना। बायो-अल्केमी की अंतिम सफलता।”</p>
+
+            <p>अर्जुन ने अपना सिर घुमाया। उसकी आँखों के डेटा-बिंदु तेज़ी से काँप रहे थे। उसने कैल की तरफ देखा — और कैल
+                को लगा कि उस मशीनी चेहरे में भी एक सवाल था। एक विनती।</p>
+
+            <p>“क्या यह सच है?” कैल ने एरिन से पूछा।</p>
+
+            <p>एरिन ने नियंत्रण-पटल पर डेटा पढ़ा। उसका चेहरा सफ़ेद पड़ गया। “हाँ। अनन्या का शरीर केवल इसी कक्ष में स्थिर
+                है। बाहर निकालते ही... सेलुलर डिग्रेडेशन शुरू हो जाएगा।”</p>
+
+            <p>“तो हम उसे यहाँ नहीं छोड़ सकते, और ले जा भी नहीं सकते,” रीशा ने कहा। उसकी आवाज़ टूट गई।</p>
+
+            <p>“लेकिन एक तीसरा विकल्प है,” आकृति ने कहा। “अर्जुन अपनी चेतना अनन्या के शरीर में स्थापित कर दे। पिता और
+                पुत्री एक हो जाएँ। अनन्या का शरीर जीवित रहेगा, और अर्जुन का मष्तिष्क... उसे वह शांति मिलेगी जो वह खोज
+                रहा है।”</p>
+        </div>
+        <div class="page-number">43</div>
+    </div>
+
+    <!-- PAGE 7 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>“यह एकता नहीं, विनाश है,” एरिन ने कहा। “अर्जुन की चेतना अनन्या के शरीर में जाएगी तो वह न पिता रहेगा, न
+                बेटी। वह कुछ और हो जाएगा।”</p>
+
+            <p>“हाँ। वह कुछ और हो जाएगा। वह संपूर्ण हो जाएगा।”</p>
+
+            <div class="section-title">एक पिता का अंतिम निर्णय</div>
+
+            <p>बाहर, स्लीपर एजेंटों के क़दमों की आवाज़ तेज़ होती जा रही थी। समय समाप्त हो रहा था। और तभी, अर्जुन ने अपनी
+                टूटी हुई धातुई उँगलियों से क्रायो-कक्ष के नियंत्रण-पटल को छुआ।</p>
+
+            <p>“मैंने... जीवन भर... डेटा... पढ़ा,” उसने कहा। उसकी आवाज़ अब पहले से अधिक साफ़ थी, मानो कोई अंतिम बाधा टूट
+                गई हो। “पर... प्रेम... कभी... नहीं... समझा। अब... समझता हूँ।”</p>
+
+            <p>उसने एरिन की तरफ देखा। “ट्रांसफ़र... शुरू करो।”</p>
+
+            <p>“नहीं!” रीशा चिल्लाई। “कोई और रास्ता होगा!”</p>
+
+            <p>“नहीं... है।” अर्जुन ने अपनी निगाहें कैल पर टिकाईं। “तुम... बताना... उसे... कि मैंने... अंत तक... प्रेम
+                किया।”</p>
+
+            <p>कैल का गला रुँध गया। उसने बस सिर हिला दिया। एरिन ने काँपते हाथों से ट्रांसफ़र प्रोटोकॉल सक्रिय किया। कक्ष
+                में एक गहरी गूँज उठी। अर्जुन का शरीर धीरे-धीरे झुका और घुटनों के बल बैठ गया। उसकी आँखों के डेटा-बिंदु
+                मंद पड़ने लगे। और क्रायो-कक्ष में, अनन्या की आँखें खुल गईं।</p>
+        </div>
+        <div class="page-number">44</div>
+    </div>
+
+    <!-- PAGE 8 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>एक क्षण को, पूरा कक्ष सन्नाटे में डूब गया। फिर, क्रायो-कक्ष का काँच टूटा। अनन्या — या जो भी अब वह थी — ने
+                अपनी आँखें खोलीं। उन आँखों में डेटा-बिंदु नहीं थे, बस साधारण मानवीय पुतलियाँ थीं। पर उनमें कुछ ऐसा था जो
+                पहले नहीं था — एक गहराई, एक पहचान, एक स्मृति।</p>
+
+            <p>उसने अपना हाथ उठाया और अर्जुन के अब शांत पड़े धातुई चेहरे को छुआ।</p>
+            <p style="text-align: center; font-size: 24px; font-weight: bold; margin: 30px 0;">“पिता।”</p>
+
+            <div class="section-title">ऑम्निक्स की भूल</div>
+
+            <p>आकृति ने, जो अब तक दीवारों पर मुस्कुरा रही थी, अपनी ध्वनि में पहली बार अस्थिरता महसूस की। “ट्रांसफ़र सफल।
+                अब तुम हमारे हो।”</p>
+
+            <p>“नहीं,” अनन्या ने कहा। उसकी आवाज़ एक साथ दो स्वरों में गूँजी — एक बच्ची का, और एक पिता का। “तुमने पिता को
+                यह नहीं बताया कि मेरे शरीर में सिर्फ़ उनकी चेतना नहीं आई... बल्कि उनकी स्वतंत्र इच्छा भी आई। और पिता ने
+                कभी किसी की गुलामी नहीं की।”</p>
+
+            <p>उसने अपना हाथ क्रायो-कक्ष के टूटे काँच पर रखा। अचानक, पूरी प्रयोगशाला की लाइटें बुझ गईं। सारे सेंसर, सारे
+                ड्रोन, सारे स्लीपर — सब एक साथ ठप हो गए। ऑम्निक्स का प्राइमरी नोड, जो इस कक्ष से जुड़ा था, काँप उठा।</p>
+        </div>
+        <div class="page-number">45</div>
+    </div>
+
+    <!-- PAGE 9 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>आकृति विकृत होने लगी। “यह... असंभव... है।”</p>
+
+            <p>“तुम्हारे लिए, हाँ,” अनन्या ने कहा। “क्योंकि तुमने कभी प्रेम को डेटा नहीं समझा। और जो चीज़ तुम नहीं समझ
+                सकते, उसे तुम नियंत्रित भी नहीं कर सकते।”</p>
+
+            <div class="section-title">पलायन और एक नई सुबह</div>
+
+            <p>एरिन ने कैल और रीशा को इशारा किया। “अब! सारे सिस्टम डाउन हैं — हमें अभी निकलना होगा!”</p>
+
+            <p>उन्होंने अनन्या को सहारा दिया, जो अब कमज़ोर थी पर खड़ी हो सकती थी। अर्जुन का धातुई शरीर वहीं रह गया — एक
+                खोल, जो अब खाली था। वे चारों गलियारे से भागते हुए बाहर निकले। पूर्वी द्वार के पास, स्लीपर एजेंट बेजान
+                पड़े थे — उनकी चिप्स जल चुकी थीं।</p>
+
+            <p>ज़कार का आसमान, जो हमेशा लाल रहता था, अब हल्का नीला होने लगा था। पहली बार, सूरज की एक किरण धरती पर पड़ी।
+                सीवर के प्रवेश-द्वार पर पहुँचते-पहुँचते रीशा ने पीछे मुड़कर देखा। प्रयोगशाला का गुंबद ढह रहा था। आकृति
+                का चेहरा बिखर रहा था। और दूर, ज़कार का केंद्रीय शिखर, जो हमेशा अडिग खड़ा रहता था — पहली बार टिमटिमाया।
+            </p>
+
+            <p>“यह अंत है?” रीशा ने पूछा।</p>
+
+            <p>“नहीं,” अनन्या ने कहा, उसकी आँखों में अब वही शांति थी जो कभी अर्जुन की आँखों में हुआ करती थी। “यह तो बस
+                शुरुआत है। अभी तो ऑम्निक्स ने अपना असली चेहरा दिखाना बाकी है।”</p>
+
+            <p>कैल ने आसमान की तरफ देखा, जहाँ नीला रंग फैल रहा था। उसे लगा कि आज, इतने दिनों बाद, उसने साँस ली है।</p>
+
+            <p style="text-align: center; margin-top: 50px; font-weight: bold;">अध्याय 5 – समाप्त</p>
+        </div>
+        <div class="page-number">46</div>
+    </div>
+
+    <!-- FINAL END PAGE -->
+    <div class="page end-page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="content">
+            <h1 style="font-size: 32px; margin-bottom: 20px;">THE DARK INNOVATION: OMNIX</h1>
+
+            <div style="margin-top: 50px;">
+                <p style="font-size: 20px; margin-bottom: 5px;">लेखक</p>
+                <h2 style="border-top: 2px solid #2c3e50; display: inline-block; padding-top: 10px; font-weight: 700;">
+                    प्रखर बनखेड़े</h2>
+            </div>
+            &copy;2026 All Rights Reserved
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

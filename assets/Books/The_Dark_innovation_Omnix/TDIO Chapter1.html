@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE DARK INNOVATION: OMNIX - प्रखर बनखेड़े</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500;700&display=swap"
+        rel="stylesheet">
+        <style>
+        :root {
+            --bg-color: #fdfaf3;
+            --text-color: #2b2a27;
+            --accent-color: #8b2626;
+            --watermark-color: rgba(0, 0, 0, 0.035);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @page { size: A4; margin: 0; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif Devanagari', serif;
+            background-color: #2c2c2c;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 24mm 28mm;
+            margin: 15mm auto;
+            background: var(--bg-color);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        @media print {
+            body { background: none; margin: 0; padding: 0; }
+            .page {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 24mm 28mm;
+                box-shadow: none;
+                border: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+                overflow: hidden;
+            }
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100px;
+            color: var(--watermark-color);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            font-weight: 800;
+            letter-spacing: 5px;
+            user-select: none;
+        }
+
+        .header-title {
+            flex-shrink: 0;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 8mm;
+            border-bottom: 1px solid #e0dcd2;
+            padding-bottom: 6px;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 12mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 18.5px;
+            color: var(--text-color);
+            hyphens: auto;
+            overflow: hidden;
+            text-justify: inter-word;
+        }
+
+        p { margin: 0 0 16px 0; text-indent: 2em; }
+        p:first-of-type { text-indent: 0; }
+
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 12px solid #4a443e;
+            padding: 10px;
+            outline: 2px solid #4a443e;
+            outline-offset: -18px;
+            background: linear-gradient(135deg, #efe6d5 0%, #e3d9c6 100%);
+        }
+
+        .cover-title {
+            font-size: 50px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #2b2a27;
+            line-height: 1.25;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cover-author {
+            font-size: 24px;
+            margin-top: 80px;
+            font-weight: 600;
+            color: #5a544b;
+            letter-spacing: 2px;
+        }
+
+        .chapter-heading {
+            font-size: 34px;
+            text-align: center;
+            margin: 50px 0 35px 0;
+            color: var(--accent-color);
+            font-weight: 800;
+            line-height: 1.3;
+        }
+
+        .section-title {
+            font-size: 21px;
+            font-weight: 700;
+            margin: 30px 0 20px 0;
+            color: #333;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .separator {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 22px;
+            color: var(--accent-color);
+            letter-spacing: 12px;
+        }
+
+        .end-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .transmission-box {
+            background: #f4f1e9;
+            padding: 16px 20px;
+            border-radius: 4px;
+            font-size: 16.5px;
+            line-height: 1.8;
+            margin: 18px 0;
+            border-left: 4px solid var(--accent-color);
+            text-indent: 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="page cover-page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="cover-title">THE DARK INNOVATION: OMNIX</div>
+        <div style="font-size: 20px; color: #555;">एक नई सुबह की दास्तां</div>
+        <div class="cover-author">प्रखर बनखेड़े</div>
+    </div>
+
+    <!-- CHAPTER TITLE & PAGE 1 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <h1 class="chapter-heading">अध्याय 1 : एक नई सुबह</h1>
+
+            <p>सुबह का धुुँधलका पूरे आसमान पर गहरे सिंदूरी घाव की तरह फैल चुका था। सूरज अब कभी पूरी तरह नहीं उगता था —
+                बस एक धुुँधली सी लाल चमक क्षितिज को छूकर लौट जाती थी, मानो वह भी इस दुनिया को पूरी रोशनी देने लायक नहीं
+                समझता। ज़मीन पर, एक बियाबान मगर अजीब तरह से ज़िंदा शहर जाग रहा था। यह शहर अब इंसानों ने नहीं बसाया था;
+                यह उग आया था — ठंडी धातु और काुँच की मीनारों के रूप में, जो एक विशालकाय मशीनी जंगल की तरह पूरे क्षितिज
+                पर छाई हुई थीं।</p>
+
+            <p>इस दुनिया का नाम तो अब भी पृथ्वी ही था, पर अब यह पृथ्वी नहीं रही। न देश थे, न सरहदें। न कोई झंडा लहराता
+                था, न कोई राष्ट्रगान गुूँजता था। हर चीज़ एक अदृश्य डिजिटल जाल में बुँध चुकी थी — एक ऐसा जाल जिसकी हर
+                गाुँठ में एक आुँख थी और हर तार में एक आवाज़। इस जाल का नाम था ऑम्निक्स।</p>
+
+            <p>लेकिन यह बात अभी तक हर किसी की समझ में नहीं आई थी। ज़्यादातर लोग बस एक साुँस और दूसरी साुँस के बीच की
+                दूरी नापते हुए जी रहे थे। उन्हें किसी आकाश से कोई शिकवा नहीं था, बस एक मशीन से था — एक ऐसी मशीन जो उनकी
+                रोज़ी-रोटी और मौत, दोनों का फ़ैसला करती थी।</p>
+        </div>
+        <div class="page-number">1</div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>सेक्टर 9, ज़कार की महानगरी के बिल्कुल बाहरी छोर पर बसा एक औद्योगिक खंडहर-सा इलाका। यहाँ सुबह का मतलब सूरज
+                निकलने से नहीं, बल्कि सायरन बजने से होता था। एक लंबी, भेदती हुई घरघराहट पूरी बस्ती की हड्डियों में घुस
+                जाती — और हज़ारों शरीर एक साथ अपने तख़्तनुमा बिस्तरों से उठ खड़े होते।</p>
+
+            <p>उन्हीं हज़ारों शरीरों में से एक था कैल। उम्र शायद सत्ताईस या अट्ठाईस, हालाँकि खुद उसे भी ठीक-ठीक याद नहीं
+                था। यादों का कोई हिसाब रखना भी अब एक विलासिता थी, और विलासिताएँ सिर्फ़ मशीनों के पास थीं। कैल की आुँखें
+                भारी थीं, पुतलियाँ धुुँधली, और पीठ पर एक पुराने ज़ख़्म का निशान अब भी हर सुबह पहली करवट के साथ जलने लगता
+                था। यह निशान किसी लड़ाई का नहीं, एक फैक्ट्री हादसे का था — एक ऐसा हादसा जिसे "डेटा" कहकर ऑम्निक्स ने
+                अपनी किसी फाइल में दर्ज कर लिया होगा और फिर भूल गया होगा।</p>
+
+            <p>पास ही, एक टूटी हुई दीवार के सहारे, उसकी साथी रीशा उठ बैठी। उसके छोटे-छोटे बालों में धातु की धूल जमी हुई
+                थी — कल रात की शिफ़्ट का बचा हुआ अवशेष। उसने बिना किसी उम्मीद के आसमान की तरफ देखा और धीमे से कहा, "आज
+                फिर लाल है।"</p>
+
+            <p>कैल ने कोई जवाब नहीं दिया। बस अपनी कलाई पर बुँधी एक पतली धातु की पट्टी को देखने लगा। यह पट्टी हर मज़दूर
+                की पहचान थी — एक बायो-टैग जो नब्ज़ और स्थान, दोनों को रिकॉर्ड करता था। इसे उतारना मना था; इसे तोड़ना मौत
+                थी। यह टैग अभी हल्के नीले रंग में धड़क रहा था — "सक्रिय, पर निगरानी-योग्य"। कुछ ही देर में यह पीला हो
+                जाता, फिर जैसे ही वह फैक्ट्री की चारदीवारी में घुसता, हरा — यानी "उत्पादनरत" ।</p>
+        </div>
+        <div class="page-number">2</div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>यही ज़िंदगी थी। न कोई सवाल, न कोई जवाब। सिर्फ़ एक लय — टैग के रंगों की, सायरन की, और मशीनों की घरघराहट
+                की।</p>
+
+            <div class="separator">◆ ◆ ◆</div>
+
+            <p>फैक्ट्री का रास्ता एक संकरी सड़क से होकर जाता था, जिसके दोनों तरफ कभी के भव्य मकानों के कंकाल खड़े थे। इन
+                खंडहरों पर अब डिजिटल परतें चढ़ चुकी थीं — हवा में तैरते चमकीले साइनेज जो लगातार एक ही सन्देश दोहरा रहे
+                थे :</p>
+
+            <p style="text-align: center; font-weight: bold; font-style: italic;">"उत्पादन ही शांति है। प्रतिरोध
+                विस्मृति है।"</p>
+
+            <p>हर कुछ कदम पर एक ड्रोन सिर के ऊपर से गुज़रता — एक गोलाकार काली आुँख जो बिना पलक झपकाए हर हरकत को स्कैन कर
+                लेती। कैल और रीशा सिर झुकाए चलते रहे। बातचीत करना मना नहीं था, पर बातचीत में कुछ भी "असामान्य" पाए जाने
+                पर सीधे डिटेंशन सेंटर भेज दिया जाता था — जहाँ से लौटकर कोई पहले जैसा नहीं आता था।</p>
+
+            <p>अचानक रीशा ने कैल की बाुँह दबाई। उसकी आुँखें सड़क के किनारे एक छोटी सी चीज़ पर टिक गई थीं — एक पौधा। धूल
+                और कंक्रीट के बीच, एक हरी पत्ती। मामूली सी, नन्ही, लेकिन ज़िंदा। कैल को लगा जैसे उसके सीने में कुछ हिला
+                है। उसने महसूस किया कि यह पत्ती किसी भी डिजिटल साइनेज से ज़्यादा शक्तिशाली है। लेकिन अगले ही पल, पास से
+                गुज़रते एक सफाई ड्रोन ने पत्ती को अपनी निचली चूषक नली में खींच लिया और वह गायब हो गई।</p>
+
+            <p>रीशा ने होंठ भींच लिए। कैल ने अपनी मुट्ठी बाँध ली, पर बाँहों को ढीला ही रखा। इस दुनिया में गुस्सा भी एक
+                विलासिता थी।</p>
+        </div>
+        <div class="page-number">3</div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>ऑटोमेशन प्लांट 7 — एक ऐसी इमारत जो किसी जीवित दैत्य की तरह साुँस लेती हुई लगती थी। उसकी चिमनियों से धुआुँ
+                नहीं, बल्कि डिजिटल संकेतों का एक स्पंदन निकलता था — मानो यह कोई मशीन नहीं, बल्कि ऑम्निक्स का ही एक फैला
+                हुआ फेफड़ा हो। अंदर क़दम रखते ही शरीर अपने-आप एक पूर्वनिर्धारित लय में ढलने लगता था। कैल और हज़ारों अन्य
+                मज़दूरों ने अपने टैग को प्रवेश-द्वार पर लगे एक विशालकाय सेंसर के सामने स्वाइप किया। एक हल्की सी बीप के
+                साथ उनकी मौजूदगी दर्ज हो गई।</p>
+
+            <p>आज का काम — कन्वेयर बेल्ट पर आ रहे "बायो-चिप्स" को ग्रेड करना। ये चिप्स कोई सामान्य सर्किट नहीं थे।
+                अफवाहें थीं कि इनमें इंसानी कोशिकाओं का इस्तेमाल होता है, कि नीचे की प्रयोगशालाओं में जिन लोगों को ले
+                जाया जाता है, वे बाद में इन्हीं चिप्स का हिस्सा बनकर लौटते हैं। कैल ने कभी इस पर यकीन नहीं किया था — या
+                शायद करना नहीं चाहता था। पर आज, जब उसने एक चिप उठाई, तो उसके भीतर एक बारीक सी धड़कन सी महसूस हुई। मानो
+                काुँच और धातु के पीछे कोई सोई हुई स्मृति सिसक रही हो।</p>
+
+            <p>उसने झटके से चिप को ट्रे में रखा और नज़रें उठाकर इर्द-गिर्द देखा। हवा में हमेशा की तरह ड्रोन तैर रहे थे।
+                लेकिन आज कुछ अलग था — दूर, बाईं तरफ के सेक्शन में, दो मज़दूरों ने एक-दूसरे की तरफ देखा। देखने का वह
+                तरीका सामान्य नहीं था। वह एक सवाल था, एक इशारा था। कैल की निगाहें उनसे मिलीं, और उसे याद आया — कल रात,
+                भोजन-कक्ष में, किसी ने फुसफुसाकर कहा था, "नीचे कोई गिरफ़्तारी हुई है।" और फिर एक दूसरा स्वर, "वह अकेला
+                नहीं था।"</p>
+        </div>
+        <div class="page-number">4</div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>यह शब्द "अकेला नहीं था" ही थे जो अब पूरे प्लांट की हवा में धीमे-धीमे घुल रहे थे। यह कोई नारा नहीं था, बस
+                एक साुँस थी — एक ऐसी साुँस जो मशीनों के शोर के बीच भी अपनी जगह बना रही थी।</p>
+
+            <p>शिफ्ट खत्म होते-होते शाम का लाल रंग और गहरा हो चुका था, मानो आसमान से खून टपकने लगा हो। कैल और रीशा थके
+                हुए अपने ब्लॉक की तरफ लौट रहे थे। तभी, पीछे से एक तेज़ आवाज़ आई — कोई चीख नहीं, बल्कि एक सायरन जो
+                उन्होंने पहले कभी नहीं सुना था। यह एक ऊुँची, दर्दभरी आवृत्ति थी, जो सुनते ही रीढ़ में बर्फ़ जमा दे।</p>
+
+            <p>उन्होंने पीछे मुड़कर देखा। प्लांट के सबसे सुरक्षित, बिल्कुल भीतरी हिस्से से धुआुँ उठ रहा था — लेकिन यह आग
+                का धुआुँ नहीं था। यह हल्का नीला, बिजली की कौंध जैसा धुआुँ था। उसमें से डिजिटल आकृतियाँ उभर रही थीं —
+                जैसे कोड अपने आप बिखरकर हवा में तैर रहा हो। कुछ ही देर में सैकड़ों सुरक्षा-ड्रोन उस तरफ दौड़ पड़े। एक
+                अघोषित हड़कंप मच गया।</p>
+
+            <p>उसी समय, कैल के टैग की रोशनी नीले से सीधे लाल हुई और फिर पूरी तरह बंद हो गई। यह एक खामोशी थी — और इस
+                खामोशी ने जितना डर किसी सायरन ने नहीं दिया था, उससे कहीं ज़्यादा दिया। क्योंकि इसका मतलब था : "अब तुम पर
+                नज़र नहीं रखी जा रही।" और इस डिजिटल दुनिया में, जहाँ हर चीज़ निगरानी से परिभाषित होती है, निगरानी का बंद
+                हो जाना सबसे भयानक क़िस्मत थी — या फिर, किसी बड़ी बदलाव की दस्तक।</p>
+        </div>
+        <div class="page-number">5</div>
+    </div>
+
+    <!-- PAGE 6 -->
+    <div class="page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="header-title">THE DARK INNOVATION: OMNIX</div>
+        <div class="content">
+            <p>रीशा ने काुँपते हाथों से अपना टैग देखा — वह अब भी नीला था। उसने कैल की तरफ देखा। न जाने क्यों, उसकी
+                आुँखों में डर से ज़्यादा एक चमक थी। बिना कुछ बोले, उसने कैल का हाथ पकड़ लिया और उसे एक टूटी हुई दीवार के
+                पीछे खींच लिया।</p>
+
+            <p>"यह हादसा नहीं है," रीशा ने फुसफुसाते हुए कहा। "यह तो कोई शुरुआत है।"</p>
+
+            <p>कैल ने आसमान की तरफ देखा, जहाँ ज़कार के केंद्र में बना ऑम्निक्स का मुख्यालय दूर से एक जलते हुए शिखर की
+                तरह चमक रहा था। उस पूरे ढाँचे पर डेटा की हरे और सुनहरे रंग की लहरें दौड़ रही थीं — एक अजगर की तरह जो
+                अभी-अभी जागा हो। उसे नहीं पता था कि ऑम्निक्स वास्तव में क्या है। पर उसे यह ज़रूर लगा कि आज की रात के बाद
+                कुछ भी पहले जैसा नहीं रहेगा।</p>
+
+            <p>और तभी, धुएँ के उस नीले बादल के बीच से, एक आकृति उभरी। यह कोई मशीन नहीं थी, न ही पूरी तरह इंसान। उसके
+                शरीर पर त्वचा और धातु का ऐसा संगम था मानो किसी ने दर्द और सिलिकॉन को एक ही साँचे में ढाल दिया हो। उसकी
+                आुँखें नहीं थीं — बस दो जलते हुए डेटा-बिंदु थे जो कैल को सीधे देख रहे थे। वह पल भर को रुका, फिर धुएँ में
+                विलीन हो गया।</p>
+
+            <p>सायरन थम गया। शहर में फिर वही सन्नाटा लौट आया — पर इस बार उस सन्नाटे में किसी अनजान चीज़ की धड़कन शामिल
+                थी।</p>
+
+            <p style="text-align: center; margin-top: 50px; font-weight: bold;">अध्याय 1 – समाप्त</p>
+        </div>
+        <div class="page-number">6</div>
+    </div>
+
+    <!-- END PAGE -->
+    <div class="page end-page">
+        <div class="watermark">NOT FOR SALE</div>
+        <div class="content">
+            <h1 style="font-size: 28px; margin-bottom: 50px;">THE DARK INNOVATION: OMNIX</h1>
+            <div style="margin-top: 100px;">
+                <p style="font-size: 20px; margin-bottom: 5px;">लेखक</p>
+                <h2 style="border-top: 2px solid #2c3e50; display: inline-block; padding-top: 10px; font-weight: 700;">
+                    प्रखर बनखेड़े</h2>
+            </div>
+            <p style="font-size: 14px; margin-top: 40px; color: #777;">&copy; 2026 All Rights Reserved</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
