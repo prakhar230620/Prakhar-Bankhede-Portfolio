@@ -1,0 +1,36 @@
+{
+  "name": "Prakhar Bankhede | AI/ML Developer & Author",
+  "short_name": "Prakhar Bankhede",
+  "description": "Portfolio of Prakhar Bankhede — B.Tech AI/ML student, full-stack developer, and author from Indore, India. Building AI-powered applications and writing thought-provoking books.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["portfolio", "technology", "developer"],
+  "icons": [
+    {
+      "src": "/assets/images/About.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/About.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/About.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "label": "Prakhar Bankhede Portfolio"
+    }
+  ]
+}

@@ -1,4 +1,58 @@
+# =============================================
+# robots.txt — Prakhar Bankhede Portfolio
+# https://prakharbankhede.vercel.app/
+# =============================================
+
+# Allow all search engines
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
 
+# Google — Full access
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /assets/icons/
+Allow: /assets/Books/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 2
+
+# Yahoo / Slurp
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 3
+
+# LinkedIn crawler
+User-agent: LinkedInBot
+Allow: /
+
+# Twitter crawler
+User-agent: Twitterbot
+Allow: /
+
+# Facebook crawler
+User-agent: facebookexternalhit
+Allow: /
+
+# Sitemap reference
 Sitemap: https://prakharbankhede.vercel.app/sitemap.xml

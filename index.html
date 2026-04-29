@@ -1,102 +1,289 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prakhar Bankhede | AI/ML Student, Developer & Author</title>
+
+  <!-- ══ PRIMARY SEO ══════════════════════════════════════════════════ -->
+  <title>Prakhar Bankhede | AI/ML Developer, Full-Stack Engineer & Author – Indore</title>
   <meta name="description"
-    content="Prakhar Bankhede — B.Tech Artificial Intelligence & Machine Learning student, developer, and author from Indore." />
-  <meta name="keywords" content="Prakhar Bankhede, AI/ML Student, Developer, Author, IPS Academy, Web Development, Machine Learning, Indore" />
+    content="Prakhar Bankhede – B.Tech AI/ML student at IPS Academy Indore, full-stack web developer (Next.js, React, Node.js), AI engineer using Gemini & Claude APIs, and author of 3 original books. Explore 10+ live deployed projects." />
+  <meta name="keywords"
+    content="Prakhar Bankhede, AI ML Developer Indore, Full Stack Developer India, Next.js Developer, React Developer, Machine Learning Student, IPS Academy Indore, MERN Stack Developer, Anthropic Claude API, Gemini API, Portfolio Website, Author India, prakharbankhede.vercel.app" />
   <meta name="author" content="Prakhar Bankhede" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
   <meta name="theme-color" content="#0a0a0a" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="rating" content="general" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="language" content="English" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://prakharbankhede.vercel.app/" />
-  <meta property="og:title" content="Prakhar Bankhede | AI/ML Student, Developer & Author" />
-  <meta property="og:description" content="Developer. Author. Builder." />
-  <meta property="og:image" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <!-- ══ GEO / LOCAL SEO ═════════════════════════════════════════════ -->
+  <meta name="geo.region" content="IN-MP" />
+  <meta name="geo.placename" content="Indore, Madhya Pradesh, India" />
+  <meta name="geo.position" content="22.7196;75.8577" />
+  <meta name="ICBM" content="22.7196, 75.8577" />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://prakharbankhede.vercel.app/" />
-  <meta property="twitter:title" content="Prakhar Bankhede | AI/ML Student, Developer & Author" />
-  <meta property="twitter:description" content="Developer. Author. Builder." />
-  <meta property="twitter:image" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
-  <meta name="twitter:creator" content="@prakhar230620" />
-
+  <!-- ══ CANONICAL & HREFLANG ════════════════════════════════════════ -->
   <link rel="canonical" href="https://prakharbankhede.vercel.app/" />
+  <link rel="alternate" hreflang="en" href="https://prakharbankhede.vercel.app/" />
+  <link rel="alternate" hreflang="x-default" href="https://prakharbankhede.vercel.app/" />
 
-  <!-- Space Grotesk for headings, Inter for body, JetBrains Mono for accents -->
+  <!-- ══ OPEN GRAPH (Facebook, LinkedIn, WhatsApp, Discord) ══════════ -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://prakharbankhede.vercel.app/" />
+  <meta property="og:site_name" content="Prakhar Bankhede Portfolio" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Prakhar Bankhede | AI/ML Developer & Author from Indore" />
+  <meta property="og:description"
+    content="Explore the portfolio of Prakhar Bankhede — AI/ML engineer, full-stack developer building with Next.js, React & Python, and author of 3 books. 10+ live projects deployed on Vercel." />
+  <meta property="og:image" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <meta property="og:image:secure_url" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Prakhar Bankhede – AI/ML Developer and Author" />
+  <meta property="profile:first_name" content="Prakhar" />
+  <meta property="profile:last_name" content="Bankhede" />
+  <meta property="profile:username" content="prakhar230620" />
+
+  <!-- ══ TWITTER CARDS ════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@prakhar230620" />
+  <meta name="twitter:creator" content="@prakhar230620" />
+  <meta name="twitter:url" content="https://prakharbankhede.vercel.app/" />
+  <meta name="twitter:title" content="Prakhar Bankhede | AI/ML Developer & Author – Indore" />
+  <meta name="twitter:description"
+    content="B.Tech AI/ML student, full-stack developer & author. Building AI apps with Gemini, Claude & Next.js. 10+ live projects. 14+ certifications." />
+  <meta name="twitter:image" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <meta name="twitter:image:alt" content="Prakhar Bankhede Portfolio" />
+
+  <!-- ══ PWA / MANIFEST ═══════════════════════════════════════════════ -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" sizes="192x192" href="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Prakhar Bankhede" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Prakhar Bankhede Portfolio" />
+  <meta name="msapplication-TileColor" content="#0a0a0a" />
+  <meta name="msapplication-TileImage" content="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- ══ PERFORMANCE — PRECONNECT ════════════════════════════════════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://api.github.com" crossorigin />
+  <link rel="dns-prefetch" href="https://verify.skilljar.com" />
+  <link rel="dns-prefetch" href="https://github.com" />
+
+  <!-- ══ PERFORMANCE — PRELOAD ════════════════════════════════════════ -->
+  <link rel="preload" as="image" href="assets/images/About.jpeg" fetchpriority="high" />
+  <link rel="preload" as="style" href="css/style.css" />
+
+  <!-- ══ FONTS ════════════════════════════════════════════════════════ -->
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
 
-  <!-- Three.js -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
-
+  <!-- ══ STYLES ═══════════════════════════════════════════════════════ -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/extra_reader.css" />
 
-  <!-- Icons & Mobile -->
-  <link rel="apple-touch-icon" href="https://prakharbankhede.vercel.app/assets/images/About.jpeg" />
-  <meta name="format-detection" content="telephone=no" />
+  <!-- ══ THREE.JS (deferred loading) ════════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js" defer></script>
 
+  <!-- ══ ADVANCED JSON-LD STRUCTURED DATA ════════════════════════════ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+
       {
         "@type": "Person",
         "@id": "https://prakharbankhede.vercel.app/#person",
         "name": "Prakhar Bankhede",
-        "jobTitle": "AI/ML Student, Developer & Author",
+        "alternateName": ["Prakhar", "prakhar230620"],
+        "jobTitle": "AI/ML Developer, Full-Stack Engineer & Author",
+        "description": "B.Tech Artificial Intelligence & Machine Learning student at IPS Academy Indore, full-stack web developer specializing in Next.js and React, AI engineer using Gemini and Claude APIs, and author of 3 original books.",
         "url": "https://prakharbankhede.vercel.app/",
-        "image": "https://prakharbankhede.vercel.app/assets/images/About.jpeg",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://prakharbankhede.vercel.app/assets/images/About.jpeg",
+          "width": 800,
+          "height": 800,
+          "caption": "Prakhar Bankhede – AI/ML Developer and Author"
+        },
+        "email": "prakharbankhede15@gmail.com",
         "sameAs": [
           "https://github.com/prakhar230620",
           "https://www.linkedin.com/in/prakhar-bankhede-5556033b6/",
-          "https://www.instagram.com/prakhar.61_"
+          "https://www.instagram.com/prakhar.61_",
+          "https://prakharbankhede.vercel.app/"
         ],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Indore",
-          "addressCountry": "India"
-        }
+          "addressRegion": "Madhya Pradesh",
+          "addressCountry": "IN"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "IPS Academy",
+          "url": "https://www.ipsacademy.org/",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Indore",
+            "addressCountry": "IN"
+          }
+        },
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Machine Learning",
+          "Full-Stack Web Development",
+          "Next.js",
+          "React",
+          "Node.js",
+          "Python",
+          "TensorFlow",
+          "Natural Language Processing",
+          "Computer Vision",
+          "Claude API",
+          "Gemini API",
+          "MongoDB",
+          "TypeScript",
+          "Three.js",
+          "AWS",
+          "Vercel",
+          "Creative Writing",
+          "Prompt Engineering"
+        ],
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Claude with the Anthropic API",
+            "credentialCategory": "Certificate",
+            "recognizedBy": { "@type": "Organization", "name": "Anthropic" },
+            "url": "https://verify.skilljar.com/c/f4fuijzr4wd4"
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Software Engineering Virtual Experience",
+            "credentialCategory": "Certificate",
+            "recognizedBy": { "@type": "Organization", "name": "JPMorgan Chase" }
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "MERN Stack Internship",
+            "credentialCategory": "Internship Certificate",
+            "recognizedBy": { "@type": "Organization", "name": "Yipsilon IT Solutions" }
+          }
+        ]
       },
+
       {
         "@type": "WebSite",
         "@id": "https://prakharbankhede.vercel.app/#website",
         "url": "https://prakharbankhede.vercel.app/",
-        "name": "Prakhar Bankhede | Portfolio",
-        "publisher": {"@id": "https://prakharbankhede.vercel.app/#person"}
+        "name": "Prakhar Bankhede | AI/ML Developer & Author Portfolio",
+        "description": "Official portfolio of Prakhar Bankhede featuring AI/ML projects, full-stack web applications, certifications, and authored books.",
+        "inLanguage": "en-US",
+        "publisher": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "potentialAction": {
+          "@type": "ReadAction",
+          "target": "https://prakharbankhede.vercel.app/"
+        }
       },
+
       {
-        "@type": "ItemList",
-        "name": "Selected Projects",
+        "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Renasis", "url": "https://renasis.vercel.app/" },
-          { "@type": "ListItem", "position": 2, "name": "Key Code X", "url": "https://touch-css.vercel.app/" },
-          { "@type": "ListItem", "position": 3, "name": "CivicPlus", "url": "https://civicplus.vercel.app/" },
-          { "@type": "ListItem", "position": 4, "name": "ToolMines AI", "url": "https://github.com/prakhar230620/ToolMines_AI--AWS" },
-          { "@type": "ListItem", "position": 5, "name": "RecipeReady", "url": "https://recipe-ready-one.vercel.app/" },
-          { "@type": "ListItem", "position": 6, "name": "Resonance", "url": "https://resonance-eight.vercel.app/" },
-          { "@type": "ListItem", "position": 7, "name": "PDFusion", "url": "https://pdfusion-three.vercel.app/" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://prakharbankhede.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://prakharbankhede.vercel.app/#about" },
+          { "@type": "ListItem", "position": 3, "name": "Projects", "item": "https://prakharbankhede.vercel.app/#projects" },
+          { "@type": "ListItem", "position": 4, "name": "Skills", "item": "https://prakharbankhede.vercel.app/#skills" },
+          { "@type": "ListItem", "position": 5, "name": "Certifications", "item": "https://prakharbankhede.vercel.app/#certifications" },
+          { "@type": "ListItem", "position": 6, "name": "Books", "item": "https://prakharbankhede.vercel.app/#books" },
+          { "@type": "ListItem", "position": 7, "name": "Contact", "item": "https://prakharbankhede.vercel.app/#contact" }
         ]
       },
+
       {
-        "@type": "ItemList",
-        "name": "Authored Books",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "The Dark Innovation: Omnix" },
-          { "@type": "ListItem", "position": 2, "name": "Soch: Pinjra or Aazadi" },
-          { "@type": "ListItem", "position": 3, "name": "Ant Ki Mahek" }
-        ]
+        "@type": "SoftwareApplication",
+        "name": "Renasis",
+        "url": "https://renasis.vercel.app/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "AI-powered customer review analysis tool supporting Google Gemini and Groq for sentiment analysis and actionable business insights.",
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "programmingLanguage": ["TypeScript", "Next.js", "React"],
+        "codeRepository": "https://github.com/prakhar230620/Renasis"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "CivicPlus",
+        "url": "https://civicplus.vercel.app/",
+        "applicationCategory": "SocialNetworkingApplication",
+        "operatingSystem": "Web",
+        "description": "Advanced civic engagement platform utilizing AI to streamline community interactions and improve local government transparency.",
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "programmingLanguage": ["Next.js", "TypeScript", "Prisma", "Tailwind CSS"],
+        "codeRepository": "https://github.com/prakhar230620/CivicSnap"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "RecipeReady",
+        "url": "https://recipe-ready-one.vercel.app/",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "description": "Smart AI recipe generator that creates custom meals from available ingredients. Features PWA support and dual-AI integration with Gemini and Groq.",
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "programmingLanguage": ["Next.js", "PWA", "Gemini API", "Groq"],
+        "codeRepository": "https://github.com/prakhar230620/RecipeReady_Mobile"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "PDFusion",
+        "url": "https://pdfusion-three.vercel.app/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "description": "Comprehensive PDF management PWA for merging, splitting, and optimizing PDF documents. Built with Next.js and pdf-lib.",
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "programmingLanguage": ["Next.js", "TypeScript", "pdf-lib"],
+        "codeRepository": "https://github.com/prakhar230620/pdfusion"
+      },
+
+      {
+        "@type": "Book",
+        "name": "The Dark Innovation: Omnix",
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "inLanguage": "en",
+        "description": "A personal creative work exploring an imaginative world through narrative, shared to connect with readers through the power of storytelling.",
+        "genre": "Science Fiction / Thriller",
+        "image": "https://prakharbankhede.vercel.app/assets/Books/The_Dark_innovation_Omnix/book_cover_omnix.png"
+      },
+      {
+        "@type": "Book",
+        "name": "Soch: Pinjra or Aazadi",
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "inLanguage": "hi",
+        "description": "A profound Hindi exploration of thoughts, mental constraints, and the true essence of freedom. A journey of self-reflection and liberation.",
+        "genre": "Self-Help / Philosophy"
+      },
+      {
+        "@type": "Book",
+        "name": "Ant Ki Mahek",
+        "author": { "@id": "https://prakharbankhede.vercel.app/#person" },
+        "inLanguage": "hi",
+        "description": "A beautiful Hindi story exploring the fragrance of the end — an introspective journey blending final moments with timeless memories.",
+        "genre": "Literary Fiction"
       }
+
     ]
   }
   </script>
@@ -170,15 +357,24 @@
         <div class="about__grid">
           <div class="about__image-col reveal" data-tilt>
             <div class="about__image-frame">
-              <img src="assets/images/About.jpeg" alt="Prakhar Bankhede - AI/ML Student, Developer, and Author from IPS Academy Indore" class="about__img">
+              <img src="assets/images/About.jpeg"
+                alt="Prakhar Bankhede – AI/ML Developer, Full-Stack Engineer, and Author from IPS Academy Indore"
+                class="about__img"
+                width="480" height="480"
+                fetchpriority="high"
+                decoding="async">
               <div class="about__img-overlay"></div>
             </div>
           </div>
           <div class="about__content-col">
             <div class="about__text reveal">
               <h2 class="section__h2">Building things is<br />how I think.</h2>
-              <p>As a third-year Artificial Intelligence and Machine Learning student, I am passionate about developing scalable software and crafting compelling narratives. My approach is structured and analytical: identify core challenges, understand them deeply, and engineer robust, real-world solutions.</p>
-              <p>Operating at the intersection of full-stack web development, machine learning, and creative writing, I leverage a multidisciplinary perspective to build innovative products. I thrive on translating complex concepts into accessible, high-performance applications.</p>
+              <p>As a third-year Artificial Intelligence and Machine Learning student, I am passionate about developing
+                scalable software and crafting compelling narratives. My approach is structured and analytical: identify
+                core challenges, understand them deeply, and engineer robust, real-world solutions.</p>
+              <p>Operating at the intersection of full-stack web development, machine learning, and creative writing, I
+                leverage a multidisciplinary perspective to build innovative products. I thrive on translating complex
+                concepts into accessible, high-performance applications.</p>
               <div class="about__pills">
                 <span class="pill">IPS Academy, Indore</span>
                 <span class="pill">AI/ML — 3rd Year</span>
@@ -232,7 +428,8 @@
               </div>
               <div class="work-card__links">
                 <a href="https://renasis.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/Renasis" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+                <a href="https://github.com/prakhar230620/Renasis" target="_blank" rel="noopener noreferrer">↗
+                  GitHub</a>
               </div>
             </div>
           </article>
@@ -253,7 +450,8 @@
               </div>
               <div class="work-card__links">
                 <a href="https://touch-css.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/TouchCSS" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+                <a href="https://github.com/prakhar230620/TouchCSS" target="_blank" rel="noopener noreferrer">↗
+                  GitHub</a>
               </div>
             </div>
           </article>
@@ -274,7 +472,8 @@
               </div>
               <div class="work-card__links">
                 <a href="https://civicplus.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/CivicSnap" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+                <a href="https://github.com/prakhar230620/CivicSnap" target="_blank" rel="noopener noreferrer">↗
+                  GitHub</a>
               </div>
             </div>
           </article>
@@ -294,7 +493,8 @@
                 <span>Python</span><span>Groq SDK</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
               </div>
               <div class="work-card__links">
-                <a href="https://github.com/prakhar230620/ToolMines_AI--AWS" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+                <a href="https://github.com/prakhar230620/ToolMines_AI--AWS" target="_blank" rel="noopener noreferrer">↗
+                  GitHub</a>
               </div>
             </div>
           </article>
@@ -315,7 +515,8 @@
               </div>
               <div class="work-card__links">
                 <a href="https://recipe-ready-one.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/RecipeReady_Mobile" target="_blank" rel="noopener noreferrer">↗
+                <a href="https://github.com/prakhar230620/RecipeReady_Mobile" target="_blank"
+                  rel="noopener noreferrer">↗
                   GitHub</a>
               </div>
             </div>
@@ -337,7 +538,8 @@
               </div>
               <div class="work-card__links">
                 <a href="https://resonance-eight.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/Resonance" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+                <a href="https://github.com/prakhar230620/Resonance" target="_blank" rel="noopener noreferrer">↗
+                  GitHub</a>
               </div>
             </div>
           </article>
@@ -358,7 +560,8 @@
               </div>
               <div class="work-card__links">
                 <a href="https://pdfusion-three.vercel.app/" target="_blank" rel="noopener noreferrer">↗ Live Demo</a>
-                <a href="https://github.com/prakhar230620/pdfusion" target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+                <a href="https://github.com/prakhar230620/pdfusion" target="_blank" rel="noopener noreferrer">↗
+                  GitHub</a>
               </div>
             </div>
           </article>
@@ -460,107 +663,130 @@
             target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude with the Anthropic API</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/rzjqvoaom5gg" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/rzjqvoaom5gg" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude with Google Vertex AI</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/6eqm8vwnvn2m" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/6eqm8vwnvn2m" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude Code in Action</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="http://verify.skilljar.com/c/8vmfzh48bmvg" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="http://verify.skilljar.com/c/8vmfzh48bmvg" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">AI Fluency: Framework & Foundations</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/8xdyt7btokzs" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/8xdyt7btokzs" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Introduction to Model Context Protocol</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/5rw4gfsde9ws" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/5rw4gfsde9ws" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Model Context Protocol: Advanced Topics</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="http://verify.skilljar.com/c/6jt75ksmfp8u" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="http://verify.skilljar.com/c/6jt75ksmfp8u" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">AI Fluency for Educators</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="http://verify.skilljar.com/c/pqdiwmb7zj8f" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="http://verify.skilljar.com/c/pqdiwmb7zj8f" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">AI Fluency for Nonprofits</div>
             <div class="cert-row__date">2026</div>
           </a>
 
-          <a href="https://verify.skilljar.com/c/chonuqe6dwfr" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/chonuqe6dwfr" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Al Fluency for students</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/ib3ybopte8hs" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/ib3ybopte8hs" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude 101</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/a95nq8ni6m3p" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/a95nq8ni6m3p" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Teaching the Al Fluency Framework</div>
             <div class="cert-row__date">2026</div>
           </a>
-          <a href="https://verify.skilljar.com/c/kebxe69f4kxa" class="cert-row reveal" target="_blank" rel="noopener noreferrer">
+          <a href="https://verify.skilljar.com/c/kebxe69f4kxa" class="cert-row reveal" target="_blank"
+            rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Anthropic Icon.jpeg" alt="Anthropic AI Certification earned by Prakhar Bankhede"
+                loading="lazy">
             </div>
             <div class="cert-row__issuer">Anthropic</div>
             <div class="cert-row__name">Claude with Amazon Bedrock</div>
@@ -570,8 +796,8 @@
             class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/JPMorgan_Chase___Co-/JPMorgan_Chase___Co-_Logo_0.svg" alt="JPMorgan Chase Software Engineering Certification - Prakhar Bankhede"
-                loading="lazy">
+              <img src="assets/icons/JPMorgan_Chase___Co-/JPMorgan_Chase___Co-_Logo_0.svg"
+                alt="JPMorgan Chase Software Engineering Certification - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">JPMorganChase</div>
             <div class="cert-row__name">Software Engineering Virtual Experience</div>
@@ -592,16 +818,28 @@
             class="cert-row reveal" target="_blank" rel="noopener noreferrer">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/mastercard logo.png" alt="Mastercard Cybersecurity Certification - Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/mastercard logo.png"
+                alt="Mastercard Cybersecurity Certification - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Mastercard</div>
             <div class="cert-row__name">Cybersecurity Job Simulation</div>
             <div class="cert-row__date">2026</div>
           </a>
+          <a href="assets/images/R traininng Cretificate Spoken Tutorial.png" class="cert-row reveal" rel="noopener">
+            <div class="cert-row__dot"></div>
+            <div class="cert-row__logo">
+              <img src="assets/icons/spoken tutorial logo.png"
+                alt="Certificate for the Completion of R Training - Prakhar Bankhede" loading="lazy">
+            </div>
+            <div class="cert-row__issuer">Spoken Tutorial</div>
+            <div class="cert-row__name">Certificate for the Completion of R Training</div>
+            <div class="cert-row__date">2026</div>
+          </a>
           <a href="assets/images/MERN Stack Internship Certificate.jpeg" class="cert-row reveal" rel="noopener">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Yipsilon_Logo.png" alt="Yipsilon IT Solutions MERN Stack Internship - Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Yipsilon_Logo.png"
+                alt="Yipsilon IT Solutions MERN Stack Internship - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Yipsilon IT Solutions</div>
             <div class="cert-row__name">MERN Stack Internship</div>
@@ -610,7 +848,8 @@
           <a href="assets/images/Navodaya's talent search contest result.jpeg" class="cert-row reveal" rel="noopener">
             <div class="cert-row__dot"></div>
             <div class="cert-row__logo">
-              <img src="assets/icons/Navodaya_Logo.png" alt="Navodaya Vidyalaya Talent Search Contest - Prakhar Bankhede" loading="lazy">
+              <img src="assets/icons/Navodaya_Logo.png"
+                alt="Navodaya Vidyalaya Talent Search Contest - Prakhar Bankhede" loading="lazy">
             </div>
             <div class="cert-row__issuer">Navodaya Vidyalaya</div>
             <div class="cert-row__name">Talent Search Contest</div>
@@ -755,7 +994,8 @@
             <div class="tl__year">2026</div>
             <div class="tl__body">
               <div class="tl__title">Book Writing Started</div>
-              <p class="tl__desc">Authored a collection of original literary works exploring profound themes and narratives; currently in the pre-publication phase.</p>
+              <p class="tl__desc">Authored a collection of original literary works exploring profound themes and
+                narratives; currently in the pre-publication phase.</p>
               <span class="tl__tag">Writing</span>
             </div>
           </li>
@@ -884,11 +1124,15 @@
 
   </main>
 
-  <footer class="footer" role="contentinfo">
+  <footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
     <div class="container">
-      <span>Prakhar Bankhede · 2026</span>
-      <span>@All rights reserved.</span>
-      <span>HTML · CSS · Three.js</span>
+      <span itemprop="copyrightHolder" itemscope itemtype="https://schema.org/Person">
+        <a href="https://prakharbankhede.vercel.app/" itemprop="url" style="color:inherit;text-decoration:none;">
+          <span itemprop="name">Prakhar Bankhede</span>
+        </a> · <span itemprop="copyrightYear">2026</span>
+      </span>
+      <span>© All rights reserved.</span>
+      <span>HTML · CSS · Three.js · <a href="https://prakharbankhede.vercel.app/" style="color:inherit;text-decoration:none;">Portfolio</a></span>
     </div>
   </footer>
 
