@@ -1,6 +1,6 @@
 # =============================================
 # robots.txt — Prakhar Bankhede Portfolio
-# https://prakharbankhede.vercel.app/
+# https://prakhar82.vercel.app/
 # =============================================
 
 # Allow all search engines
@@ -55,4 +55,4 @@ User-agent: facebookexternalhit
 Allow: /
 
 # Sitemap reference
-Sitemap: https://prakharbankhede.vercel.app/sitemap.xml
+Sitemap: https://prakhar82.vercel.app/sitemap.xml
