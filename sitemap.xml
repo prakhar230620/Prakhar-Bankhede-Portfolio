@@ -4,68 +4,11 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage / Root -->
   <url>
     <loc>https://prakharbankhede.vercel.app/</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-
-  <!-- About Section -->
-  <url>
-    <loc>https://prakharbankhede.vercel.app/#about</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Projects Section -->
-  <url>
-    <loc>https://prakharbankhede.vercel.app/#projects</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Skills Section -->
-  <url>
-    <loc>https://prakharbankhede.vercel.app/#skills</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Certifications Section -->
-  <url>
-    <loc>https://prakharbankhede.vercel.app/#certifications</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Books Section -->
-  <url>
-    <loc>https://prakharbankhede.vercel.app/#books</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Timeline / Journey Section -->
-  <url>
-    <loc>https://prakharbankhede.vercel.app/#timeline</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Contact Section -->
-  <url>
-    <loc>https://prakharbankhede.vercel.app/#contact</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
   </url>
 
 </urlset>
