@@ -94,8 +94,6 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/extra_reader.css" />
 
-  <!-- ══ THREE.JS (deferred loading) ════════════════════════════════ -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js" defer></script>
 
   <!-- ══ ADVANCED JSON-LD STRUCTURED DATA ════════════════════════════ -->
   <script type="application/ld+json">
@@ -1274,6 +1272,8 @@
 
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Three.js must load before main.js (particle simulator depends on window.THREE) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
   <!-- JS Libraries for Book Flip (Turn.js) -->
   <script src="js/jquery.js"></script>
   <script src="js/turn.js"></script>
