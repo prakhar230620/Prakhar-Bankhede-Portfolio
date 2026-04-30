@@ -1,76 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- ── HOMEPAGE (Primary) ─────────────────────────────────── -->
   <url>
     <loc>https://prakhar82.vercel.app/</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- ── ABOUT SECTION ─────────────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#about</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- ── PROJECTS SECTION ──────────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#projects</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- ── BOOKS SECTION ─────────────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#books</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- ── GITHUB SECTION ────────────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#github</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ── SKILLS SECTION ────────────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#skills</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ── CERTIFICATIONS SECTION ────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#certs</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ── TIMELINE SECTION ──────────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#timeline</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- ── CONTACT SECTION ───────────────────────────────────── -->
-  <url>
-    <loc>https://prakhar82.vercel.app/#contact</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
 </urlset>
