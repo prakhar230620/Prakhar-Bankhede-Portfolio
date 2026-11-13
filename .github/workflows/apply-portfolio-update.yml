@@ -1,0 +1,46 @@
+name: Apply reviewed portfolio update
+
+on:
+  push:
+    branches:
+      - portfolio-seo-deploy
+    paths:
+      - portfolio-update.trigger
+
+permissions:
+  contents: write
+
+jobs:
+  apply-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out production branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download and unpack reviewed patch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -fsSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github.raw" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/contents/portfolio-update.patch.b64?ref=portfolio-seo-deploy" \
+            | base64 -d | gzip -d > "$RUNNER_TEMP/portfolio-update.patch"
+
+      - name: Apply and commit complete update
+        run: |
+          git apply --check "$RUNNER_TEMP/portfolio-update.patch"
+          git apply "$RUNNER_TEMP/portfolio-update.patch"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Patch produced no changes; refusing an empty commit."
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update portfolio content, technical SEO and reliability"
+          git push origin HEAD:main
