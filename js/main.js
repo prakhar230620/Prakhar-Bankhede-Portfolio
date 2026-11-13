@@ -652,8 +652,9 @@ const counterObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
     const el = e.target, target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
     let v = 0; const step = target / 60;
-    const t = setInterval(() => { v = Math.min(v + step, target); el.textContent = Math.floor(v) + (v >= target ? '+' : ''); if (v >= target) clearInterval(t); }, 18);
+    const t = setInterval(() => { v = Math.min(v + step, target); el.textContent = Math.floor(v) + (v >= target ? suffix : ''); if (v >= target) clearInterval(t); }, 18);
     counterObs.unobserve(el);
   });
 }, { threshold: 0.6 });
@@ -680,11 +681,12 @@ async function loadGitHub() {
 
   // Specific projects to feature (order matters for display)
   const targetNames = [
-    'Renasis', 'ToolMines_AI--AWS', 'RecipeReady_Mobile', 'pdfusion', 'Resonance',
+    'ReportAndFix1', 'Renasis', 'ToolMines_AI--AWS', 'RecipeReady_Mobile', 'pdfusion', 'Resonance',
     'CENTRAL-AI-16', 'vocalforge', 'ytgenius', 'int-proj', 'TouchCSS'
   ];
 
   const projectDescriptions = {
+    'ReportAndFix1': 'Multi-tenant issue reporting and resolution SaaS for campuses and institutions, with QR intake, role-based workflows, department routing, two-stage verification, subscription billing, analytics, and offline PWA support.',
     'Renasis': 'AI-powered customer review analysis tool supporting Google Gemini and Groq. Built with Next.js 15 and TypeScript for sentiment analysis and actionable insights.',
     'ToolMines_AI--AWS': 'Backend integration for the ToolMines AI suite using AWS services. Features secure environment management and server-side logic for AI applications.',
     'RecipeReady_Mobile': 'Smart recipe generator that creates custom meals from available ingredients. Built with Next.js, featuring PWA support and dual-AI integration.',
@@ -699,15 +701,54 @@ async function loadGitHub() {
 
   try {
     // Fetch 100 repos to ensure we catch all featured ones from the 50+ total
-    const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100&type=public`);
-    if (!res.ok) throw new Error();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 9000);
+    let res;
+    try {
+      res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100&type=public`, { signal: controller.signal, headers: { Accept: 'application/vnd.github+json' } });
+    } finally {
+      clearTimeout(timeoutId);
+    }
+    if (!res.ok) throw new Error(`GitHub returned ${res.status}`);
 
     const allRepos = await res.json();
+    if (!Array.isArray(allRepos)) throw new Error('GitHub response was not a repository list');
+
+    // If one of the linked repositories becomes private, is renamed, or is deleted,
+    // keep the portfolio intact and redirect that source link to the public profile.
+    const publicRepoNames = new Set(allRepos.filter(repo => repo && repo.name).map(repo => repo.name.toLowerCase()));
+    document.querySelectorAll('a[href^="https://github.com/' + GITHUB_USERNAME + '/"]').forEach(link => {
+      const parts = new URL(link.href).pathname.split('/').filter(Boolean);
+      const repoName = parts.length === 2 ? parts[1].toLowerCase() : '';
+      if (repoName && !publicRepoNames.has(repoName)) {
+        link.href = `https://github.com/${GITHUB_USERNAME}`;
+        link.textContent = '↗ GitHub Profile';
+        link.title = 'This repository is not publicly available. Open the public GitHub profile instead.';
+        link.setAttribute('aria-label', 'Open GitHub profile; repository is not publicly available');
+      }
+    });
 
     // Filter by the target list (case-insensitive)
     let repos = allRepos.filter(r =>
       targetNames.some(name => r.name.toLowerCase() === name.toLowerCase())
     );
+
+    // A private, renamed, or deleted repository is simply absent from this public feed.
+    // The hand-curated project cards above remain available independently.
+    if (!repos.length) {
+      grid.innerHTML = '';
+      const fallback = document.createElement('div');
+      fallback.className = 'repo-fallback';
+      fallback.textContent = 'No featured public repositories are available from the GitHub feed right now.';
+      const link = document.createElement('a');
+      link.href = `https://github.com/${GITHUB_USERNAME}`;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'View GitHub profile ↗';
+      fallback.append(' ', link);
+      grid.appendChild(fallback);
+      return;
+    }
 
     // Sort to match the targetNames order
     repos.sort((a, b) => {
@@ -754,8 +795,22 @@ async function loadGitHub() {
       setTimeout(() => card.classList.add('revealed'), 80 * (index + 1));
     });
   } catch (err) {
-    console.error('GitHub Fetch Error:', err);
-    if (grid) grid.innerHTML = `<div style="grid-column:1/-1;padding:2rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--text-3)">Couldn't load repos. <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" rel="noopener" style="color:var(--gold)">View on GitHub ↗</a></div>`;
+    console.warn('GitHub repository feed unavailable:', err);
+    if (grid) {
+      grid.innerHTML = '';
+      const fallback = document.createElement('div');
+      fallback.className = 'repo-fallback';
+      fallback.textContent = err && err.name === 'AbortError'
+        ? 'GitHub is taking longer than expected. Your featured projects are still available above.'
+        : 'GitHub activity is temporarily unavailable. Your featured projects are still available above.';
+      const link = document.createElement('a');
+      link.href = `https://github.com/${GITHUB_USERNAME}`;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'Open GitHub profile ↗';
+      fallback.append(' ', link);
+      grid.appendChild(fallback);
+    }
   }
 }
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -768,43 +823,47 @@ const form = document.getElementById('contactForm');
 if (form) {
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = document.getElementById('formSubmit'), txt = document.getElementById('formBtnText');
-    txt.textContent = 'Sending…'; btn.disabled = true;
+    const btn = document.getElementById('formSubmit');
+    const txt = document.getElementById('formBtnText');
+    const status = document.getElementById('formStatus');
+    const success = document.getElementById('formSuccess');
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    txt.textContent = 'Sending…';
+    btn.disabled = true;
+    if (status) { status.hidden = true; status.textContent = ''; }
 
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     try {
-      // Run the network request and an artificial UI delay concurrently, so "Sending..." 
-      // remains highly visible for at least 1.5 seconds, satisfying user perception of work.
-      const [r] = await Promise.all([
-        fetch('/api/contact', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }),
-        new Promise(resolve => setTimeout(resolve, 1500))
-      ]);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+      });
+      const result = await response.json().catch(() => ({}));
 
-      const result = await r.json().catch(() => ({}));
-
-      if (r.ok && result.success) {
-        form.querySelectorAll('.field,#formSubmit').forEach(el => el.style.display = 'none');
-        document.getElementById('formSuccess').hidden = false;
-      }
-      else {
-        const errMsg = result.error || 'Error — Try Again';
-        txt.textContent = errMsg;
+      if (response.ok && result.success) {
+        form.querySelectorAll('.field,#formSubmit').forEach(el => { el.hidden = true; });
+        if (success) success.hidden = false;
+      } else {
+        const errMsg = result.error || 'The message could not be sent. Please try again.';
+        if (status) { status.textContent = errMsg; status.hidden = false; }
+        txt.textContent = 'Try Again';
         btn.disabled = false;
-        console.error('Contact Form Error:', result);
       }
     } catch (err) {
-      txt.textContent = 'Network Error — Try Again';
+      if (status) {
+        status.textContent = 'Network error. Please check your connection or email me directly.';
+        status.hidden = false;
+      }
+      txt.textContent = 'Try Again';
       btn.disabled = false;
-      console.error('Fetch error:', err);
+      console.warn('Contact form request failed:', err && err.message ? err.message : err);
     }
   });
 }
@@ -838,40 +897,6 @@ document.querySelectorAll('.book__3d').forEach(bookEl => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
   }, { threshold: 0.5 });
   document.querySelectorAll('.progress-bar__fill').forEach(f => { f.style.animationPlayState = 'paused'; obs.observe(f); });
-})();
-
-/* ═══════════════════════════════════════════════════════════════
-   DESKTOP MODE TOAST
-   Suggests desktop view to mobile/tablet users for better performance
-═══════════════════════════════════════════════════════════════ */
-(function initDesktopModeToast() {
-  const toast = document.getElementById('desktop-toast');
-  const closeBtn = document.getElementById('closeToast');
-  if (!toast || !closeBtn) return;
-
-  // Detection: Width < 1024px (Tablets & Phones)
-  const isMobileOrTablet = window.innerWidth < 1024;
-  const isDismissed = sessionStorage.getItem('desktop-toast-dismissed');
-
-  if (isMobileOrTablet && !isDismissed) {
-    // Show after a short delay for better UX
-    setTimeout(() => {
-      toast.hidden = false;
-      // Trigger CSS transition
-      requestAnimationFrame(() => {
-        toast.classList.add('toast--show');
-      });
-    }, 2000);
-  }
-
-  closeBtn.addEventListener('click', () => {
-    toast.classList.remove('toast--show');
-    sessionStorage.setItem('desktop-toast-dismissed', 'true');
-    // Hide completely after transition
-    setTimeout(() => {
-      toast.hidden = true;
-    }, 600);
-  });
 })();
 
 /* =================================================================
